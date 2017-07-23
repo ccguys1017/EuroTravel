@@ -4,7 +4,6 @@ import * as actions from '../actions'
 
 class Feature extends Component {
   componentWillMount () {
-    dispatch({})
     this.props.fetchMessage()
   }
 

@@ -34,7 +34,7 @@ exports.signup = function (req, res, next) {
       email: email,
       password: password
     })
-
+    console.log('creating new user', user)
     user.save(function (err) {
       if (err) { return next(err) }
 

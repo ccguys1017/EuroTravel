@@ -13,7 +13,6 @@ export default class App extends Component {
   render () {
     return (
       <Router >
-
         <div>
           <Route path='/' component={Header} />
           <Route path='/signin' component={Signin} />

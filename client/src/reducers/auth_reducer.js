@@ -3,19 +3,19 @@ import {
   UNAUTH_USER,
   AUTH_ERROR,
   FETCH_MESSAGE
-} from '../actions/types';
+} from '../actions/types'
 
-export default function(state = {}, action) {
-  switch(action.type) {
+export default function (state = {authenticated: false}, action) {
+  switch (action.type) {
     case AUTH_USER:
-      return { ...state, error: '', authenticated: true };
+      return { ...state, error: '', authenticated: true }
     case UNAUTH_USER:
-      return { ...state, authenticated: false };
+      return { ...state, authenticated: false }
     case AUTH_ERROR:
-      return { ...state, error: action.payload };
+      return { ...state, error: action.payload }
     case FETCH_MESSAGE:
-      return { ...state, message: action.payload };
+      return { ...state, message: action.payload }
   }
 
-  return state;
+  return state
 }
