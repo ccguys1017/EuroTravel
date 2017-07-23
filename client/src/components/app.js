@@ -6,7 +6,6 @@ import Signout from './auth/signout'
 import Signup from './auth/signup'
 import Feature from './feature'
 import RequireAuth from './auth/require_auth'
-
 import Header from './header'
 
 export default class App extends Component {

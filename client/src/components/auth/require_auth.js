@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+
 
 export default function(ComposedComponent) {
   class Authentication extends Component {
@@ -25,8 +27,8 @@ export default function(ComposedComponent) {
   }
 
   function mapStateToProps(state) {
-    return { authenticated: state.auth.authenticated };
+    return { authenticated: state.auth.authenticated }
   }
 
-  return connect(mapStateToProps)(Authentication);
+  return withRouter(connect(mapStateToProps)(Authentication))
 }

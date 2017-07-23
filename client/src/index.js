@@ -5,7 +5,6 @@ import { createStore, applyMiddleware } from 'redux'
 import reduxThunk from 'redux-thunk'
 
 import App from './components/app'
-import Welcome from './components/welcome'
 import reducers from './reducers'
 import { AUTH_USER} from './actions/types'
 
