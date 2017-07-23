@@ -6,7 +6,6 @@ import reduxThunk from 'redux-thunk'
 import App from './components/app'
 import reducers from './reducers'
 import { AUTH_USER} from './actions/types'
-import history from './history'
 
 // Add middleware to your store
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore)

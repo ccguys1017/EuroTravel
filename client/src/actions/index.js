@@ -5,7 +5,6 @@ import {
   AUTH_ERROR,
   FETCH_MESSAGE
 } from './types'
-import history from '../history'
 
 const ROOT_URL = 'http://localhost:3000/api/v1'
 
@@ -20,7 +19,6 @@ export function signinUser ({ email, password }) {
         dispatch({ type: AUTH_USER })
         // - Save the JWT token
         localStorage.setItem('token', response.data.token)
-        // - redirect to the route '/feature'
       })
       .catch(() => {
         // If request is bad...
@@ -34,7 +32,6 @@ export function signupUser ({ email, password }) {
   return function (dispatch) {
     axios.post(`${ROOT_URL}/signup`, { email, password })
       .then(response => {
-        console.log('from server on signup', response)
         dispatch({ type: AUTH_USER })
         localStorage.setItem('token', response.data.token)
       })
@@ -51,7 +48,6 @@ export function authError (error) {
 
 export function signoutUser () {
   localStorage.removeItem('token')
-  console.log('fired singnout')
   return { type: UNAUTH_USER }
 }
 
