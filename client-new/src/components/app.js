@@ -11,7 +11,7 @@ import Header from './header'
 export default class App extends Component {
   render () {
     return (
-      <Router >
+      <Router>
         <div>
           <Route path='/' component={Header} />
           <Route path='/signin' component={Signin} />
