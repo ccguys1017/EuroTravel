@@ -6,19 +6,19 @@ import reduxThunk from 'redux-thunk'
 import App from './components/app'
 import reducers from './reducers'
 import { AUTH_USER} from './actions/types'
-import DevTools from './devTools'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
-// Add middleware to your store
-const createStoreWithMiddleware = applyMiddleware(reduxThunk, DevTools.instrument())(createStore)
-// create your store with the middleware added
-const store = createStoreWithMiddleware(reducers)
+const store = createStore(reducers, composeWithDevTools(
+  applyMiddleware(reduxThunk)
+))
 
 const token = localStorage.getItem('token')
 // If we have a token, consider the user to be signed in
 if (token) {
-  // we need to update applicax``tion state
+  // we need to update application state to authenticated=true
   store.dispatch({ type: AUTH_USER })
 }
+
 ReactDOM.render(
   <Provider store={store} >
     <App />
