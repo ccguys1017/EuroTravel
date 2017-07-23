@@ -20,7 +20,7 @@ if (token) {
   store.dispatch({ type: AUTH_USER })
 }
 ReactDOM.render(
-  <Provider store={store} history={history}>
+  <Provider store={store} >
     <App />
   </Provider>
   , document.querySelector('#root'))

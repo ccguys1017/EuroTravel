@@ -1,8 +1,19 @@
 import React, { Component } from 'react'
 import { reduxForm } from 'redux-form'
 import * as actions from '../../actions'
+import PropTypes from 'prop-types'
+
 
 class Signup extends Component {
+  static contextTypes = {
+    router: PropTypes.object
+  }
+  componentWillUpdate(nextProps) {
+    console.log("updating signin", nextProps, this.context)
+    if (nextProps.authenticated) {
+      this.context.router.history.push('/feature')
+    }
+  }
   handleFormSubmit (formProps) {
     // Call action creator to sign up the user
     this.props.signupUser(formProps)

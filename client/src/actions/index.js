@@ -21,7 +21,6 @@ export function signinUser ({ email, password }) {
         // - Save the JWT token
         localStorage.setItem('token', response.data.token)
         // - redirect to the route '/feature'
-        history.push('/feature')
       })
       .catch(() => {
         // If request is bad...
@@ -38,7 +37,6 @@ export function signupUser ({ email, password }) {
         console.log('from server on signup', response)
         dispatch({ type: AUTH_USER })
         localStorage.setItem('token', response.data.token)
-        history.push('/feature')
       })
       .catch(response => dispatch(authError(response.data.error)))
   }

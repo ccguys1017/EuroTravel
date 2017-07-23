@@ -1,11 +1,22 @@
 import React, { Component } from 'react'
 import { reduxForm } from 'redux-form'
 import * as actions from '../../actions'
-import { Link, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 class Signin extends Component {
+  //add the router object to this.context to allow for redirects
+  static contextTypes = {
+    router: PropTypes.object
+  }
+  componentWillUpdate(nextProps) {
+    console.log("updating signin", nextProps, this.context)
+    if (nextProps.authenticated) {
+      this.context.router.history.push('/feature')
+    }
+  }
   handleFormSubmit ({ email, password }) {
-    // Need to do something to log user in
+    // action creator dispatching creditionals to validate on server
     this.props.signinUser({ email, password })
   }
 
@@ -21,7 +32,6 @@ class Signin extends Component {
 
   render () {
     const { handleSubmit, fields: { email, password }} = this.props
-
     return (
       <div>
         <Link to='/'>Home</Link>
@@ -43,10 +53,10 @@ class Signin extends Component {
 }
 
 function mapStateToProps (state) {
-  return { errorMessage: state.auth.error }
+  return { errorMessage: state.auth.error, authenticated: state.auth.authenticated }
 }
 
-export default withRouter(reduxForm({
+export default reduxForm({
   form: 'signin',
   fields: ['email', 'password']
-}, mapStateToProps, actions)(Signin))
+}, mapStateToProps, actions)(Signin)

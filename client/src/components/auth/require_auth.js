@@ -1,23 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
-
+//This is a higher order component to authorize a user
 export default function(ComposedComponent) {
+  //use the context property to access the router history
   class Authentication extends Component {
     static contextTypes = {
-      router: React.PropTypes.object
+      router: PropTypes.object
     }
 
     componentWillMount() {
       if (!this.props.authenticated) {
-        this.context.router.push('/')
+        this.context.router.history.push('/')
       }
     }
 
     componentWillUpdate(nextProps) {
       if (!nextProps.authenticated) {
-        this.context.router.push('/')
+        this.context.router.history.push('/')
       }
     }
 
@@ -30,5 +31,5 @@ export default function(ComposedComponent) {
     return { authenticated: state.auth.authenticated }
   }
 
-  return withRouter(connect(mapStateToProps)(Authentication))
+  return connect(mapStateToProps)(Authentication)
 }
