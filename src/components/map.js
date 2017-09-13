@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Map, GoogleApiWrapper} from 'google-maps-react';
+import {Map, GoogleApiWrapper, Marker} from 'google-maps-react';
 import { connect } from 'react-redux';
 import {insertMap} from '../actions/actions';
 
@@ -22,7 +22,7 @@ let Container = React.createClass({
 
   onMarkerClick: function(props, marker, e) {
     
-    this.props.state.maps.setState({
+    this.props.state.maps.state.maps.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true
@@ -31,14 +31,14 @@ let Container = React.createClass({
 
   onInfoWindowClose: function() {
     console.log(this.props.state);
-    this.props.state.maps.setState({
+    this.props.state.maps.state.maps.setState({
       showingInfoWindow: false,
       activeMarker: null
     })
   },
 
   onMapClicked: function(props) {
-      console.log(this.props.state);
+      
     if (this.state.showingInfoWindow) {
       this.props.state.maps.setState({
         showingInfoWindow: false,
@@ -48,12 +48,13 @@ let Container = React.createClass({
   },
 
   render: function() {
-    console.log(this.props);
+    console.log(this.props.state.maps);
     if (!this.props.loaded) {
       return <div>Loading...</div>
     }
     if (this.props.state.maps.clicked === true){
     return (
+      <div>
       <Map google={this.props.google}
           style={{width: '100%', height: '100%', position: 'relative'}}
           className={'map'}
@@ -66,10 +67,16 @@ let Container = React.createClass({
           }} 
           onMarkerClick={this.onMarkerClick}
           onClick={this.onMapClicked}
-          onDragend={this.onMapMoved} />
+          onDragend={this.onMapMoved}>
+          <Marker title={this.props.state.maps.marker.title} 
+            name ={this.props.state.maps.marker.name}
+            position={{lat: this.props.state.maps.selectedLocation.lat, lng: this.props.state.maps.selectedLocation.lng}}
+          />
+          </Map>
+          </div>
       )
     } else {
-      return( <div> <h3>Please search for your location </h3> </div>)
+      return ( <div> <h3>Please search for your location </h3> </div>)
     }
   }
 });

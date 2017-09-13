@@ -31096,7 +31096,7 @@ var Container = _react2.default.createClass({
 
   onMarkerClick: function onMarkerClick(props, marker, e) {
 
-    this.props.state.maps.setState({
+    this.props.state.maps.state.maps.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true
@@ -31105,14 +31105,14 @@ var Container = _react2.default.createClass({
 
   onInfoWindowClose: function onInfoWindowClose() {
     console.log(this.props.state);
-    this.props.state.maps.setState({
+    this.props.state.maps.state.maps.setState({
       showingInfoWindow: false,
       activeMarker: null
     });
   },
 
   onMapClicked: function onMapClicked(props) {
-    console.log(this.props.state);
+
     if (this.state.showingInfoWindow) {
       this.props.state.maps.setState({
         showingInfoWindow: false,
@@ -31122,7 +31122,7 @@ var Container = _react2.default.createClass({
   },
 
   render: function render() {
-    console.log(this.props);
+    console.log(this.props.state.maps);
     if (!this.props.loaded) {
       return _react2.default.createElement(
         'div',
@@ -31131,19 +31131,30 @@ var Container = _react2.default.createClass({
       );
     }
     if (this.props.state.maps.clicked === true) {
-      return _react2.default.createElement(_googleMapsReact.Map, { google: this.props.google,
-        style: { width: '100%', height: '100%', position: 'relative' },
-        className: 'map',
-        zoom: 14,
-        containerStyle: {},
-        centerAroundCurrentLocation: true,
-        initialCenter: {
-          lat: this.props.state.maps.selectedLocation.lat,
-          lng: this.props.state.maps.selectedLocation.lng
-        },
-        onMarkerClick: this.onMarkerClick,
-        onClick: this.onMapClicked,
-        onDragend: this.onMapMoved });
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          _googleMapsReact.Map,
+          { google: this.props.google,
+            style: { width: '100%', height: '100%', position: 'relative' },
+            className: 'map',
+            zoom: 14,
+            containerStyle: {},
+            centerAroundCurrentLocation: true,
+            initialCenter: {
+              lat: this.props.state.maps.selectedLocation.lat,
+              lng: this.props.state.maps.selectedLocation.lng
+            },
+            onMarkerClick: this.onMarkerClick,
+            onClick: this.onMapClicked,
+            onDragend: this.onMapMoved },
+          _react2.default.createElement(_googleMapsReact.Marker, { title: this.props.state.maps.marker.title,
+            name: this.props.state.maps.marker.name,
+            position: { lat: this.props.state.maps.selectedLocation.lat, lng: this.props.state.maps.selectedLocation.lng }
+          })
+        )
+      );
     } else {
       return _react2.default.createElement(
         'div',
@@ -33863,6 +33874,12 @@ var initialState = {
         lat: "0",
         lng: "0"
     },
+    marker: {
+        title: "test",
+        name: "TEST",
+        position: { lat: 0, lng: 0 }
+
+    },
     clicked: false
 };
 
@@ -33874,7 +33891,12 @@ function maps() {
 
         case Actions.INSERT_MAP:
             return Object.assign({}, state, {
-                selectedLocation: { lat: action.lat, lng: action.lng }
+                selectedLocation: { lat: action.lat, lng: action.lng },
+                marker: {
+                    title: 'Your selected Location.',
+                    name: 'LOCATION',
+                    position: { lat: action.lat, lng: action.lng }
+                }
             });
             break;
 

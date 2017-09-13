@@ -9,6 +9,12 @@ const initialState = {
         lat:"0",
         lng:"0"
     },
+    marker:{
+        title:"test",
+        name:"TEST",
+        position:{lat:0, lng:0}
+    
+    },
     clicked: false
 };
 
@@ -17,7 +23,12 @@ export default function maps(state = initialState, action){
 
         case Actions.INSERT_MAP:
             return Object.assign({}, state, {
-                selectedLocation: {lat: action.lat, lng: action.lng }
+                selectedLocation: {lat: action.lat, lng: action.lng },
+                marker: {
+                    title:'Your selected Location.',
+                    name:'LOCATION',
+                    position:{lat:action.lat, lng: action.lng}
+            }
             });
             break;
 
