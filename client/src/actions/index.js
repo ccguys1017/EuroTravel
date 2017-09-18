@@ -1,12 +1,12 @@
-import axios from 'axios'
+import axios from 'axios';
 import {
   AUTH_USER,
   UNAUTH_USER,
   AUTH_ERROR,
   FETCH_MESSAGE
-} from './types'
+} from './types';
 
-const ROOT_URL = 'http://localhost:3000/api/v1'
+const ROOT_URL = 'http://localhost:8080/api/v1';
 
 export function signinUser ({ email, password }) {
   return function (dispatch) {
@@ -15,7 +15,6 @@ export function signinUser ({ email, password }) {
       .then(response => {
         // If request is good...
         // - Update state to indicate user is authenticated
-        console.log('from server on login', response)
         dispatch({ type: AUTH_USER })
         // - Save the JWT token
         localStorage.setItem('token', response.data.token)
@@ -25,7 +24,7 @@ export function signinUser ({ email, password }) {
         // - Show an error to the user
         dispatch(authError('Bad Login Info'))
       })
-  }
+  };
 }
 
 export function signupUser ({ email, password }) {
@@ -35,25 +34,25 @@ export function signupUser ({ email, password }) {
         dispatch({ type: AUTH_USER })
         localStorage.setItem('token', response.data.token)
       })
-      .catch(response => dispatch(authError(response.data.error)))
-  }
+      .catch(response => dispatch(authError('Email Address already Signed Up')))
+  };
 }
 
 export function authError (error) {
   return {
     type: AUTH_ERROR,
     payload: error
-  }
-}
+  };
+};
 
 export function signoutUser () {
-  localStorage.removeItem('token')
-  return { type: UNAUTH_USER }
-}
+  localStorage.removeItem('token');
+  return { type: UNAUTH_USER };
+};
 
 export function fetchMessage () {
   return function (dispatch) {
-    axios.get('http://localhost:3000/', {
+    axios.get('http://localhost:8080/', {
       headers: { authorization: localStorage.getItem('token') }
     })
       .then(response => {
@@ -62,5 +61,5 @@ export function fetchMessage () {
           payload: response.data.message
         })
       })
-  }
-}
+  };
+};

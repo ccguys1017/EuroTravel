@@ -5,15 +5,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class Signin extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      email: '',
-      password: ''
-    }
-  }
-
   //add the router object to this.context to allow for redirects
   static contextTypes = {
     router: PropTypes.object
@@ -22,7 +13,7 @@ class Signin extends Component {
   componentWillUpdate(nextProps) {
     if (nextProps.authenticated) {
       this.context.router.history.push('/');
-    };
+    }
   };
 
   handleFormSubmit ({ email, password }) {
@@ -37,36 +28,36 @@ class Signin extends Component {
           <strong>Oops!</strong> {this.props.errorMessage}
         </div>
       );
-    };
+    }
   };
 
   render () {
-    const { handleSubmit, fields: { email, password }} = this.props;
+    const { handleSubmit, fields: { email, password }} = this.props
     return (
-      <div className='tg-login__wrapper'>
+      <div>
         <Link to='/'>Home</Link>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <fieldset className='form-group'>
             <label>Email:</label>
-            <input {...email} className='form-control' placeholder='Enter email' />
+            <input {...email} className='form-control' />
           </fieldset>
           <fieldset className='form-group'>
             <label>Password:</label>
-            <input {...password} type='password' className='form-control' placeholder='Enter password' />
+            <input {...password} type='password' className='form-control' />
           </fieldset>
           {this.renderAlert()}
           <button action='submit' className='btn btn-primary'>Sign in</button>
         </form>
       </div>
     );
-  };
+  }
 };
 
 function mapStateToProps (state) {
-  return { errorMessage: state.auth.error, authenticated: state.auth.authenticated };
+  return { errorMessage: state.auth.error, authenticated: state.auth.authenticated }
 };
 
 export default reduxForm({
   form: 'signin',
   fields: ['email', 'password']
-}, mapStateToProps, actions)(Signin)
+}, mapStateToProps, actions)(Signin);

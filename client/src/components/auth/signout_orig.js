@@ -7,10 +7,15 @@ class Signout extends Component {
   static contextTypes = {
     router: PropTypes.object
   };
-  
+
   componentWillMount () {
     this.props.signoutUser();
     this.context.router.history.push('/');
+  };
+
+  render () {
+    return <div>
+           </div>
   }
 };
 

@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import PropTypes from 'prop-types';
 
 class Feature extends Component {
-  static contextTypes = {
-    router: PropTypes.object
-  };
-
   componentWillMount () {
     this.props.fetchMessage()
   };
@@ -15,8 +10,8 @@ class Feature extends Component {
   render () {
     return (
       <div>{this.props.message}</div>
-    );
-  }
+    )
+  };
 };
 
 function mapStateToProps (state) {

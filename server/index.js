@@ -1,24 +1,42 @@
 // Main starting point of the application
-const express = require('express')
-const http = require('http')
-const bodyParser = require('body-parser')
-const morgan = require('morgan')
-const app = express()
-const router = require('./router')
-const mongoose = require('mongoose')
-const cors = require('cors')
+const express = require('express');
+const http = require('http');
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
+const opn = require('opn');  //Imported
+const path = require('path');  //Imported
+
+const app = express();
+
+const mongoose = require('mongoose');
+const cors = require('cors');
+
+// Routes
+const index = require('./routes/index');
+
 
 // DB Setup
-mongoose.connect('mongodb://localhost/auth')
+mongoose.connect('mongodb://ccguys1017:fiveCCguys1017$@ds025583.mlab.com:25583/eurotravel');
 
 // App Setup
-app.use(morgan('combined'))
-app.use(cors())
-app.use(bodyParser.json({ type: '*/*' }))
-router(app)
+app.use(morgan('combined'));
+app.use(cors());
+app.use(bodyParser.json({ type: '*/*' }));
+index(app);
+
+app.use(express.static(path.resolve(__dirname + '/public'))); // Imported
+
+/*app.get('/', function(req, res) {
+    res.sendfile(path.resolve(__dirname + '/public/views/index.html'));
+   });*/      //Imported
+
+app.get('*', function(req, res) {
+    res.sendfile(path.resolve(__dirname + '/public/views/404.html'));
+   }); //Imported
 
 // Server Setup
-const port = process.env.PORT || 3000
-const server = http.createServer(app)
-server.listen(port)
-console.log('Server listening on:', port)
+const port = process.env.PORT || 8080;
+const server = http.createServer(app);
+server.listen(port);
+console.log('Server listening on:', port);
+
