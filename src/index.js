@@ -15,6 +15,7 @@ import {createStore, bindActionCreators} from 'redux';
 import {insertMap, locationClicked} from './actions/actions';
 
 
+
 const store = createStore(rootReducer, window.STATE_FROM_SERVER);
 
 class Main extends Component{
@@ -75,6 +76,7 @@ class Main extends Component{
         );
     };
 };
+
 
 
 

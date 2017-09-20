@@ -61,7 +61,7 @@ let Container = React.createClass({
       return <div>Loading...</div>
     }
     if (this.props.state.maps.clicked === true){
-     
+    console.log(this.props.state.maps.selectedLocation.lat);
     return (
       <div>
       <Map google={this.props.google}
@@ -70,7 +70,7 @@ let Container = React.createClass({
           zoom={14}
           containerStyle={{}}
           centerAroundCurrentLocation={false}
-          center={this.props.state.selectedLocation}
+          center={{lat:this.props.state.maps.selectedLocation.lat, lng: this.props.state.maps.selectedLocation.lng}}
           initialCenter={{
             lat:this.props.state.maps.selectedLocation.lat,
             lng:this.props.state.maps.selectedLocation.lng
