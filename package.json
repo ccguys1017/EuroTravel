@@ -1,11 +1,21 @@
 {
+<<<<<<< HEAD
   "name": "eurotravel",
   "version": "0.1.0",
   "dependencies": {
+=======
+  "name": "newtestapp",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "google-maps": "^3.2.1",
+    "google-maps-react": "^1.1.0",
+>>>>>>> 26068a924bfbab0cd76918baf4746fd05922ed1c
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-google-autocomplete": "^1.0.13",
     "react-redux": "^5.0.6",
+<<<<<<< HEAD
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
@@ -22,6 +32,13 @@
   },
   "devDependencies": {
     "react-scripts": "1.0.13"
+=======
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^4.0.8",
+    "react-scripts": "1.0.13",
+    "redux": "^3.7.2",
+    "redux-form": "^7.0.4"
+>>>>>>> 26068a924bfbab0cd76918baf4746fd05922ed1c
   },
   "scripts": {
     "start": "react-scripts start",
@@ -29,4 +46,8 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 26068a924bfbab0cd76918baf4746fd05922ed1c

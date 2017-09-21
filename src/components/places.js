@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Component } from 'react';
 //import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -111,3 +112,14 @@ export default connect(mapStatetoProps)(Places);
 /*
 <button onClick={this.onClick.bind(this)} className='btn btn-default'>Back</button>
 */
+=======
+import React, {Component} from 'react';
+
+export default class Places extends Component{
+    render(){
+        return(
+            <div>This is the Places page </div>
+        )
+    }
+}
+>>>>>>> 26068a924bfbab0cd76918baf4746fd05922ed1c
