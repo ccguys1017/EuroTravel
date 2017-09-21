@@ -1,15 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-<<<<<<< HEAD
 
 import {Map, GoogleApiWrapper, Marker} from 'google-maps-react';
 import { connect } from 'react-redux';
 import {insertMap} from '../actions';
-=======
-import {Map, GoogleApiWrapper, Marker} from 'google-maps-react';
-import { connect } from 'react-redux';
-import {insertMap} from '../actions/actions';
->>>>>>> 26068a924bfbab0cd76918baf4746fd05922ed1c
 
 let Container = React.createClass({
   
@@ -63,21 +57,13 @@ let Container = React.createClass({
   },
 
   render: function() {
-<<<<<<< HEAD
     console.log('this.props.state.maps.clicked: ' + this.props.state.maps.clicked);
     //this.props.state.maps.clicked = true;
-=======
-    console.log(this.props.state.maps);
->>>>>>> 26068a924bfbab0cd76918baf4746fd05922ed1c
     if (!this.props.loaded) {
       return <div>Loading...</div>
     }
     if (this.props.state.maps.clicked === true){
-<<<<<<< HEAD
       console.log('this.props.state.maps.clicked: ' + this.props.state.maps.clicked);
-=======
-    console.log(this.props.state.maps.selectedLocation.lat);
->>>>>>> 26068a924bfbab0cd76918baf4746fd05922ed1c
     return (
       <div>
       <Map google={this.props.google}
@@ -143,7 +129,3 @@ export default GoogleApiWrapper({apiKey: ('AIzaSyAMdFDbMMpTtr8YgDIST1Uu_TPukPCfl
 //         );
 //     }
 // }
-<<<<<<< HEAD
-=======
-
->>>>>>> 26068a924bfbab0cd76918baf4746fd05922ed1c
