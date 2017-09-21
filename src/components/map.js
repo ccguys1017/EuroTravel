@@ -86,11 +86,7 @@ let Container = React.createClass({
           zoom={14}
           containerStyle={{}}
           centerAroundCurrentLocation={false}
-<<<<<<< HEAD
-          center={this.props.state.selectedLocation}
-=======
           center={{lat:this.props.state.maps.selectedLocation.lat, lng: this.props.state.maps.selectedLocation.lng}}
->>>>>>> 26068a924bfbab0cd76918baf4746fd05922ed1c
           initialCenter={{
             lat:this.props.state.maps.selectedLocation.lat,
             lng:this.props.state.maps.selectedLocation.lng
