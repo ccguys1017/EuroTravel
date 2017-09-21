@@ -8,7 +8,7 @@ import {
   LOCATION_CLICKED
 } from './types';
 
-const ROOT_URL = 'http://localhost:8080/api/v1';
+const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
 
 export function signinUser ({ email, password }) {
   return function (dispatch) {
@@ -54,7 +54,7 @@ export function signoutUser () {
 
 export function fetchMessage () {
   return function (dispatch) {
-    axios.get('http://localhost:8080/', {
+    axios.get('https://eurotravel-sever.herokuapp.com/', {
       headers: { authorization: localStorage.getItem('token') }
     })
       .then(response => {
