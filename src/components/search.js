@@ -40,7 +40,15 @@ export default class PlacesSearch extends React.Component{
             console.log(results);
         }
     });
-
+    service.getDetails({
+      placeId: this.state.place_id
+    }, function(place, status) {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        console.log(place.reviews);
+       
+        // Intended behavior is to set this.setState({places.place.reviews})
+      }
+    })
     
     function createMarker(place) {
         var placeLoc = place.geometry.location;
@@ -50,15 +58,7 @@ export default class PlacesSearch extends React.Component{
             position: place.geometry.location
         });
 
-    service.getDetails({
-        placeId: place.place_id
-      }, function(place, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          console.log(place.reviews);
-          console.log(place.place_id);
-          // Intended behavior is to set this.setState({places.place.reviews})
-        }
-      })
+    
    }
 }
     render(){
