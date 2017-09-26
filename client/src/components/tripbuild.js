@@ -21,7 +21,7 @@ class Tripbuild extends Component {
     return ( 
       <div className='tripbuild'>
         <h3>Create Your Custom Itinerary</h3>
-        <form action='/tripresults'>
+        <form action='/scratchpad'>
           <div className='form-group'>
             <label className='col-md-3 control-label' for='Checkboxes'>Check your Itinerary Items</label>  
             <div className='col-md-9 columns'>

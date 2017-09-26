@@ -3,7 +3,9 @@ import {
   AUTH_USER,
   UNAUTH_USER,
   AUTH_ERROR,
-  FETCH_MESSAGE
+  FETCH_MESSAGE,
+  FETCH_CITY_LONLAT,
+  SAVE_ITINERARY
 } from './types';
 
 const ROOT_URL = 'http://localhost:8080/api/v1';
@@ -45,6 +47,12 @@ export function authError (error) {
   };
 };
 
+export function saveItinerary (error) {
+  return {
+    type: SAVE_ITINERARY
+  };
+};
+
 export function signoutUser () {
   localStorage.removeItem('token');
   return { type: UNAUTH_USER };
@@ -63,3 +71,17 @@ export function fetchMessage () {
       })
   };
 };
+
+export function saveUserItin () {
+  console.log('saveUserItin() entered');
+  return function (dispatch) {
+//    axios.post(`${ROOT_URL}/saveUserItin`, { city, country })
+    axios.post(`${ROOT_URL}/saveUserItin`)
+      .then(response => {
+        dispatch({ 
+          type: SAVE_ITINERARY })
+        })
+      .catch(response => dispatch(saveItinerary('Error saving User Itinerary document')))
+  };
+}
+

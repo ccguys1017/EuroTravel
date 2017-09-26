@@ -6,10 +6,11 @@ import Signout from './auth/signout';
 import Signup from './auth/signup';
 import Feature from './feature';
 import RequireAuth from './auth/require_auth';
-import Header from './header';
+import Homepage from './homepage';
 import Dashboard from './dashboard';
 import Tripbuild from './tripbuild';
 import Tripresults from './tripresults';
+import Scratchpad from './scratchpad';
 import Places from './places';
 
 export default class App extends Component {
@@ -17,7 +18,7 @@ export default class App extends Component {
     return (
       <Router>
         <div>
-          <Route exact path='/' component={Header} />
+          <Route exact path='/' component={Homepage} />
           <Route path='/signin' component={Signin} />
           <Route path='/signup' component={Signup} />
           <Route path='/signout' component={Signout} />
@@ -25,6 +26,7 @@ export default class App extends Component {
           <Route path='/places' component={Places} />          
           <Route path='/tripbuild' component={Tripbuild} />
           <Route path='/tripresults' component={Tripresults} />
+          <Route path='/scratchpad' component={Scratchpad} />
           <Route path='/feature' component={RequireAuth(Feature)} />
         </div>
       </Router>

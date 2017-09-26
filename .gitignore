@@ -1,1 +1,9 @@
-node_modules
+server/node_modules/*
+server/model/cities.js
+server/controllers/cities.js
+client/node_modules/*
+client/src/components/dashboard_new.js
+client/src/components/scratchpad.js
+client/src/components/scratchpad2.js
+client/src/components/scratchpad3.js
+client/src/components/temp.js

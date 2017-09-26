@@ -2,7 +2,8 @@ import {
   AUTH_USER,
   UNAUTH_USER,
   AUTH_ERROR,
-  FETCH_MESSAGE
+  FETCH_MESSAGE,
+  FETCH_CITY_LONLAT
 } from '../actions/types';
 
 export default function (state = {authenticated: false}, action) {
@@ -15,7 +16,9 @@ export default function (state = {authenticated: false}, action) {
       return { ...state, error: action.payload }
     case FETCH_MESSAGE:
       return { ...state, message: action.payload }
+    case FETCH_CITY_LONLAT:
+      return { ...state, error: action.type }
+    default:
+      return state;
   };
-
-  return state;
 };

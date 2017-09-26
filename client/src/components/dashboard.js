@@ -7,7 +7,8 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
   }    
-  state = {};
+  state = {
+  };
 
   static contextTypes = {
     router: PropTypes.object
@@ -18,7 +19,6 @@ class Dashboard extends Component {
   }
 
   render() {
-    const location = this.state.location;
     return (
       <div className='dashboard'>
         <h3>Dashboard</h3>
