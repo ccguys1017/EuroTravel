@@ -10,7 +10,6 @@ import Homepage from './homepage';
 import Dashboard from './dashboard';
 import Tripbuild from './tripbuild';
 import Tripresults from './tripresults';
-import Scratchpad from './scratchpad';
 import Places from './places';
 
 export default class App extends Component {
@@ -26,7 +25,6 @@ export default class App extends Component {
           <Route path='/places' component={Places} />          
           <Route path='/tripbuild' component={Tripbuild} />
           <Route path='/tripresults' component={Tripresults} />
-          <Route path='/scratchpad' component={Scratchpad} />
           <Route path='/feature' component={RequireAuth(Feature)} />
         </div>
       </Router>
