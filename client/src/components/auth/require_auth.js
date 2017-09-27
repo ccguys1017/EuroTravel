@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 //This is a higher order component to authorize a user
 export default function(ComposedComponent) {
+  
   //use the context property to access the router history
   class Authentication extends Component {
     static contextTypes = {

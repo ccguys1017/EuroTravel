@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import * as actions from '../../actions';
 import PropTypes from 'prop-types';
 
-
 class Signup extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +20,7 @@ class Signup extends Component {
 
   componentWillUpdate(nextProps) {
     if (this.props.authenticated) {
+      localStorage.setItem('userEmail', this.props.values.email);
       this.context.router.history.push('/');
     };
   }
@@ -28,6 +28,7 @@ class Signup extends Component {
   handleFormSubmit (formProps) {
     // Call action creator to sign up the user
     this.props.signupUser(formProps);
+    localStorage.setItem('userEmail', this.props.values.email);
     this.context.router.history.push('/');
   }
 
@@ -50,7 +51,7 @@ class Signup extends Component {
         <fieldset className='form-group'>
           <label>Email:</label>
           <input className='form-control' {...email} placeholder='Enter email' />
-          {email.touched && email.error && <div className='error'>{email.error}</div>}          
+          {email.touched && email.error && <div className='error'>{email.error}</div>}        
         </fieldset>
         <fieldset className='form-group'>
           <label>Password:</label>

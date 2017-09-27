@@ -2,17 +2,30 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { DefaultPlayer as Video } from 'react-html5video';
+import * as actions from '../actions';
+import PropTypes from 'prop-types';
 
 class Homepage extends Component {
+  static contextTypes = {
+    router: PropTypes.object
+  };
+
+  componentDidMount () {
+    this.props.fetchMessage()
+  };
+
   renderLinks () {
     if (this.props.authenticated) {
       // show a link for user to go to Dashboard or Sign Out
       return [
-        <li className='nav-item' key={1}>
-          <Link className='btn btn-default tg-login__btn' to='/dashboard'>Dashboard</Link>
+        <li className='nav-item' key={1}>{this.props.message}
         </li>
         ,
         <li className='nav-item' key={2}>
+          <Link className='btn btn-default tg-login__btn' to='/dashboard'>Dashboard</Link>
+        </li>
+        ,
+        <li className='nav-item' key={3}>
           <Link className='nav-link' to='/signout'>Sign Out</Link>
         </li>
       ];
@@ -31,7 +44,6 @@ class Homepage extends Component {
   };
 
   render () {
-
     return (
       <div className='tg-header'>
         <nav className="navbar navbar-default">
@@ -49,6 +61,7 @@ class Homepage extends Component {
                 <li className="active"><a href="/">Home <span className="sr-only">(current)</span></a></li>
                 <li><a href="#">Trip Ideas</a></li>
                 <li><a href="#">Destinations</a></li>
+
               </ul>
               <ul className="nav navbar-nav navbar-right">
                 {this.renderLinks()}
@@ -194,8 +207,9 @@ class Homepage extends Component {
 
 function mapStateToProps (state) {
   return {
-    authenticated: state.auth.authenticated
+    authenticated: state.auth.authenticated,
+    message: state.auth.message
   };
 };
 
-export default connect(mapStateToProps)(Homepage);
+export default connect(mapStateToProps, actions)(Homepage);

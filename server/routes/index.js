@@ -13,6 +13,6 @@ module.exports = function (app) {
   });
   app.post('/api/v1/signin', requireSignin, Authentication.signin);
   app.post('/api/v1/signup', Authentication.signup);
-  //app.get('/api/v1/itineraries', getItineraries);
-  app.post('/api/v1/itinerary', Itinerary.saveItinerary);
+  app.post('/api/v1/save_itin', Itinerary.saveItinerary);
+  app.post('/api/v1/itinerary2', Itinerary.readItinerary);
 };

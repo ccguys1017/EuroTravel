@@ -55,6 +55,7 @@ export function saveItinerary (error) {
 
 export function signoutUser () {
   localStorage.removeItem('token');
+  localStorage.removeItem('userEmail');
   return { type: UNAUTH_USER };
 };
 
@@ -75,7 +76,6 @@ export function fetchMessage () {
 export function saveUserItin () {
   console.log('saveUserItin() entered');
   return function (dispatch) {
-//    axios.post(`${ROOT_URL}/saveUserItin`, { city, country })
     axios.post(`${ROOT_URL}/saveUserItin`)
       .then(response => {
         dispatch({ 

@@ -22,6 +22,7 @@ class Signin extends Component {
   componentWillUpdate(nextProps) {
     if (nextProps.authenticated) {
       this.context.router.history.push('/');
+      localStorage.setItem('userEmail', this.props.values.email);
     };
   };
 
