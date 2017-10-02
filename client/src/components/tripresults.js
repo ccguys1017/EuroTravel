@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as actions from '../actions';
+import Tripbuild from './tripbuild';
+import PlacesSearch from './search';
 import axios from 'axios';
 
 import Checkbox from './checkbox';
@@ -335,6 +337,13 @@ const places_model = [  // Object array used for Prototyping
 class Tripresults extends Component {
   constructor(props) {
     super(props);
+  
+    this.state = {
+      itins_saved: false,
+      //lat: 0,
+      //lng: 0,
+      placeid: ''
+    };
   }
 
   static contextTypes = {
@@ -359,7 +368,6 @@ class Tripresults extends Component {
     for (const checkbox of this.selectedCheckboxes) {   
 
       const user_email = localStorage.getItem('userEmail');
-
       const cb_name = checkbox.name;
       const cb_place_id = checkbox.place_id;
       const cb_price_level = checkbox.price_level;
@@ -372,22 +380,32 @@ class Tripresults extends Component {
       axios.post(`${ROOT_URL}/save_itin`, { user_email, cb_name, cb_place_id, cb_price_level, cb_rating, cb_type, cb_vicinity })
       .then(response => {
         this.setState({
+          itins_svaed: true
         });
       })
       .catch(err => {
         this.setState({
+          itins_svaed: false
         });        
       })
     }
+
     this.context.router.history.push('/');
   }
 
-  createCheckbox = (name, place_id, price_level, rating, type, vicinity) => (
+  createCheckbox = (name, place_id) => (
     <Checkbox
       label={name}
       handleCheckboxChange={this.toggleCheckbox}
       key={place_id}
     />
+  )
+
+  IterateOverPlaces = () => (
+    <PlacesSearch types={['(regions)']} selectedLocation={{lat:localStorage.getItem('trip_lat'), lng:localStorage.getItem('trip_lng')}} placeid={this.state.placeid} />
+    /*
+        location = {lat:Number(this.props.selectedLocation.lat), lng: Number(this.props.selectedLocation.lng)}
+    */
   )
 
   createCheckboxes = () => (
@@ -400,6 +418,7 @@ class Tripresults extends Component {
         <h3>Your Custom Itinerary Results</h3>
         <div className="row">
           <div className="col-sm-12">
+            {this.IterateOverPlaces()}
             <form action='/' onSubmit={this.handleFormSubmit}>
               {this.createCheckboxes()}
               <button className="btn btn-default" type="submit">Save</button>
@@ -410,5 +429,9 @@ class Tripresults extends Component {
     );
   }
 }
+
+const mapStatetoProps = (state) => ({
+  itins_saved: state.itins_saved
+});
 
 export default Tripresults;

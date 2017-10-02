@@ -47,12 +47,6 @@ export function authError (error) {
   };
 };
 
-export function saveItinerary (error) {
-  return {
-    type: SAVE_ITINERARY
-  };
-};
-
 export function signoutUser () {
   localStorage.removeItem('token');
   localStorage.removeItem('userEmail');
@@ -73,15 +67,4 @@ export function fetchMessage () {
   };
 };
 
-export function saveUserItin () {
-  console.log('saveUserItin() entered');
-  return function (dispatch) {
-    axios.post(`${ROOT_URL}/saveUserItin`)
-      .then(response => {
-        dispatch({ 
-          type: SAVE_ITINERARY })
-        })
-      .catch(response => dispatch(saveItinerary('Error saving User Itinerary document')))
-  };
-}
 

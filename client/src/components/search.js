@@ -24,6 +24,8 @@
     componentDidMount() {
       let state = this.state;
       let location = {lat:Number(this.props.selectedLocation.lat), lng: Number(this.props.selectedLocation.lng)};
+      //let location ={lat:Number(localStorage.getItem('trip_lat')), lng:Number(localStorage.getItem('trip_lng'))};
+      console.log('location: ' + location);
       let map = new google.maps.Map(document.getElementById('map'), {
           center: location,
           zoom:15
@@ -34,9 +36,9 @@
       service.nearbySearch({
         location:location,
         radius: 500,                // DEBUG (RAB)
-        type: ['store']             // DEBUG (RAB)
+        //type: ['store']             // DEBUG (RAB)
         //type: ['lodging']         // DEBUG (RAB)
-        //type: ['cafe']            // DEBUG (RAB)
+        type: ['cafe']            // DEBUG (RAB)
         //type: ['museum']          // DEBUG (RAB)
         //type: ['pharmacy']        // DEBUG (RAB)
         //type: ['subway_station']  // DEBUG (RAB)
@@ -50,6 +52,7 @@
               createMarker(results[i]);
               state.Places.push(results[i]);
             }
+            console.log('results: ' + JSON.stringify(results));
           }
       });
 
@@ -69,10 +72,6 @@
         let placeAddr = place.vicinity;           // DEBUG (RAB) Capture Places data
         let placeRating = place.rating;           // DEBUG (RAB) Capture Places data
         console.log(place);                       // DEBUG (RAB) Capture Places data
-        console.log('Name: ' + placeName);        // DEBUG (RAB) Capture Places data
-        console.log('Type: ' + placeType);        // DEBUG (RAB) Capture Places data
-        console.log('Address: ' + placeAddr);     // DEBUG (RAB) Capture Places data
-        console.log('Rating: ' + placeRating);    // DEBUG (RAB) Capture Places data
 
         let marker = new google.maps.Marker({
           map: map,

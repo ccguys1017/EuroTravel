@@ -11,7 +11,7 @@ exports.saveItinerary = function (req, res, next) {
     const vicinity = req.body.cb_vicinity;
 
     // See if a Itin with the given place_id exists
-    Itin.findOne({ place_id: place_id }, function (err, existingItin) {
+    Itin.findOne({ email: email, place_id: place_id }, function (err, existingItin) {
       if (err) { return next(err) }
   
       // If a Itin with place_id does exist, return an error

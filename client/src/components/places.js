@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Autocomplete from 'react-google-autocomplete';
 import PlacesSearch from './search';
@@ -51,8 +49,9 @@ class Places extends Component {
           } // end for loop
           console.log('selectedlatlong: ' + selectedlatlong);
           console.log('Lat = '  + selLat + ' || Lng = ' + selLng);
-          this.setState({selectedLocation: {lat: selLat, lng:selLng}})
-          this.setState({clicked: true})
+          this.setState({selectedLocation: {lat: selLat, lng:selLng}});
+          this.setState({clicked: true});
+
           console.log('Selected Location: ' + this.state.selectedLocation);
           this.setState({placeid: place.place_id});
           console.log('place_id: ' + this.state.placeid);

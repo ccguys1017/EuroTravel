@@ -1,5 +1,6 @@
 const Authentication = require('../controllers/authentication');
 const Itinerary = require('../controllers/itinerary');
+const Cities = require('../controllers/cities_lng_lat');
 
 const passportService = require('../services/passport');
 const passport = require('passport');
@@ -13,6 +14,7 @@ module.exports = function (app) {
   });
   app.post('/api/v1/signin', requireSignin, Authentication.signin);
   app.post('/api/v1/signup', Authentication.signup);
+  app.post('/api/v1/cities_lng_lat', Cities.getLngLat);
   app.post('/api/v1/save_itin', Itinerary.saveItinerary);
-  app.post('/api/v1/itinerary2', Itinerary.readItinerary);
+  app.post('/api/v1/get_itin', Itinerary.readItinerary);
 };
