@@ -112,7 +112,7 @@ class Dashboard extends Component {
             <div className='dashradio'>
               <div className='dashradio-item'>
                 <input type='radio' name='radio' id='countrydashradio1' />
-                <label>England</label>
+                <label>United Kingdom</label>
               </div>
               <div className='dashradio-item'>
                 <input type='radio' name='radio' id='countrydashradio2' />
