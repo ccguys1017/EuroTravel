@@ -71,7 +71,7 @@
         let placeType = place.types[0];           // DEBUG (RAB) Capture Places data
         let placeAddr = place.vicinity;           // DEBUG (RAB) Capture Places data
         let placeRating = place.rating;           // DEBUG (RAB) Capture Places data
-        console.log(place);                       // DEBUG (RAB) Capture Places data
+        console.log('place: ' + place);                       // DEBUG (RAB) Capture Places data
 
         let marker = new google.maps.Marker({
           map: map,

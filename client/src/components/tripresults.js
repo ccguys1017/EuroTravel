@@ -340,8 +340,6 @@ class Tripresults extends Component {
   
     this.state = {
       itins_saved: false,
-      //lat: 0,
-      //lng: 0,
       placeid: ''
     };
   }
@@ -352,6 +350,7 @@ class Tripresults extends Component {
 
   componentWillMount = () => {
     this.selectedCheckboxes = new Set();
+    this.placesForAllTypes = new Set();
   }
 
   toggleCheckbox = label => {
@@ -390,7 +389,7 @@ class Tripresults extends Component {
       })
     }
 
-    this.context.router.history.push('/');
+    this.context.router.history.push('/dashboard');
   }
 
   createCheckbox = (name, place_id) => (
@@ -402,11 +401,11 @@ class Tripresults extends Component {
   )
 
   IterateOverPlaces = () => (
-    <PlacesSearch types={['(regions)']} selectedLocation={{lat:localStorage.getItem('trip_lat'), lng:localStorage.getItem('trip_lng')}} placeid={this.state.placeid} />
-    /*
-        location = {lat:Number(this.props.selectedLocation.lat), lng: Number(this.props.selectedLocation.lng)}
-    */
+    this.placesForAllTypes.add('test'),
+    <PlacesSearch style={{width:'20%'}} types={['(regions)']} selectedLocation={{lat:localStorage.getItem('trip_lat'), lng:localStorage.getItem('trip_lng')}} placeid={this.state.placeid} />
   )
+
+//  this.placesForAllTypes.add('test')
 
   createCheckboxes = () => (
     places_model.map(this.createCheckbox)
@@ -419,7 +418,7 @@ class Tripresults extends Component {
         <div className="row">
           <div className="col-sm-12">
             {this.IterateOverPlaces()}
-            <form action='/' onSubmit={this.handleFormSubmit}>
+            <form action='/dashboard' onSubmit={this.handleFormSubmit}>
               {this.createCheckboxes()}
               <button className="btn btn-default" type="submit">Save</button>
             </form>

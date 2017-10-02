@@ -114,8 +114,8 @@ componentWillMount = () => {
     console.log('latitude: ' + JSON.stringify(this.state.lat));
     console.log('Place Type Array: [' + places_type + ']');
 
-    localStorage.setItem('trip_lat', JSON.stringify(this.state.lng));
-    localStorage.setItem('trip_lng', JSON.stringify(this.state.lat));
+    localStorage.setItem('trip_lat', JSON.stringify(this.state.lat));
+    localStorage.setItem('trip_lng', JSON.stringify(this.state.lng));
     localStorage.setItem('place_type_array', places_type);
 
     this.context.router.history.push('/tripresults');

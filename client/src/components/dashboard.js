@@ -33,7 +33,7 @@ class Dashboard extends Component {
     let trip_city, trip_country = '';
 
     if (document.getElementById('countrydashradio1').checked) {
-      trip_country = 'England';
+      trip_country = 'United Kingdom';
     } else if (document.getElementById('countrydashradio2').checked) {
       trip_country = 'France';
     } else if (document.getElementById('countrydashradio3').checked) {
