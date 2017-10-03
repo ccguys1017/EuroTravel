@@ -7,7 +7,7 @@ import {
   FETCH_CITY_LONLAT,
   SAVE_ITINERARY
 } from './types';
-
+import * as types from './types';
 const ROOT_URL = 'http://localhost:8080/api/v1';
 
 export function signinUser ({ email, password }) {
@@ -68,3 +68,6 @@ export function fetchMessage () {
 };
 
 
+export const addPlace = (place) => ({type: types.NEW_PLACE, place });
+export const addLocation = (lat, lng) => ({type:types.NEW_LOCATION, lat, lng});
+export const handleClick = () => ({type:types.HANDLE_CLICK});

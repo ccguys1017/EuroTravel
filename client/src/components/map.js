@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
 import Autocomplete from 'react-google-autocomplete';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as actionCreators from '../actions/actions';
 
-export default class Main extends Component {
+class Main extends Component {
   render() {
   //For the default center of map
   const location = {
@@ -32,8 +36,10 @@ export default class Main extends Component {
           }
         } // end for loop
 
-        store.dispatch(insertMap(selLat, selLng));
+        
+        store.dispatch(addLocation(selLat, selLng));
         store.dispatch(locationClicked());
+        console.log(this.props);
         }}  // end onPlaceSelected
         types={['(regions)']}
       />
@@ -48,3 +54,12 @@ export default class Main extends Component {
   );
   };
 };
+const mapStateToProps = (state) =>{
+  return {state: state};
+};
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(actionCreators, dispatch);
+}
+Main = connect(mapStateToProps, mapDispatchToProps)(Main);
+
+export default Main;

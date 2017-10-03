@@ -5,6 +5,8 @@ import * as actions from '../actions';
 import Tripbuild from './tripbuild';
 import PlacesSearch from './search';
 import axios from 'axios';
+import {bindActionCreators} from 'redux';
+import * as actionCreators from '../actions';
 
 import Checkbox from './checkbox';
 
@@ -12,6 +14,8 @@ const ROOT_URL = 'http://localhost:8080/api/v1';
 
 const places = [];  /* This will be the object array for the real data returned from the 
                        looped Google Places API call */
+let testPlaces =  localStorage.getItem('test_places');
+console.log(testPlaces);
 const places_model = [  // Object array used for Prototyping 
   
   /* { places.name } { places.place_id } { places.price_level } { places.rating } { places.vincinity } */
@@ -351,6 +355,8 @@ class Tripresults extends Component {
   componentWillMount = () => {
     this.selectedCheckboxes = new Set();
     this.placesForAllTypes = new Set();
+
+    console.log(this.props);
   }
 
   toggleCheckbox = label => {
@@ -361,6 +367,10 @@ class Tripresults extends Component {
     }
   }
 
+  
+  componentWillReceiveProps(nextProps){
+    this.props.maps.places.map(this.createCheckbox)
+  }
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
 
@@ -408,10 +418,13 @@ class Tripresults extends Component {
 //  this.placesForAllTypes.add('test')
 
   createCheckboxes = () => (
-    places_model.map(this.createCheckbox)
+    
+    this.props.maps.places.map(this.createCheckbox)
+    
   )
 
   render() {
+    
     return (
       <div className="tripresults">
         <h3>Your Custom Itinerary Results</h3>
@@ -429,8 +442,13 @@ class Tripresults extends Component {
   }
 }
 
-const mapStatetoProps = (state) => ({
-  itins_saved: state.itins_saved
+const mapStateToProps = (state) => ({
+  itins_saved: state.itins_saved,
+  maps: state.maps
 });
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(actionCreators, dispatch);
+}
+export default Tripresults = connect(mapStateToProps, mapDispatchToProps)(Tripresults);
 
-export default Tripresults;
+
