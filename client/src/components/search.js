@@ -87,16 +87,16 @@
   
       var x = 0; //Counter for info marker open/close
       function createMarker(place, x) {
-        let markerColor = ['blue_markerA.png',          // 0
-                           'brown_markerA.png',         // 1
-                           'darkgreen_markerA.png',     // 2    
-                           'green_markerA.png',         // 3
-                           'orange_markerA.png',        // 4
-                           'paleblue_markerA.png',      // 5
-                           'pink_markerA.png',          // 6
-                           'purple_markerA.png',        // 7
-                           'red_markerA.png',           // 8
-                           'yellow_markerA.png'];       // 9
+        let markerColor = ['/png/blue_markerA.png',          // 0
+                           '/png/brown_markerB.png',         // 1
+                           '/png/darkgreen_markerC.png',     // 2    
+                           '/png/green_markerD.png',         // 3
+                           '/png/orange_markerE.png',        // 4
+                           '/png/paleblue_markerF.png',      // 5
+                           '/png/pink_markerG.png',          // 6
+                           '/png/purple_markerH.png',        // 7
+                           '/png/red_markerI.png',           // 8
+                           '/png/yellow_markerJ.png'];       // 9
         let placeLoc = place.geometry.location;   // DEBUG (RAB) Capture Places data
         let placeName = place.name;               // DEBUG (RAB) Capture Places data
         let placeType = place.types[0];           // DEBUG (RAB) Capture Places data
