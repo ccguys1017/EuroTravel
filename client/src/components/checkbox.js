@@ -28,7 +28,7 @@ class Checkbox extends Component {
             value={ this.props.label.place_id }
             checked={isChecked}
             onChange={this.toggleCheckboxChange}
-          />
+          /><span className="badge">{this.props.label.types[0]}</span>
           { this.props.label.name } { this.props.label.vicinity } 
         </label>
       </div>

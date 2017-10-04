@@ -133,7 +133,6 @@
     render() {
       return(
         <div>
-          <h1>IM WORKING</h1>
           <button onClick={this.onClick.bind(this)} className='btn btn-default'>Back</button>  
         </div>
       )
