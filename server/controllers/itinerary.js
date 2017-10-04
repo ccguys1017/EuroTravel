@@ -45,7 +45,6 @@ exports.readItinerary = function(req, res, next) {
       }
     ]).sort({ updatedAt: -1 })
     .then(function(savedItin) {
-      console.log(savedItin);
       res.send({ payload: savedItin })
     })
     .catch(function(err) {
