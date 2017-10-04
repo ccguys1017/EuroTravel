@@ -57,7 +57,7 @@
         }, function(results, status) {
             if (status === google.maps.places.PlacesServiceStatus.OK) {
               for (let i =0; i < results.length; i++) {
-                createMarker(results[i]);
+                createMarker(results[i], x);
                 props.addPlace(results[i]);
                 //store.addPlace(results[i]);
                 
@@ -86,7 +86,17 @@
     
   
       var x = 0; //Counter for info marker open/close
-      function createMarker(place) {
+      function createMarker(place, x) {
+        let markerColor = ['blue_markerA.png',          // 0
+                           'brown_markerA.png',         // 1
+                           'darkgreen_markerA.png',     // 2    
+                           'green_markerA.png',         // 3
+                           'orange_markerA.png',        // 4
+                           'paleblue_markerA.png',      // 5
+                           'pink_markerA.png',          // 6
+                           'purple_markerA.png',        // 7
+                           'red_markerA.png',           // 8
+                           'yellow_markerA.png'];       // 9
         let placeLoc = place.geometry.location;   // DEBUG (RAB) Capture Places data
         let placeName = place.name;               // DEBUG (RAB) Capture Places data
         let placeType = place.types[0];           // DEBUG (RAB) Capture Places data
@@ -96,6 +106,7 @@
         let infowindow = new google.maps.InfoWindow();
         let marker = new google.maps.Marker({
           map: map,
+          icon: markerColor[x],
           position: place.geometry.location
         });
         google.maps.event.addListener(marker, 'click', function() {
