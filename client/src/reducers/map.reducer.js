@@ -2,6 +2,7 @@ import * as Actions from '../actions/types';
 
 const initialState = {
     places:[],
+    searchTypes:[],
     selectedLocation: {lat: "", long:""},
     clicked: false
     
@@ -16,11 +17,14 @@ export default function maps(state = initialState, action){
             places:[...state.places, action.place]
         }
         break;
-            // return Object.assign({}, state, {
-            //     places: [...state.places, action.place]
-            // });
-            // break;
 
+        case Actions.NEW_TYPE:
+            console.log("NEW TYPE ADDED : " + action.thing);
+            return {
+                ...state,
+                searchTypes:[...state.searchTypes, action.thing]
+            }
+            break;
         case Actions.NEW_LOCATION:
         return{
             ...state,

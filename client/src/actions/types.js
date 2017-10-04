@@ -7,3 +7,4 @@ export const SAVE_ITINERARY = 'save_itinerary';
 export const NEW_PLACE = "NEW_PLACE";
 export const NEW_LOCATION = "NEW_LOCATION";
 export const HANDLE_CLICK = "HANDLE_CLICK";
+export const NEW_TYPE = "NEW_TYPE";

@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import Dashboard from './dashboard';
 import PlacesSearch from './search';
-
+import {bindActionCreators} from 'redux';
+import * as actionCreators from '../actions';
 
 const ROOT_URL = 'http://localhost:8080/api/v1';
 
@@ -117,8 +118,17 @@ componentWillMount = () => {
     localStorage.setItem('trip_lat', JSON.stringify(this.state.lat));
     localStorage.setItem('trip_lng', JSON.stringify(this.state.lng));
     localStorage.setItem('place_type_array', places_type);
+    console.log(places_type);
+    console.log("============ LOOK HERE ==========");
+    for (var i = 0; i < places_type.length; i ++){
+        this.props.addType(places_type[i]);
+        console.log("Place added: " + places_type[i]);
+    }
 
+    console.log("Places_type map completed");
+    console.log(this.props);
     this.context.router.history.push('/tripresults');
+
 
     /*
      (RAB) We now have our longitude/latitude for selected city/country and our Places 'type' (itinerary) array. We can now iterate our Google Places API calls over our Places 'type' array to collect itinerary data (push the returned API data into an Object Array which we will use the array map() method to show the itinerary data along with a checkbox to allow the user to save selected itineraries)
@@ -220,9 +230,11 @@ componentWillMount = () => {
   }
 }
 
-const mapStatetoProps = state => ({
-    lng: state.longitude,
-    lat: state.latitude,
-});
-
-export default connect(mapStatetoProps)(Tripbuild);
+const mapStateToProps = (state) =>{
+    return {state: state};
+  };
+function mapDispatchToProps(dispatch){
+    return bindActionCreators(actionCreators, dispatch);
+  }
+  Tripbuild = connect(mapStateToProps, mapDispatchToProps)(Tripbuild);
+  export default Tripbuild;
