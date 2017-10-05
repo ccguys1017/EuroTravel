@@ -1,68 +1,111 @@
-import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import registerServiceWorker from './registerServiceWorker';
-//import Main from './components/map';
-import Autocomplete from 'react-google-autocomplete';
+import Badge from './components/Badge';
+import Breadcrumb from './components/Breadcrumb';
+import BreadcrumbItem from './components/BreadcrumbItem';
+import Button from './components/Button';
+import ButtonGroup from './components/ButtonGroup';
+import ButtonToolbar from './components/ButtonToolbar';
+import Card from './components/Card';
+import CardBody from './components/CardBody';
+import CardImage from './components/CardImage';
+import CardText from './components/CardText';
+import CardTitle from './components/CardTitle';
+import Carousel from './components/Carousel';
+import CarouselCaption from './components/CarouselCaption';
+import CarouselControl from './components/CarouselControl';
+import CarouselInner from './components/CarouselInner';
+import CarouselItem from './components/CarouselItem';
+import Col from './components/Col';
+import Collapse from './components/Collapse';
+import Container from './components/Container';
+import Dropdown from './components/Dropdown';
+import Fa from './components/Fa';
+import Fade from './components/Fade';
+import FormInline from './components/FormInline';
+import Footer from './components/Footer';
+import Input from './components/Input';
+import Jumbotron from './components/Jumbotron';
+import ListGroup from './components/ListGroup';
+import ListGroupItem from './components/ListGroupItem';
+import Media from './components/Media';
+import Modal from './components/Modal';
+import ModalBody from './components/ModalBody';
+import ModalFooter from './components/ModalFooter';
+import ModalHeader from './components/ModalHeader';
+import Nav from './components/Nav';
+import Navbar from './components/Navbar';
+import NavbarBrand from './components/NavbarBrand';
+import NavbarNav from './components/NavbarNav';
+import NavbarToggler from './components/NavbarToggler';
+import NavItem from './components/NavItem';
+import NavLink from './components/NavLink';
+import Pagination from './components/Pagination';
+import PageItem from './components/PageItem';
+import PageLink from './components/PageLink';
+import Popover from './components/Popover';
+import PopoverBody from './components/PopoverBody';
+import PopoverHeader from './components/PopoverHeader';
+import Progress from './components/Progress';
+import Ripple from './components/Ripple';
+import Row from './components/Row';
+import Table from './components/Table';
+import TabPane from './components/TabPane';
+import TabContent from './components/TabContent';
+import TextField from './components/TextField';
+import Tooltip from './components/Tooltip';
 
-import PlacesSearch from './components/search';
-class Main extends Component{
-    state= {
-        selectedLocation:{ lat: 0, lng: 0},
-        clicked: false,
-        placeid:""
-    }
-    render(){
-            //For the default center of map
-        const location = {
-            lat:40.7575285,
-            lng:-73.9884469
-        };
-        console.log("APP.JS RUNNING");
-
-        return(
-            <div>
-            <Autocomplete style={{width:'90%'}} 
-                onPlaceSelected={(place) => {
-
-                    var selectedlatlong = place.geometry.location.toString();
-                    var selLat = "";
-                    var selLng = "";
-                    var onlng = false;
-                    
-
-                    for (var i =0; i < selectedlatlong.length; i++){
-                        if(onlng === false){
-                        if ( i !== 0 && selectedlatlong[i] !== ',' ){
-                            selLat = selLat.concat(selectedlatlong[i]);
-                        } else if (selectedlatlong[i] === ','){
-                            onlng = true;
-                        }
-                        } // end first if 
-                           else if(onlng === true && selectedlatlong[i] !== ')' && selectedlatlong[i] !== ' '){
-                                selLng = selLng.concat(selectedlatlong[i]);
-                            }
-                        } // end for loop
-                        console.log(selectedlatlong);
-                        console.log("Lat = "  + selLat + " || Lng =" + selLng);
-                        this.setState({selectedLocation: {lat: selLat, lng:selLng}})
-                        this.setState({clicked: true})
-                        
-                        this.setState({placeid: place.place_id});
-                        console.log(this.state.placeid);
-                    }
-                   
-                }  // end onPlaceSelected
-                types={['(regions)']}
-                />
-                {(this.state.clicked === true) ? <PlacesSearch selectedLocation= {this.state.selectedLocation} placeid={this.state.placeid} /> : <h2>Please select a location </h2> }
-            
-                <h1> Hi im working </h1>
-                
-            </div>
-        );
-    };
-};
-
-ReactDOM.render(<Main />, document.getElementById('root'));
-registerServiceWorker();
+export {
+	Badge,
+	Breadcrumb,
+	BreadcrumbItem,
+	Button,
+	ButtonGroup,
+	ButtonToolbar,
+  Card,
+  CardBody,
+  CardImage,
+  CardText,
+  CardTitle,
+  Carousel,
+  CarouselCaption,
+  CarouselControl,
+  CarouselInner,
+  CarouselItem,
+  Col,
+  Collapse,
+  Container,
+	Dropdown,
+	Fa,
+	Fade,
+  FormInline,
+  Footer,
+  Input,
+  Jumbotron,
+  ListGroup,
+  ListGroupItem,
+  Media,
+	Modal,
+	ModalBody,
+	ModalFooter,
+	ModalHeader,
+  Nav,
+	Navbar,
+  NavbarBrand,
+  NavbarNav,
+  NavbarToggler,
+  NavItem,
+  NavLink,
+  Pagination,
+  PageItem,
+  PageLink,
+  Popover,
+  PopoverBody,
+  PopoverHeader,
+  Progress,
+  Ripple,
+  Row,
+  Table,
+  TabPane,
+  TabContent,
+  TextField,
+  Tooltip,
+}

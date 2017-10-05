@@ -1,0 +1,33 @@
+{
+  "name": "EuroTravel",
+  "version": "0.1.0",
+  "dependencies": {
+    "all-the-cities": "^2.0.0",
+    "axios": "^0.16.2",
+    "bower": "^1.8.2",
+    "fs": "0.0.1-security",
+    "google-maps-react": "^1.1.0",
+    "gulp": "^3.9.1",
+    "mdbootstrap": "^4.4.1",
+    "mongoose": "^4.11.12",
+    "path": "^0.12.7",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-google-autocomplete": "^1.0.13",
+    "react-html5video": "^2.3.0",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.1.2",
+    "react-router-dom": "^4.1.2",
+    "react-scripts": "1.0.13",
+    "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-form": "^5.0.1",
+    "redux-thunk": "^2.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
