@@ -16,5 +16,6 @@ module.exports = function (app) {
   app.post('/api/v1/signup', Authentication.signup);
   app.post('/api/v1/cities_lng_lat', Cities.getLngLat);
   app.post('/api/v1/save_itin', Itinerary.saveItinerary);
+  app.post('/api/v1/remove_itin/:id', Itinerary.deleteItinerary);  
   app.post('/api/v1/get_itin', Itinerary.readItinerary);
 };

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Tripbuild from './tripbuild';
+import TableRow from './tablerow';
 
 const ROOT_URL = 'http://localhost:8080/api/v1';
 
@@ -16,7 +17,7 @@ class Dashboard extends Component {
     this.state = {
       itins_retrieved: false,
       city: '',
-      country: ''
+      country: '',
     };
   }    
 
@@ -60,7 +61,6 @@ class Dashboard extends Component {
       trip_city = 'Amsterdam';
     }
 
-
     console.log('this.state.city: ' + trip_city);
     console.log('this.state.country: ' + trip_country);    
 
@@ -68,19 +68,30 @@ class Dashboard extends Component {
     localStorage.setItem('sel_country', trip_country);
     this.setState({city : trip_city});
     this.setState({country : trip_country});
-    /*
-    <Tripbuild city={this.state.city} country={this.state.country} />
-    */
+
     this.context.router.history.push('/tripbuild');
   }
 
-  componentDidMount() {
+  deleteData(id){
+    axios.get(`${ROOT_URL}/remove_itin`+id)
+    .then().catch(err => console.log(err))
+  }
+
+  tabRow(){
+    if(saved_itineraries instanceof Array){
+      return saved_itineraries.map(function(object, i){
+          return <TableRow obj={object} key={i} />;
+      })
+    }
+  }
+
+  componentWillMount() {
     const user_email = localStorage.getItem('userEmail');
     // (RAB) send the user checkboxed itinerary data to the server to store the user-specific itinerary data in the DB 
     axios.post(`${ROOT_URL}/get_itin`, { user_email })
       .then(response => {
         saved_itineraries = response.data.payload;
-        this.setState({itins_retrieved : true})
+        this.setState({itins_retrieved : true});
       })
       .catch(err => {
         this.setState({itins_retrieved : false});        
@@ -97,14 +108,17 @@ class Dashboard extends Component {
         <h3>Dashboard</h3>
         <div className='col-md-6'>
           <h4><strong>Your Previously saved Itineraries</strong></h4>
-          <ul className="itineraries">
-            {saved_itineraries.map(saved_itins => 
-            <li key={saved_itins.place_id}>
-              <span className="badge">{saved_itins.type}</span>
-              {saved_itins.name} {saved_itins.price_level} {saved_itins.rating} {saved_itins.vicinity} 
-            </li>
-            )}
-          </ul>
+          <table className="table table-striped">
+              <thead>
+                <tr>
+                  <td>Itinerary Type</td>
+                  <td>Place</td>
+                </tr>
+              </thead>
+              <tbody>
+                {this.tabRow()}
+              </tbody>
+            </table>
         </div>
         <div className='col-md-3'>
           <h2>Select a Country:</h2>
@@ -177,7 +191,7 @@ class Dashboard extends Component {
             <button className='btn btn-default' type='submit'>
               Click to Manually Search Places
             </button>
-            </form>
+          </form>
           <button onClick={this.onBackClick.bind(this)} className='btn btn-default'>Back</button>
         </div>
       </div>
@@ -190,3 +204,18 @@ const mapStatetoProps = (state) => ({
 });
 
 export default connect(mapStatetoProps)(Dashboard);
+
+
+
+/*
+
+          <ul className="itineraries">
+            {saved_itineraries.map(saved_itins => 
+            <li key={saved_itins.place_id}>
+              <span className="badge">{saved_itins.type}</span>
+              <i>Name: </i><strong> {saved_itins.name}</strong> <i>Address: </i>{saved_itins.vicinity} 
+            </li>
+            )}
+          </ul>
+
+*/

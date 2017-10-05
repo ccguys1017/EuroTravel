@@ -34,8 +34,8 @@ class Places extends Component {
           let selLng = '';
           let onlng = false;  
 
-          console.log('selectedlatlong: ' + selectedlatlong);
-          console.log('selectedlatlong.length: ' + selectedlatlong.length);
+          //console.log('selectedlatlong: ' + selectedlatlong);
+          //console.log('selectedlatlong.length: ' + selectedlatlong.length);
           for (let i =0; i < selectedlatlong.length; i++) {
             if(onlng === false) {
               if ( i !== 0 && selectedlatlong[i] !== ',' ) {
@@ -47,14 +47,14 @@ class Places extends Component {
               selLng = selLng.concat(selectedlatlong[i]);
             }
           } // end for loop
-          console.log('selectedlatlong: ' + selectedlatlong);
-          console.log('Lat = '  + selLat + ' || Lng = ' + selLng);
+          //console.log('selectedlatlong: ' + selectedlatlong);
+          //console.log('Lat = '  + selLat + ' || Lng = ' + selLng);
           this.setState({selectedLocation: {lat: selLat, lng:selLng}});
           this.setState({clicked: true});
 
-          console.log('Selected Location: ' + this.state.selectedLocation);
+          //console.log('Selected Location: ' + this.state.selectedLocation);
           this.setState({placeid: place.place_id});
-          console.log('place_id: ' + this.state.placeid);
+          //console.log('place_id: ' + this.state.placeid);
           }}  // end onPlaceSelected
           types={['(regions)']}
         />

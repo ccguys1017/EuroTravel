@@ -29,7 +29,7 @@ class Checkbox extends Component {
             checked={isChecked}
             onChange={this.toggleCheckboxChange}
           /><span className="badge">{this.props.label.types[0]}</span>
-          { this.props.label.name } { this.props.label.vicinity } 
+          <i>Name: </i><strong>{ this.props.label.name }</strong> <i>Address: </i>{ this.props.label.vicinity } 
         </label>
       </div>
     );

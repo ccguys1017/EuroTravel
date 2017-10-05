@@ -51,3 +51,26 @@ exports.readItinerary = function(req, res, next) {
       res.send("the user saved itinerary lookup failed");
     });
 };
+/*
+// Defined delete | remove | destroy route
+itemRouter.route('/delete/:id').get(function (req, res) {
+  Item.findByIdAndRemove({_id: req.params.id},
+	   function(err, item){
+		if(err) res.json(err);
+		else res.json('Successfully removed');
+	});
+});
+*/
+
+
+exports.deleteItinerary = function(req, res, next) {
+  // See if a Itin with the given _id exists
+  Itin.findByIdAndRemove({_id: req.params.id}, function (err, existingItin) {
+    if (err) { return next(err) }
+    
+    // If a Itin with _id does not exist, return an error
+    if (!existingItin) {
+      return res.status(422).send({ error: 'Itinerary for this place does not exist' })
+    }
+  })
+};
