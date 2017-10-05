@@ -6,7 +6,7 @@ const MediaPage = props => {
     <div className="container-fluid">
       <div className="">
         <Media>
-          <Media left href="#">
+          <Media left href="">
             <Media
               object
               src="https://placehold.it/64x64"

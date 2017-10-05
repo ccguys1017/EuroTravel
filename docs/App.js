@@ -16,7 +16,7 @@ class App extends Component {
     return (
       <div className="flyout">
         <Navbar color="indigo" dark expand="md">
-          <NavbarBrand href="/">My Dashboard</NavbarBrand>
+          <NavbarBrand href="/listgroup">My Dashboard</NavbarBrand>
           <NavbarToggler />
           <div className="collapse navbar-collapse" id="reactNavbar">
             <NavbarNav className="ml-auto">
@@ -24,13 +24,13 @@ class App extends Component {
                 <NavLink href="/">Home</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/button">Destinations</NavLink>
+                <NavLink href="/button">BuildTrip</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/listgroup">Trip Build</NavLink>
+                <NavLink href="/input">LogIn</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#" />
+                <NavLink href="media">TestSpot</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="#" />

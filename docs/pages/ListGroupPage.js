@@ -18,7 +18,7 @@ const PaginationPage = props => {
               href="#"
               className="d-flex justify-content-between align-items-center"
             >
-              BuildTrips <Badge pill>O</Badge>
+              SomethingHere<Badge pill>O</Badge>
             </ListGroupItem>
             <ListGroupItem
               href="#"
@@ -31,7 +31,7 @@ const PaginationPage = props => {
               href="#"
               className="d-flex justify-content-between align-items-center"
             >
-              Wish Lists <Badge pill>O</Badge>
+              AnotherSuffHere<Badge pill>O</Badge>
             </ListGroupItem>
           </ListGroup>
         </div>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Col, Container, Row, Footer } from "mdbreact";
 import { Button } from "mdbreact";
+import { Fa } from "mdbreact";
 import {
   Carousel,
   CarouselCaption,
@@ -131,39 +132,6 @@ class CarouselPage extends Component {
                 }}
               />
             </Carousel>
-            <Button block color="primary">
-              Block level button
-            </Button>
-            <Footer className="center-on-small-only">
-              <Container>
-                <Row>
-                  <Col md="6" />
-                  <Col md="6">
-                    <h5 className="title">Follow Us</h5>
-                    <ul>
-                      <li>
-                        <a href="#!">Link 1</a>
-                      </li>
-                      <li>
-                        <a href="#!">Link 2</a>
-                      </li>
-                      <li>
-                        <a href="#!">Link 3</a>
-                      </li>
-                      <li>
-                        <a href="#!">Link 4</a>
-                      </li>
-                    </ul>
-                  </Col>
-                </Row>
-              </Container>
-              <div className="footer-copyright">
-                <Container>
-                  &copy; {new Date().getFullYear()} Copyright:{" "}
-                  <a href="https://www.guidetrip.com"> guidetrip.com </a>
-                </Container>
-              </div>
-            </Footer>
           </div>
         </div>
       </div>

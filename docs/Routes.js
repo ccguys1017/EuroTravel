@@ -44,17 +44,17 @@ class Routes extends React.Component {
           <Route exact path="/components" component={ComponentsPage} />
           <Route path="/components/badge" component={BadgePage} />
           <Route path="/components/breadcrumb" component={BreadcrumbPage} />
-          <Route path="/components/input" component={InputPage} />
+          <Route exact path="/input" component={InputPage} />
           <Route path="/css/jumbotron" component={JumbotronPage} />
-          <Route path="/components/cards" component={CardsPage} />
-          <Route path="/components/media" component={MediaPage} />
+          <Route exact path="/cards" component={CardsPage} />
+          <Route exact path="/media" component={MediaPage} />
           <Route exact path="/button" component={ButtonPage} />
           <Route exact path="/listgroup" component={ListGroupPage} />
           <Route path="/components/tooltips" component={TooltipsPage} />
           <Route path="/components/footer" component={FooterPage} />
           <Route path="/components/dropdown" component={DropdownPage} />
           <Route path="/javascript/carousel" component={CarouselPage} />
-          <Route path="/javascript/modal" component={ModalPage} />
+          <Route exact path="/modal" component={ModalPage} />
           <Route
             render={function() {
               return <h1>Not Found</h1>;

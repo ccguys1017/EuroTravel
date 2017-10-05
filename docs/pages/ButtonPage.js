@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, ButtonGroup, ButtonToolbar, Fa } from "mdbreact";
+import { Col, Container, Row, Footer } from "mdbreact";
 
 const ButtonPage = props => {
   return (
@@ -85,6 +86,47 @@ const ButtonPage = props => {
           <Button active>Morroco</Button>
           <Button active>Tunisia</Button>
         </ButtonGroup>
+
+        <Footer>
+          <Row>
+            <Col md="6">
+              <h5 className="title" />
+              <p />
+            </Col>
+            <Col md="6">
+              <h5 className="title">Follow Us</h5>
+              <ul>
+                <li class="">
+                  <a href="https://www.facebook.com/Guide-Trip-115665839101471/">
+                    <p>
+                      <Fa icon="facebook" />
+                    </p>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://twitter.com/guidetripme/">
+                    <p>
+                      <Fa icon="twitter" />
+                    </p>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.instagram.com/guidetripme/">
+                    <p>
+                      <Fa icon="instagram" />
+                    </p>
+                  </a>
+                </li>
+              </ul>
+            </Col>
+          </Row>
+          <div className="footer-copyright">
+            <Container>
+              &copy; {new Date().getFullYear()} Copyright:{" "}
+              <a href="https://www.guidetrip.com"> guidetrip.com </a>
+            </Container>
+          </div>
+        </Footer>
       </div>
     </div>
   );
