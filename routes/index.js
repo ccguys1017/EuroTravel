@@ -1,5 +1,7 @@
 const Authentication = require('../controllers/authentication');
-//const Authentication = require('../controllers/itineraries');
+const Itinerary = require('../controllers/itinerary');
+const Cities = require('../controllers/cities_lng_lat');
+
 const passportService = require('../services/passport');
 const passport = require('passport');
 
@@ -12,6 +14,8 @@ module.exports = function (app) {
   });
   app.post('/api/v1/signin', requireSignin, Authentication.signin);
   app.post('/api/v1/signup', Authentication.signup);
-  //app.get('/api/v1/itineraries', getItineraries);
-  //app.post('/api/v1/iteraries', saveItinerary);
+  app.post('/api/v1/cities_lng_lat', Cities.getLngLat);
+  app.post('/api/v1/save_itin', Itinerary.saveItinerary);
+  app.post('/api/v1/remove_itin/:id', Itinerary.deleteItinerary);  
+  app.post('/api/v1/get_itin', Itinerary.readItinerary);
 };
