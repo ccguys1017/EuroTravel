@@ -40,3 +40,10 @@ class TableRow extends Component {
     
     export default TableRow;
     
+
+    /*
+
+              <td>
+                {this.props.obj.photo}
+              </td>
+    */

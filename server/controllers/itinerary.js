@@ -9,6 +9,7 @@ exports.saveItinerary = function (req, res, next) {
     const rating = req.body.cb_rating;
     const type = req.body.cb_type;
     const vicinity = req.body.cb_vicinity;
+    const photo = req.body.cb_photo;
 
     // See if a Itin with the given place_id exists
     Itin.findOne({ email: email, place_id: place_id }, function (err, existingItin) {
@@ -27,7 +28,8 @@ exports.saveItinerary = function (req, res, next) {
         price_level: price_level,
         rating: rating,
         type: type,
-        vicinity: vicinity
+        vicinity: vicinity,
+        photo: photo
       });
   
       itin.save(function (err) {
@@ -38,30 +40,22 @@ exports.saveItinerary = function (req, res, next) {
 
 exports.readItinerary = function(req, res, next) {
   const email = req.body.user_email;
+  console.log('email: ' + email);
+
   Itin.aggregate(
     [
       {
         $match: { email : email }
-      }
-    ]).sort({ updatedAt: -1 })
+      },
+    ]).sort({ updatedAt: -1, type: 1 })
     .then(function(savedItin) {
+
       res.send({ payload: savedItin })
     })
     .catch(function(err) {
       res.send("the user saved itinerary lookup failed");
     });
 };
-/*
-// Defined delete | remove | destroy route
-itemRouter.route('/delete/:id').get(function (req, res) {
-  Item.findByIdAndRemove({_id: req.params.id},
-	   function(err, item){
-		if(err) res.json(err);
-		else res.json('Successfully removed');
-	});
-});
-*/
-
 
 exports.deleteItinerary = function(req, res, next) {
   // See if a Itin with the given _id exists

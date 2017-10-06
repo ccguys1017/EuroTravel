@@ -32,6 +32,9 @@ const ItinSchema = new Schema(
     vicinity: {
       type: String,
       required: true
+    },
+    photo: {
+      type: String
     }
   },
   {

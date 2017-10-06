@@ -60,11 +60,12 @@ class Tripresults extends Component {
       const cb_price_level = checkbox.price_level;
       const cb_rating = checkbox.rating;
       const cb_type = checkbox.types[0];
+      const cb_photo = checkbox.photos[0].html_attributions[0];
       const cb_vicinity = checkbox.vicinity;
 
       /* (CRUD) Send the user checkboxed itinerary data to the server to store the user-specific     itinerary data in the DB */
 
-      axios.post(`${ROOT_URL}/save_itin`, { user_email, cb_name, cb_place_id, cb_price_level, cb_rating, cb_type, cb_vicinity })
+      axios.post(`${ROOT_URL}/save_itin`, { user_email, cb_name, cb_place_id, cb_price_level, cb_rating, cb_type, cb_vicinity, cb_photo })
       .then(response => {
         this.setState({
           itins_saved: true
