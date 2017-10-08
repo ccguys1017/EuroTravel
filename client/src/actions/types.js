@@ -8,3 +8,4 @@ export const NEW_PLACE = "NEW_PLACE";
 export const NEW_LOCATION = "NEW_LOCATION";
 export const HANDLE_CLICK = "HANDLE_CLICK";
 export const NEW_TYPE = "NEW_TYPE";
+export const WIPE_PLACES = "WIPE_PLACES";

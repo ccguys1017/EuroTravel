@@ -5,7 +5,11 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import Tripbuild from './tripbuild';
 import TableRow from './tablerow';
-
+import {Table} from 'react-bootstrap';
+import {bindActionCreators} from 'redux';
+import * as actionCreators from '../actions';
+import Autocomplete from 'react-google-autocomplete';
+import PlacesSearch from './search';
 const ROOT_URL = 'http://localhost:8080/api/v1';
 
 let saved_itineraries = [];
@@ -35,7 +39,37 @@ class Dashboard extends Component {
   onBackClick () {
     this.context.router.history.push('/');
   }
+  handleSave = place => {
+    console.log(place);
+    const user_email = localStorage.getItem('userEmail');
+    const cb_name = place.name;
+    const cb_place_id = place.place_id;
+    const cb_price_level = place.price_level;
+    const cb_rating = place.rating;
+    const cb_type = place.types[0];
+    if(place.photos){
+      const cb_photo = place.photos[0].html_attributions[0];
+      
+    }
+    const cb_vicinity = place.vicinity;
 
+    /* (CRUD) Send the user checkboxed itinerary data to the server to store the user-specific     itinerary data in the DB */
+
+    axios.post(`${ROOT_URL}/save_itin`, { user_email, cb_name, cb_place_id, cb_price_level, cb_rating, cb_type, cb_vicinity, if(cb_photo){return cb_photo} })
+    .then(response => {
+      this.setState({
+        itins_saved: true
+      });
+    })
+    .catch(err => {
+      this.setState({
+        itins_saved: false
+      });        
+    })
+  
+
+  console.log("HANDLE SAVE FUNCTION COMPLETED");
+} //End handleSave()
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
     let trip_city = '';
@@ -486,7 +520,7 @@ class Dashboard extends Component {
         trip_city5 : 'Subotica',
         trip_city6 : 'Zrenjanin'  
       })   
-    } else if (document.getElementById('countrydashradi43').checked) {
+    } else if (document.getElementById('countrydashradio43').checked) {
       this.setState({
         trip_country : 'Slovakia',
         trip_city1 : 'Bratislava',
@@ -595,6 +629,7 @@ class Dashboard extends Component {
   }
 
   render() {
+    document.getElementById('map').innerHTML = "";
     const itins_retrieved = this.state.itins_retrieved;
     if (!itins_retrieved) {
       return <div>Loading.......</div>;
@@ -604,7 +639,7 @@ class Dashboard extends Component {
         <h3>Dashboard</h3>
         <div className='col-md-6'>
           <h4><strong>Your Previously saved Itineraries</strong></h4>
-          <table className="table table-striped">
+          <Table striped hover className="table table-striped">
               <thead>
                 <tr>
                   <td>Itinerary Type</td>
@@ -614,10 +649,11 @@ class Dashboard extends Component {
               <tbody>
                 {this.tabRow()}
               </tbody>
-            </table>
+            </Table>
         </div>
         <div className='col-md-3'>
           <h2>Select a Country:</h2>
+
           <form action='/dashboard' onChange={this.listCities.bind(this)}>
             <div className='dashradio'>
               <div className='dashradio-item'>
@@ -851,6 +887,7 @@ class Dashboard extends Component {
                 <input type='radio' name='radio' id='citydashradio6' />
                 <label>{this.state.trip_city6}</label>
               </div>
+              
             </div>
             <button className='btn btn-default' type='submit'>
               Click to Create Custom Itinerary
@@ -859,6 +896,45 @@ class Dashboard extends Component {
               <strong>or</strong>
             </div>
           </form>
+          <Autocomplete style={{width:'66%'}} 
+          onPlaceSelected={(place) => {
+
+          let selectedlatlong = place.geometry.location.toString();
+          let selLat = '';
+          let selLng = '';
+          let onlng = false;  
+
+          //console.log('selectedlatlong: ' + selectedlatlong);
+          //console.log('selectedlatlong.length: ' + selectedlatlong.length);
+          for (let i =0; i < selectedlatlong.length; i++) {
+            if(onlng === false) {
+              if ( i !== 0 && selectedlatlong[i] !== ',' ) {
+                selLat = selLat.concat(selectedlatlong[i]);
+              } else if (selectedlatlong[i] === ',') {
+                onlng = true;
+              }
+            } else if(onlng === true && selectedlatlong[i] !== ')' && selectedlatlong[i] !== ' ') {
+              selLng = selLng.concat(selectedlatlong[i]);
+            }
+          } // end for loop
+          //console.log('selectedlatlong: ' + selectedlatlong);
+          //console.log('Lat = '  + selLat + ' || Lng = ' + selLng);
+          this.props.addLocation(selLat, selLng);
+          console.log(this.props);
+          console.log(place);
+          localStorage.setItem('sel_city', place.address_components[0].long_name);
+          localStorage.setItem('sel_country', place.address_components[3].short_name);
+
+          localStorage.setItem('trip_lat', place.address_components[0].long_name);
+          localStorage.setItem('trip_lng', place.address_components[3].short_name);
+          this.context.router.history.push('/tripbuild');
+         
+        
+          
+
+          }}  // end onPlaceSelected
+          types={['(regions)']}
+        />
           <form action='/places'>
             <button className='btn btn-default' type='submit'>
               Click to Manually Search Places
@@ -872,7 +948,10 @@ class Dashboard extends Component {
 }
 
 const mapStatetoProps = (state) => ({
-  itins_retrieved: state.itins_retrieved
+  itins_retrieved: state.itins_retrieved,
+  state:state
 });
-
-export default connect(mapStatetoProps)(Dashboard);
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(actionCreators, dispatch);
+}
+export default connect(mapStatetoProps,mapDispatchToProps)(Dashboard);

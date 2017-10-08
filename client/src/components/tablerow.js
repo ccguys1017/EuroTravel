@@ -26,7 +26,7 @@ class TableRow extends Component {
               <td><span className="badge">{this.props.obj.type}</span>
               </td>
               <td>
-                {this.props.obj.name}{this.props.obj.vicinity}
+                {this.props.obj.name} <br/>{this.props.obj.vicinity}
               </td>
               <td>
                 <form onSubmit={this.handleSubmit}>

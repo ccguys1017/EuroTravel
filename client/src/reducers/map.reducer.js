@@ -11,7 +11,7 @@ const initialState = {
 export default function maps(state = initialState, action){
     switch(action.type){
         case Actions.NEW_PLACE:
-        console.log("NEW PLACE ADDED : " + action.place);
+        console.log("NEW PLACE ADDED : " + action.place.name);
         return {
             ...state,
             places:[...state.places, action.place]
@@ -37,6 +37,11 @@ export default function maps(state = initialState, action){
             clicked: !state.clicked
         }
         break;
+
+        case Actions.WIPE_PLACES:
+        return{...state,
+            places: []}
+            break;
         default:
             return state
         }

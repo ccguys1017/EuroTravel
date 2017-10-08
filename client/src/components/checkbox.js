@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-
+import {ListGroupItem} from 'react-bootstrap';
 class Checkbox extends Component {
   state = {
     isChecked: false,
   }
 
   toggleCheckboxChange = () => {
-    const { handleCheckboxChange, label } = this.props;
+    const { handleCheckboxChange, label, handleSave } = this.props;
     this.setState(({ isChecked }) => (
       {
         isChecked: !isChecked,
@@ -21,6 +21,7 @@ class Checkbox extends Component {
     const { isChecked } = this.state;
 
     return (
+      <ListGroupItem>
       <div className="checkbox">
         <label>
           <input
@@ -30,8 +31,10 @@ class Checkbox extends Component {
             onChange={this.toggleCheckboxChange}
           /><span className="badge">{this.props.label.types[0]}</span>
           <i>Name: </i><strong>{ this.props.label.name }</strong> <i>Address: </i>{ this.props.label.vicinity } 
+          
         </label>
       </div>
+      </ListGroupItem>
     );
   }
 }

@@ -6,7 +6,8 @@ import {
   FETCH_MESSAGE,
   FETCH_CITY_LONLAT,
   SAVE_ITINERARY,
-  NEW_TYPE
+  NEW_TYPE,
+  WIPE_PLACES
 } from './types';
 import * as types from './types';
 const ROOT_URL = 'http://localhost:8080/api/v1';
@@ -73,3 +74,4 @@ export const addPlace = (place) => ({type: types.NEW_PLACE, place });
 export const addLocation = (lat, lng) => ({type:types.NEW_LOCATION, lat, lng});
 export const handleClick = () => ({type:types.HANDLE_CLICK});
 export const addType = (thing) => ({type: NEW_TYPE, thing});
+export const wipePlaces = () => ({type: WIPE_PLACES});

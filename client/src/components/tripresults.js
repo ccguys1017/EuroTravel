@@ -7,6 +7,7 @@ import PlacesSearch from './search';
 import axios from 'axios';
 import {bindActionCreators} from 'redux';
 import * as actionCreators from '../actions';
+import {ListGroup, ListGroupItem} from 'react-bootstrap';
 
 import Checkbox from './checkbox';
 
@@ -53,19 +54,22 @@ class Tripresults extends Component {
     formSubmitEvent.preventDefault();
 
     for (const checkbox of this.selectedCheckboxes) {   
-
+      console.log(checkbox);
       const user_email = localStorage.getItem('userEmail');
       const cb_name = checkbox.name;
       const cb_place_id = checkbox.place_id;
       const cb_price_level = checkbox.price_level;
       const cb_rating = checkbox.rating;
       const cb_type = checkbox.types[0];
-      const cb_photo = checkbox.photos[0].html_attributions[0];
+      if(checkbox.photos){
+        const cb_photo = checkbox.photos[0].html_attributions[0];
+        
+      }
       const cb_vicinity = checkbox.vicinity;
 
       /* (CRUD) Send the user checkboxed itinerary data to the server to store the user-specific     itinerary data in the DB */
 
-      axios.post(`${ROOT_URL}/save_itin`, { user_email, cb_name, cb_place_id, cb_price_level, cb_rating, cb_type, cb_vicinity, cb_photo })
+      axios.post(`${ROOT_URL}/save_itin`, { user_email, cb_name, cb_place_id, cb_price_level, cb_rating, cb_type, cb_vicinity, if(cb_photo){return cb_photo} })
       .then(response => {
         this.setState({
           itins_saved: true
@@ -86,12 +90,45 @@ class Tripresults extends Component {
       label={name}
       handleCheckboxChange={this.toggleCheckbox}
       key={place_id}
+      handleSave={this.handleSave}
     />
   )
+  handleSave = place => {
+      console.log(place);
+      const user_email = localStorage.getItem('userEmail');
+      const cb_name = place.name;
+      const cb_place_id = place.place_id;
+      const cb_price_level = place.price_level;
+      const cb_rating = place.rating;
+      const cb_type = place.types[0];
+      if(place.photos){
+        const cb_photo = place.photos[0].html_attributions[0];
+        
+      }
+      const cb_vicinity = place.vicinity;
+
+      /* (CRUD) Send the user checkboxed itinerary data to the server to store the user-specific     itinerary data in the DB */
+
+      axios.post(`${ROOT_URL}/save_itin`, { user_email, cb_name, cb_place_id, cb_price_level, cb_rating, cb_type, cb_vicinity, if(cb_photo){return cb_photo} })
+      .then(response => {
+        this.setState({
+          itins_saved: true
+        });
+      })
+      .catch(err => {
+        this.setState({
+          itins_saved: false
+        });        
+      })
+    
+
+    console.log("HANDLE SAVE FUNCTION COMPLETED");
+  } //End handleSave()
+
 
   IterateOverPlaces = () => (
     this.placesForAllTypes.add('test'),
-    <PlacesSearch style={{width:'20%'}} types={['(regions)']} selectedLocation={{lat:localStorage.getItem('trip_lat'), lng:localStorage.getItem('trip_lng')}} placeid={this.state.placeid} />
+    <PlacesSearch style={{width:'20%'}} types={['(regions)']} handleSave = {this.handleSave} selectedLocation={{lat:localStorage.getItem('trip_lat'), lng:localStorage.getItem('trip_lng')}} placeid={this.state.placeid} />
   )
 
   createCheckboxes = () => (
@@ -109,7 +146,9 @@ class Tripresults extends Component {
           <div className="col-sm-12">
             {this.IterateOverPlaces()}
             <form action='/dashboard' onSubmit={this.handleFormSubmit}>
+            <ListGroup>
               {this.createCheckboxes()}
+            </ListGroup>
               <button className="btn btn-default" type="submit">Save</button>
             </form>
           </div>

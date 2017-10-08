@@ -7,7 +7,7 @@ import Dashboard from './dashboard';
 import PlacesSearch from './search';
 import {bindActionCreators} from 'redux';
 import * as actionCreators from '../actions';
-
+import Autocomplete from 'react-google-autocomplete';
 const ROOT_URL = 'http://localhost:8080/api/v1';
 
 let cities = [];
@@ -31,7 +31,7 @@ class Tripbuild extends Component {
 componentWillMount = () => {
     let longitude = 0;
     let latitude = 0;
-
+    
     const city = localStorage.getItem('sel_city');
     const country = localStorage.getItem('sel_country');
     //console.log('tripbuild city: ' + this.props.city);
@@ -119,7 +119,8 @@ componentWillMount = () => {
     localStorage.setItem('trip_lng', JSON.stringify(this.state.lng));
     localStorage.setItem('place_type_array', places_type);
     console.log(places_type);
-    console.log("============ LOOK HERE ==========");
+    console.log("============ LOOK HERE =========");
+    this.props.wipePlaces(); // to reset the places per search
     for (var i = 0; i < places_type.length; i ++){
         this.props.addType(places_type[i]);
         console.log("Place added: " + places_type[i]);
@@ -147,6 +148,7 @@ componentWillMount = () => {
   }
 
   render() {
+    document.getElementById('map').innerHTML = "";
     return ( 
       <div className='tripbuild'>
         <h3>Create Your Custom Itinerary</h3>
@@ -222,6 +224,7 @@ componentWillMount = () => {
               </div>
             </div>
           </div>
+          
           <button className='btn btn-default' type='submit'>Click to Generate Itinerary</button>
         </form>
         <button onClick={this.onClick.bind(this)} className='btn btn-default'>Back</button>
