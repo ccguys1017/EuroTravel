@@ -71,7 +71,7 @@ export function fetchMessage () {
 
 
 export const addPlace = (place) => ({type: types.NEW_PLACE, place });
-export const addLocation = (lat, lng) => ({type:types.NEW_LOCATION, lat, lng});
+export const addLocation = (lat, lng, placeid) => ({type:types.NEW_LOCATION, lat, lng,placeid});
 export const handleClick = () => ({type:types.HANDLE_CLICK});
 export const addType = (thing) => ({type: NEW_TYPE, thing});
 export const wipePlaces = () => ({type: WIPE_PLACES});

@@ -3,7 +3,7 @@ import * as Actions from '../actions/types';
 const initialState = {
     places:[],
     searchTypes:[],
-    selectedLocation: {lat: "", long:""},
+    selectedLocation: {lat: "", long:"", place_id:""},
     clicked: false
     
 };
@@ -28,7 +28,7 @@ export default function maps(state = initialState, action){
         case Actions.NEW_LOCATION:
         return{
             ...state,
-            selectedLocation: {lat: action.lat, lng: action.lng}
+            selectedLocation: {lat: action.lat, lng: action.lng, place_id:action.placeid}
         }
         break;
 

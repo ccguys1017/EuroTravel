@@ -11,6 +11,7 @@ import Dashboard from './dashboard';
 import Tripbuild from './tripbuild';
 import Tripresults from './tripresults';
 import Places from './places';
+import manualSearch from './manualSearch';
 
 export default class App extends Component {
   render () {
@@ -24,6 +25,7 @@ export default class App extends Component {
           <Route path='/dashboard' component={Dashboard} />
           <Route path='/places' component={Places} />          
           <Route path='/tripbuild' component={Tripbuild} />
+          <Route path='/manualSearch' component={manualSearch} />
           <Route path='/tripresults' component={Tripresults} />
           <Route path='/feature' component={RequireAuth(Feature)} />
         </div>
