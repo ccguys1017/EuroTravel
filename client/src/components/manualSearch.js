@@ -48,6 +48,20 @@ class manualSearch extends React.Component{
         key={place_id}
         handleSave={this.handleSave}
       />)
+      componentWillMount = () => {
+        this.selectedCheckboxes = new Set();
+        this.placesForAllTypes = new Set();
+    
+        console.log(this.props);
+      }
+    
+      toggleCheckbox = label => {
+        if (this.selectedCheckboxes.has(label)) {
+          this.selectedCheckboxes.delete(label);
+        } else {
+          this.selectedCheckboxes.add(label);
+        }
+      }
   createCheckboxes = () => (
     
     this.props.state.maps.places.map(this.createCheckbox)
@@ -66,8 +80,8 @@ class manualSearch extends React.Component{
         let test_places = [];
         
         let service = new google.maps.places.PlacesService(map);
-        
-        let searchTypes = ["lodging", "cafe"];
+        console.log(this.props);
+        let searchTypes = this.props.state.maps.searchTypes;
         let props = this.props;
         for (let x=0; x < searchTypes.length; x++){
           service.nearbySearch({

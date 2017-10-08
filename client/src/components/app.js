@@ -12,6 +12,7 @@ import Tripbuild from './tripbuild';
 import Tripresults from './tripresults';
 import Places from './places';
 import manualSearch from './manualSearch';
+import manualBuild from './manualBuild';
 
 export default class App extends Component {
   render () {
@@ -26,6 +27,7 @@ export default class App extends Component {
           <Route path='/places' component={Places} />          
           <Route path='/tripbuild' component={Tripbuild} />
           <Route path='/manualSearch' component={manualSearch} />
+          <Route path='/manualBuild' component={manualBuild} />
           <Route path='/tripresults' component={Tripresults} />
           <Route path='/feature' component={RequireAuth(Feature)} />
         </div>

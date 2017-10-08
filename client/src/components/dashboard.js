@@ -927,7 +927,7 @@ class Dashboard extends Component {
 
           localStorage.setItem('trip_lat', place.address_components[0].long_name);
           localStorage.setItem('trip_lng', place.address_components[3].short_name);
-          this.context.router.history.push('/manualSearch');
+          this.context.router.history.push('/manualBuild');
          
         
           
