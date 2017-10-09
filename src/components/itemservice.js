@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const ROOT_URL = 'http://localhost:8080/api/v1';
+const ROOT_URL = 'https://dry-ravine-12347.herokuapp.com/api/v1';
 
 class ItemService {
 
