@@ -10,7 +10,7 @@ import {
   WIPE_PLACES
 } from './types';
 import * as types from './types';
-const ROOT_URL = 'http://localhost:8080/api/v1';
+const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
 
 export function signinUser ({ email, password }) {
   return function (dispatch) {
