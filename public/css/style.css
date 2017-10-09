@@ -1,0 +1,113 @@
+.tg-header {
+    background-color: transparent;
+   }
+   
+   .scrolling-navbar {
+    -webkit-transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+    -moz-transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+    transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+   }
+   
+   .top-nav-collapse {
+    background-color: #667490 ;
+   }
+   
+   footer.page-footer {
+    background-color: #667490 ;
+    margin-top: 0;
+   }
+   
+   @media only screen and (max-width: 768px) {
+    .navbar {
+      background-color: #667490 ;
+    }
+   }
+   
+   /* Necessary for full page carousel*/
+   
+   html,
+   body,
+   .view {
+    height: 100%;
+   }
+   
+   /* Carousel*/
+   
+   .carousel,
+   .carousel-item,
+   .active {
+    height: 100%;
+   }
+   
+   .carousel-inner {
+    height: 100%;
+   }
+   
+   .carousel-item:nth-child(1) {
+    background-image: url('https://mdbootstrap.com/img/Photos/Others/img%20(49).jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+   }
+   
+   .carousel-item:nth-child(2) {
+    background-image: url('https://mdbootstrap.com/img/Photos/Others/img%20(41).jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+   }
+   
+   .carousel-item:nth-child(3) {
+    background-image: url('https://mdbootstrap.com/img/Photos/Others/img%20(50).jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+   }
+   
+   /*Caption*/
+   
+   .flex-center {
+    color: #fff;
+   }
+   
+   @media (min-width: 776px) {
+    .carousel .view ul li {
+      display: inline;
+    }
+    .carousel .view .full-bg-img ul li .flex-item {
+      margin-bottom: 1.5rem;
+    }
+   }
+
+/******************** login **********************/
+.tg-login__wrapper {
+    position: relative;
+    top: 200px;
+  }
+  
+  .tg-login__btn {
+    color: #166585;
+    border-radius: 0;
+    /*border: 1px solid white;*/
+    /*background-color: white;*/
+  }
+  
+  .tg-login__btn:hover {
+    color: #506692;
+    border-radius: 0;
+    border: 1px solid white;
+    /*background-color: white;*/
+  }
+  
+  .tg-login__btn:active {
+    color: #667490;
+    border-radius: 0;
+    border: 1px solid white;
+    /*background-color: white;*/
+  }
+  
+  .tg-login__btn:focus {
+    color: #4797B7;
+    border-radius: 0;
+    border: 1px solid #4797B7;
+    /*background-color: white;*/
+  }
+
+  
