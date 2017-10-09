@@ -148,82 +148,82 @@ class manualSearch extends React.Component{
 
           switch (placeType) {
             case 'store':
-              markerColor = '/png/blue_markerA.png';
+              markerColor = '/static/png/blue_markerA.png';
               break;
             case 'lodging':
-              markerColor = '/png/brown_markerB.png';
+              markerColor = '/static/png/brown_markerB.png';
               break;
             case 'cafe':
-              markerColor = '/png/darkgreen_markerC.png';
+              markerColor = '/static/png/darkgreen_markerC.png';
               break;
             case 'museum':
-              markerColor = '/png/green_markerD.png';
+              markerColor = '/static/png/green_markerD.png';
               break;
             case 'pharmacy':
-              markerColor = '/png/orange_markerE.png';
+              markerColor = '/static/png/orange_markerE.png';
               break;
             case 'subway_station':
-              markerColor = '/png/paleblue_markerF.png';
+              markerColor = '/static/png/paleblue_markerF.png';
               break;
             case 'airport':
-              markerColor = '/png/pink_markerG.png';
+              markerColor = '/static/png/pink_markerG.png';
               break;
             case 'hospital':
-              markerColor = '/png/purple_markerH.png';
+              markerColor = '/static/png/purple_markerH.png';
               break;
             case 'bus_station':
-              markerColor = '/png/red_markerI.png';
+              markerColor = '/static/png/red_markerI.png';
               break;
             case 'park':
-              markerColor = '/png/yellow_markerJ.png';
+              markerColor = '/static/png/yellow_markerJ.png';
               break;
             case 'atm':
-              markerColor = '/png/blue_markerK.png';
+              markerColor = '/static/png/blue_markerK.png';
               break;
             case 'bank':
-              markerColor = '/png/brown_markerL.png';
+              markerColor = '/static/png/brown_markerL.png';
               break;
             case 'doctor':
-              markerColor = '/png/darkgreen_markerM.png';
+              markerColor = '/static/png/darkgreen_markerM.png';
               break;
             case 'zoo':
-              markerColor = '/png/green_markerN.png';
+              markerColor = '/static/png/green_markerN.png';
               break;
             case 'police':
-              markerColor = '/png/orange_markerO.png';
+              markerColor = '/static/png/orange_markerO.png';
               break;
             case 'train_station':
-              markerColor = '/png/paleblue_markerP.png';
+              markerColor = '/static/png/paleblue_markerP.png';
               break;
             case 'school':
-              markerColor = '/png/pink_markerQ.png';
+              markerColor = '/static/png/pink_markerQ.png';
               break;
             case 'bar':
-              markerColor = '/png/purple_markerR.png';
+              markerColor = '/static/png/purple_markerR.png';
               break;
             case 'church':
-              markerColor = '/png/red_markerS.png';
+              markerColor = '/static/png/red_markerS.png';
               break;
             case 'synagogue':
-              markerColor = '/png/yellow_markerT.png';
+              markerColor = '/static/png/yellow_markerT.png';
               break;
             case 'mosque':
-              markerColor = '/png/blue_markerU.png';
+              markerColor = '/static/png/blue_markerU.png';
               break;
             case 'university':
-              markerColor = '/png/brown_markerV.png';
+              markerColor = '/static/png/brown_markerV.png';
               break;
             case 'embassy':
-              markerColor = '/png/darkgreen_markerW.png';
+              markerColor = '/static/png/darkgreen_markerW.png';
               break;
             case 'library':
-              markerColor = '/png/green_markerX.png';
+              markerColor = '/static/png/green_markerX.png';
               break;
             case 'spa':
-              markerColor = '/png/orange_markerY.png';
+              markerColor = '/static/png/orange_markerY.png';
               break;
             default:
-              markerColor = '/png/paleblue_markerZ.png';
+              markerColor = '/static/png/paleblue_markerZ.png';
           };
   
 
