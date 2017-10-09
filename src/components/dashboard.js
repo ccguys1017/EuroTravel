@@ -10,7 +10,7 @@ import {bindActionCreators} from 'redux';
 import * as actionCreators from '../actions';
 import Autocomplete from 'react-google-autocomplete';
 import PlacesSearch from './search';
-const ROOT_URL = 'https://dry-ravine-12347.herokuapp.com/api/v1';
+const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
 
 let saved_itineraries = [];
 
