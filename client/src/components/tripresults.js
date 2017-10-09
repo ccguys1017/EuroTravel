@@ -142,6 +142,40 @@ class Tripresults extends Component {
     return (
       <div className="tripresults">
         <h3>Your Custom Itinerary Results</h3>
+
+        <h4>Lengend:</h4>
+        <div>
+          <span className="badge" id='testA'>A - Store</span>
+          <span className="badge" id='testB'>B - Lodging</span>
+          <span className="badge" id='testC'>C - Restaurant/Cafe</span>
+          <span className="badge" id='testD'>D - Museum/Art Gallery</span>
+          <span className="badge" id='testE'>E - Pharmacy</span>
+          <span className="badge" id='testF'>F - Subway</span>
+          <span className="badge" id='testG'>G - Airport</span>
+          <span className="badge" id='testH'>H - Hospital</span>
+          <span className="badge" id='testI'>I - Bus</span>
+        </div>
+        <div>
+          <span className="badge" id='testJ'>J - Park</span>
+          <span className="badge" id='testK'>K - ATM</span>
+          <span className="badge" id='testL'>L - Bank</span>
+          <span className="badge" id='testM'>M - Doctor/Dentist</span>
+          <span className="badge" id='testN'>N - Zoo</span>
+          <span className="badge" id='testO'>O - Police</span>
+          <span className="badge" id='testP'>P - Train</span>
+          <span className="badge" id='testQ'>Q - School</span>
+          <span className="badge" id='testR'>R - Bar</span>
+          <span className="badge" id='testS'>S - Church</span>
+        </div>
+        <div>
+          <span className="badge" id='testT'>T - Synagogue</span>
+          <span className="badge" id='testU'>U - Mosque</span>
+          <span className="badge" id='testV'>V - University</span>
+          <span className="badge" id='testW'>W - Embassy</span>
+          <span className="badge" id='testX'>X - Library</span>
+          <span className="badge" id='testY'>Y - Spa</span>
+          <span className="badge" id='testZ'>Z - Other</span>
+        </div>
         <div className="row">
           <div className="col-sm-12">
             {this.IterateOverPlaces()}

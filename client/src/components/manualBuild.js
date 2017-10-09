@@ -110,6 +110,36 @@ componentWillMount = () => {
     if (document.getElementById('checkbox_place_bar').checked) {
         places_type.push('bar');
     }
+    if (document.getElementById('checkbox_place_church').checked) {
+        places_type.push('church');
+    }
+    if (document.getElementById('checkbox_place_university').checked) {
+        places_type.push('university');
+    }
+    if (document.getElementById('checkbox_place_synagogue').checked) {
+        places_type.push('synagogue');
+    }
+    if (document.getElementById('checkbox_place_embassy').checked) {
+        places_type.push('embassy');
+    }
+    if (document.getElementById('checkbox_place_restaurant').checked) {
+        places_type.push('restaurant');
+    }
+    if (document.getElementById('checkbox_place_dentist').checked) {
+        places_type.push('dentist');
+    }
+    if (document.getElementById('checkbox_place_mosque').checked) {
+        places_type.push('mosque');
+    }
+    if (document.getElementById('checkbox_place_library').checked) {
+        places_type.push('library');
+    }
+    if (document.getElementById('checkbox_place_art_gallery').checked) {
+        places_type.push('art_gallery');
+    }
+    if (document.getElementById('checkbox_place_spa').checked) {
+        places_type.push('spa');
+    }
 
 
     console.log(places_type);
@@ -124,17 +154,6 @@ componentWillMount = () => {
     console.log(this.props);
     this.context.router.history.push('/manualSearch');
 
-
-    /*
-     (RAB) We now have our longitude/latitude for selected city/country and our Places 'type' (itinerary) array. We can now iterate our Google Places API calls over our Places 'type' array to collect itinerary data (push the returned API data into an Object Array which we will use the array map() method to show the itinerary data along with a checkbox to allow the user to save selected itineraries)
-    */
-
-/*
-    for (const checkbox of this.selectedCheckboxes) {   
-
-    }
-    this.context.router.history.push('/tripresults');
-*/
   }
 
  onClick () {
@@ -216,12 +235,49 @@ componentWillMount = () => {
                     <input type='checkbox' name='Checkboxes' id='checkbox_place_bar' value='item-3' />Bar
                 </label>
               </div>
+              <div className='col-md-4 columns'>
+                <label className='checkbox-inline'>
+                    <input type='checkbox' name='Checkboxes' id='checkbox_place_church' value='item-1' />Church
+                </label>
+                <label className='checkbox-inline'>
+                    <input type='checkbox' name='Checkboxes' id='checkbox_place_university' value='item-2' />University
+                </label>
+                <label className='checkbox-inline'>
+                    <input type='checkbox' name='Checkboxes' id='checkbox_place_synagogue' value='item-3' />Synagogue
+                </label>
+              </div>
+              <div className='col-md-4 columns'>
+                <label className='checkbox-inline'>
+                    <input type='checkbox' name='Checkboxes' id='checkbox_place_embassy' value='item-1' />Embassy
+                </label>
+                <label className='checkbox-inline'>
+                    <input type='checkbox' name='Checkboxes' id='checkbox_place_restaurant' value='item-2' />Restaurant
+                </label>
+                <label className='checkbox-inline'>
+                    <input type='checkbox' name='Checkboxes' id='checkbox_place_dentist' value='item-3' />Dentist
+                </label>
+              </div>
+              <div className='col-md-4 columns'>
+                <label className='checkbox-inline'>
+                    <input type='checkbox' name='Checkboxes' id='checkbox_place_mosque' value='item-1' />Mosque
+                </label>
+                <label className='checkbox-inline'>
+                    <input type='checkbox' name='Checkboxes' id='checkbox_place_library' value='item-2' />Library
+                </label>
+                <label className='checkbox-inline'>
+                    <input type='checkbox' name='Checkboxes' id='checkbox_place_art_gallery' value='item-3' />Art Gallery
+                </label>
+              </div>
+              <div className='col-md-4 columns'>
+                <label className='checkbox-inline'>
+                    <input type='checkbox' name='Checkboxes' id='checkbox_place_spa' value='item-1' />Spa
+                </label>
+              </div>              
             </div>
           </div>
-          
           <button className='btn btn-default' type='submit'>Click to Generate Itinerary</button>
         </form>
-        <button onClick={this.onClick.bind(this)} className='btn btn-default'>Back</button>
+        <button onClick={this.onClick.bind(this)} className='btn btn-default'>Dashboard</button>
       </div>
     );
   }

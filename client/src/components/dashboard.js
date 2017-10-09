@@ -651,10 +651,9 @@ class Dashboard extends Component {
               </tbody>
             </Table>
         </div>
-        <div className='col-md-3'>
-          <h2>Select a Country:</h2>
-
-          <form action='/dashboard' onChange={this.listCities.bind(this)}>
+        <form action='/dashboard' onChange={this.listCities.bind(this)}>
+        <div className='col-md-2'>
+          <h2>Select Country:</h2>
             <div className='dashradio'>
               <div className='dashradio-item'>
                 <input type='radio' name='radio' id='countrydashradio1' />
@@ -756,6 +755,14 @@ class Dashboard extends Component {
                 <input type='radio' name='radio' id='countrydashradio25' />
                 <label>Kosovo</label>
               </div>
+            </div>
+          </div>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <div className='col-md-2'>
               <div className='dashradio-item'>
                 <input type='radio' name='radio' id='countrydashradio26' />
                 <label>Latvia</label>
@@ -856,11 +863,10 @@ class Dashboard extends Component {
                 <input type='radio' name='radio' id='countrydashradio50' />
                 <label>United Kingdom</label>
               </div>
-            </div>
+          </div>
           </form>
-        </div>
-        <div className='col-md-3'>
-          <h2>Select a City:</h2>
+        <div className='col-md-2'>
+          <h2>Select City:</h2>
           <form action='/tripbuild' onSubmit={this.handleFormSubmit.bind(this)}>
             <div className='dashradio'>
               <div className='dashradio-item'>
@@ -887,10 +893,9 @@ class Dashboard extends Component {
                 <input type='radio' name='radio' id='citydashradio6' />
                 <label>{this.state.trip_city6}</label>
               </div>
-              
             </div>
             <button className='btn btn-default' type='submit'>
-              Click to Create Custom Itinerary
+              Create Custom Itinerary
             </button>
             <div>
               <strong>or</strong>
@@ -935,12 +940,8 @@ class Dashboard extends Component {
           }}  // end onPlaceSelected
           types={['(regions)']}
         />
-          <form action='/places'>
-            <button className='btn btn-default' type='submit'>
-              Click to Manually Search Places
-            </button>
-          </form>
-          <button onClick={this.onBackClick.bind(this)} className='btn btn-default'>Back</button>
+
+          <button onClick={this.onBackClick.bind(this)} className='btn btn-default'>Homepage</button>
         </div>
       </div>
     );

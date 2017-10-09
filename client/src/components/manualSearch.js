@@ -48,6 +48,10 @@ class manualSearch extends React.Component{
     
   )
 
+  onClick () {
+    this.context.router.history.push('/dashboard');
+  };
+
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
 
@@ -85,7 +89,6 @@ class manualSearch extends React.Component{
     componentDidMount() {
       console.log(this.props);
         let location = {lat:Number(this.props.state.maps.selectedLocation.lat), lng: Number(this.props.state.maps.selectedLocation.lng)};
-        //let location ={lat:Number(localStorage.getItem('trip_lat')), lng:Number(localStorage.getItem('trip_lng'))};
         console.log('location: ' + location);
         let map = new google.maps.Map(document.getElementById('map'), {
             center: location,
@@ -132,26 +135,101 @@ class manualSearch extends React.Component{
         
         var x = 0; //Counter for info marker open/close
         function createMarker(place, x) {
-          let markerColor = ['/png/blue_markerA.png',          // 0
-                             '/png/brown_markerB.png',         // 1
-                             '/png/darkgreen_markerC.png',     // 2    
-                             '/png/green_markerD.png',         // 3
-                             '/png/orange_markerE.png',        // 4
-                             '/png/paleblue_markerF.png',      // 5
-                             '/png/pink_markerG.png',          // 6
-                             '/png/purple_markerH.png',        // 7
-                             '/png/red_markerI.png',           // 8
-                             '/png/yellow_markerJ.png'];       // 9
+          let markerColor = '/png/blue_markerA.png';
+
           let placeLoc = place.geometry.location;   // DEBUG (RAB) Capture Places data
           let placeName = place.name;               // DEBUG (RAB) Capture Places data
           let placeType = place.types[0];           // DEBUG (RAB) Capture Places data
           let placeAddr = place.vicinity;           // DEBUG (RAB) Capture Places data
           let placeRating = place.rating;           // DEBUG (RAB) Capture Places data
           console.log('place: ' + place);                       // DEBUG (RAB) Capture Places data
+
+          switch (placeType) {
+            case 'store':
+              markerColor = '/png/blue_markerA.png';
+              break;
+            case 'lodging':
+              markerColor = '/png/brown_markerB.png';
+              break;
+            case 'cafe':
+              markerColor = '/png/darkgreen_markerC.png';
+              break;
+            case 'museum':
+              markerColor = '/png/green_markerD.png';
+              break;
+            case 'pharmacy':
+              markerColor = '/png/orange_markerE.png';
+              break;
+            case 'subway_station':
+              markerColor = '/png/paleblue_markerF.png';
+              break;
+            case 'airport':
+              markerColor = '/png/pink_markerG.png';
+              break;
+            case 'hospital':
+              markerColor = '/png/purple_markerH.png';
+              break;
+            case 'bus_station':
+              markerColor = '/png/red_markerI.png';
+              break;
+            case 'park':
+              markerColor = '/png/yellow_markerJ.png';
+              break;
+            case 'atm':
+              markerColor = '/png/blue_markerK.png';
+              break;
+            case 'bank':
+              markerColor = '/png/brown_markerL.png';
+              break;
+            case 'doctor':
+              markerColor = '/png/darkgreen_markerM.png';
+              break;
+            case 'zoo':
+              markerColor = '/png/green_markerN.png';
+              break;
+            case 'police':
+              markerColor = '/png/orange_markerO.png';
+              break;
+            case 'train_station':
+              markerColor = '/png/paleblue_markerP.png';
+              break;
+            case 'school':
+              markerColor = '/png/pink_markerQ.png';
+              break;
+            case 'bar':
+              markerColor = '/png/purple_markerR.png';
+              break;
+            case 'church':
+              markerColor = '/png/red_markerS.png';
+              break;
+            case 'synagogue':
+              markerColor = '/png/yellow_markerT.png';
+              break;
+            case 'mosque':
+              markerColor = '/png/blue_markerU.png';
+              break;
+            case 'university':
+              markerColor = '/png/brown_markerV.png';
+              break;
+            case 'embassy':
+              markerColor = '/png/darkgreen_markerW.png';
+              break;
+            case 'library':
+              markerColor = '/png/green_markerX.png';
+              break;
+            case 'spa':
+              markerColor = '/png/orange_markerY.png';
+              break;
+            default:
+              markerColor = '/png/paleblue_markerZ.png';
+          };
+  
+
           let infowindow = new google.maps.InfoWindow();
           let marker = new google.maps.Marker({
             map: map,
-            icon: markerColor[x],
+            //icon: markerColor[x],
+            icon: markerColor,
             position: place.geometry.location
           });
           google.maps.event.addListener(marker, 'click', function() {
@@ -176,15 +254,48 @@ class manualSearch extends React.Component{
             return(
               <div className="tripresults">
         <h3>Your Custom Itinerary Results</h3>
+        <h4>Lengend:</h4>
+        <div>
+          <span className="badge" id='testA'>A - Store</span>
+          <span className="badge" id='testB'>B - Lodging</span>
+          <span className="badge" id='testC'>C - Restaurant/Cafe</span>
+          <span className="badge" id='testD'>D - Museum/Art Gallery</span>
+          <span className="badge" id='testE'>E - Pharmacy</span>
+          <span className="badge" id='testF'>F - Subway</span>
+          <span className="badge" id='testG'>G - Airport</span>
+          <span className="badge" id='testH'>H - Hospital</span>
+          <span className="badge" id='testI'>I - Bus</span>
+        </div>
+        <div>
+          <span className="badge" id='testJ'>J - Park</span>
+          <span className="badge" id='testK'>K - ATM</span>
+          <span className="badge" id='testL'>L - Bank</span>
+          <span className="badge" id='testM'>M - Doctor/Dentist</span>
+          <span className="badge" id='testN'>N - Zoo</span>
+          <span className="badge" id='testO'>O - Police</span>
+          <span className="badge" id='testP'>P - Train</span>
+          <span className="badge" id='testQ'>Q - School</span>
+          <span className="badge" id='testR'>R - Bar</span>
+          <span className="badge" id='testS'>S - Church</span>
+        </div>
+        <div>
+          <span className="badge" id='testT'>T - Synagogue</span>
+          <span className="badge" id='testU'>U - Mosque</span>
+          <span className="badge" id='testV'>V - University</span>
+          <span className="badge" id='testW'>W - Embassy</span>
+          <span className="badge" id='testX'>X - Library</span>
+          <span className="badge" id='testY'>Y - Spa</span>
+          <span className="badge" id='testZ'>Z - Other</span>
+        </div>
         <div className="row">
-          <div className="col-sm-12">
-            
+          <div className="col-sm-12">            
             <form action='/dashboard' onSubmit={this.handleFormSubmit}>
             <ListGroup>
               {this.createCheckboxes()}
             </ListGroup>
-              <button className="btn btn-default" type="submit">Save</button>
+              <button className="btn btn-default" type="submit">Click to Save checked Itineraries</button>
             </form>
+            <button onClick={this.onClick.bind(this)} className='btn btn-default'>Dashboard</button> 
           </div>
         </div>
       </div>
