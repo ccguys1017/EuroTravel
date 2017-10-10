@@ -280,6 +280,7 @@ class manualSearch extends React.Component{
           <span className="badge" id='testR'>R - Bar</span>
           <span className="badge" id='testS'>S - Church</span>
         </div>
+        
         <div>
           <span className="badge" id='testT'>T - Synagogue</span>
           <span className="badge" id='testU'>U - Mosque</span>
@@ -289,6 +290,8 @@ class manualSearch extends React.Component{
           <span className="badge" id='testY'>Y - Spa</span>
           <span className="badge" id='testZ'>Z - Other</span>
         </div>
+        <div id="map">
+          </div>
         <div className="row">
           <div className="col-sm-12">            
             <form action='/dashboard' onSubmit={this.handleFormSubmit}>

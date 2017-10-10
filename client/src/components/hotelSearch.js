@@ -254,7 +254,7 @@ class hotelSearch extends React.Component{
         render(){
             return(
               <div className="tripresults">
-        <h3>Your Custom Itinerary Results</h3>
+        <h3>Nearby Hotels</h3>
         <div id="listing">
       <table id="resultsTable">
         <tbody id="results"></tbody>
@@ -289,11 +289,11 @@ class hotelSearch extends React.Component{
     </div>
         <div className="row">
           <div className="col-sm-12">
-            
+          <div id="map">
+          </div>
             <form action='/dashboard' onSubmit={this.handleFormSubmit}>
-            <ListGroup>
-              {this.createCheckboxes()}
-            </ListGroup>
+            
+            
               <button className="btn btn-default" type="submit">Save</button>
             </form>
           </div>
