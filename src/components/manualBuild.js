@@ -8,7 +8,7 @@ import PlacesSearch from './search';
 import {bindActionCreators} from 'redux';
 import * as actionCreators from '../actions';
 import Autocomplete from 'react-google-autocomplete';
-const ROOT_URL = 'http://localhost:8080/api/v1';
+const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
 
 let cities = [];
 let places_type = [];
