@@ -30,9 +30,7 @@ app.get('*', function(req, res) {
    });
 
 // Server Setup
-const port = process.env.PORT || 8080;
-const server = http.createServer(app);
-//server.listen(port);
-server.listen(https://eurotravel-sever.herokuapp.com/);
-console.log('Server listening on:', port);
+//const port = process.env.PORT || 8080;
+//const server = http.createServer(app);
+//console.log('Server listening on:', port);
 
