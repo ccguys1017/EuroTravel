@@ -7,6 +7,8 @@ import * as actionCreators from '../actions';
 import {ListGroup, ListGroupItem} from 'react-bootstrap';
 import Checkbox from './checkbox';
 import axios from 'axios';
+import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
+
 
 const ROOT_URL = 'http://localhost:8080/api/v1';
 class manualSearch extends React.Component{
@@ -255,6 +257,18 @@ class manualSearch extends React.Component{
         render(){
             return(
               <div className="tripresults">
+                                    <Navbar>
+    <Navbar.Header>
+      <Navbar.Brand>
+        <a href="/">GuideTrip</a>
+      </Navbar.Brand>
+    </Navbar.Header>
+    <Nav>
+      <NavItem eventKey={2} href="/">Home</NavItem>
+      <NavItem eventKey={1} href="/dashboard">Dashboard</NavItem>
+      <NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
+    </Nav>
+  </Navbar>
         <h3>Your Custom Itinerary Results</h3>
         <h4>Lengend:</h4>
         <div>
@@ -304,7 +318,21 @@ class manualSearch extends React.Component{
             <button onClick={this.onClick.bind(this)} className='btn btn-default'>Dashboard</button> 
           </div>
         </div>
+        <footer style={{position:"relative"}} id="sticky">
+          
+            <a href="/"> Home</a>
+            <a href="/dashboard"> Dashboard</a>
+            <a href="/hotelBuild"> Find Hotels</a>
+          
+          <div class="footer-copyright">
+      <div class="container-fluid">
+          © 2017 Copyright: <a href="/"> GuideTrip </a>
+
       </div>
+  </div>
+    </footer>
+      </div>
+      
             )
         }
     }

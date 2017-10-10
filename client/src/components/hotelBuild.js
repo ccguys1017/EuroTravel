@@ -4,6 +4,8 @@ import * as actionCreators from '../actions';
 import Autocomplete from 'react-google-autocomplete';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
+
 class hotelBuild extends React.Component{
     constructor(props){
         super(props)
@@ -14,7 +16,18 @@ class hotelBuild extends React.Component{
     render(){
         return(
             <div>
-
+<Navbar>
+    <Navbar.Header>
+      <Navbar.Brand>
+        <a href="/">GuideTrip</a>
+      </Navbar.Brand>
+    </Navbar.Header>
+    <Nav>
+      <NavItem eventKey={2} href="/">Home</NavItem>
+      <NavItem eventKey={1} href="/dashboard">Dashboard</NavItem>
+      <NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
+    </Nav>
+  </Navbar>
 <Autocomplete style={{width:'66%'}} 
           onPlaceSelected={(place) => {
 
@@ -54,7 +67,19 @@ class hotelBuild extends React.Component{
           }}  // end onPlaceSelected
           types={['(regions)']}
         />
+        <footer id="sticky">
+            
+              <a href="/"> Home</a>
+              <a href="/dashboard"> Dashboard</a>
+              <a href="/hotelBuild"> Find Hotels</a>
+            
+            <div class="footer-copyright">
+        <div class="container-fluid">
+            © 2017 Copyright: <a href="/"> GuideTrip </a>
 
+        </div>
+    </div>
+      </footer>
             </div>
         )
     }

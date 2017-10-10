@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import Tripbuild from './tripbuild';
 import TableRow from './tablerow';
-import {Table} from 'react-bootstrap';
+import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
 import {bindActionCreators} from 'redux';
 import * as actionCreators from '../actions';
 import Autocomplete from 'react-google-autocomplete';
@@ -632,14 +632,27 @@ class Dashboard extends Component {
   }
 
   render() {
-    document.getElementById('map').innerHTML = "";
+    
     const itins_retrieved = this.state.itins_retrieved;
     if (!itins_retrieved) {
       return <div>Loading.......</div>;
     }
     return (      
-      <div className='dashboard'>
-        <h3>Dashboard</h3>
+      <div>
+          <Navbar>
+    <Navbar.Header>
+      <Navbar.Brand>
+        <a href="/">GuideTrip</a>
+      </Navbar.Brand>
+    </Navbar.Header>
+    <Nav>
+      <NavItem eventKey={2} href="/">Home</NavItem>
+      <NavItem eventKey={1} href="/dashboard">Dashboard</NavItem>
+      <NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
+    </Nav>
+  </Navbar>
+  <div className='dashboard'>
+        <h3 style={{textAlign: "center"}}>Dashboard</h3>
         <div className='col-md-6'>
           <h4><strong>Your Previously saved Itineraries</strong></h4>
           <Table striped hover className="table table-striped">
@@ -931,10 +944,16 @@ class Dashboard extends Component {
           console.log(this.props);
           console.log(place);
           localStorage.setItem('sel_city', place.address_components[0].long_name);
-          localStorage.setItem('sel_country', place.address_components[3].short_name);
+          if(place.address_components.length > 3){
+            localStorage.setItem('sel_country', place.address_components[3].short_name);
 
-          localStorage.setItem('trip_lat', place.address_components[0].long_name);
-          localStorage.setItem('trip_lng', place.address_components[3].short_name);
+          }else if (place.address_components.length < 3){
+            localStorage.setItem('sel_country', place.address_components[2].short_name);
+
+          }
+
+          //localStorage.setItem('trip_lat', place.address_components[0].long_name);
+          //localStorage.setItem('trip_lng', place.address_components[3].short_name);
           this.context.router.history.push('/manualBuild');
          
         
@@ -946,7 +965,24 @@ class Dashboard extends Component {
         <button onClick={this.onHotelClick.bind(this)} className='btn btn-default'>Search Hotels</button>
           <button onClick={this.onBackClick.bind(this)} className='btn btn-default'>Homepage</button>
         </div>
+        </div>
+        
+        <footer style={{bottom:0, position:"absolute"}}id="sticky">
+            
+              <a href="/"> Home</a>
+              <a href="/dashboard"> Dashboard</a>
+              <a href="/hotelBuild"> Find Hotels</a>
+            
+            <div class="footer-copyright">
+        <div class="container-fluid">
+            © 2017 Copyright: <a href="/"> GuideTrip </a>
+
+        </div>
+    </div>
+      </footer>
       </div>
+    
+    
     );
   }
 }

@@ -434,12 +434,3 @@ body {
   background-color:black;
   font-size:15px;
 }
-.carousel-caption {
-  top: 0;
-  bottom: auto;
-}
-div#homeBTN{
-  display:inline;
-  margin: 0 auto;
-  
-}

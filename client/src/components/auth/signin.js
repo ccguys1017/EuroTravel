@@ -3,6 +3,8 @@ import { reduxForm } from 'redux-form';
 import * as actions from '../../actions';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
+
 
 class Signin extends Component {
   constructor(props) {
@@ -44,8 +46,20 @@ class Signin extends Component {
   render () {
     const { handleSubmit, fields: { email, password }} = this.props;
     return (
+      <div>
+      <Navbar>
+<Navbar.Header>
+<Navbar.Brand>
+<a href="/">GuideTrip</a>
+</Navbar.Brand>
+</Navbar.Header>
+<Nav>
+<NavItem eventKey={2} href="/">Home</NavItem>
+<NavItem eventKey={1} href="/dashboard">Dashboard</NavItem>
+<NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
+</Nav>
+</Navbar>
       <div className='tg-login__wrapper'>
-        <Link to='/'>Home</Link>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <fieldset className='form-group'>
             <label>Email:</label>
@@ -58,6 +72,7 @@ class Signin extends Component {
           {this.renderAlert()}
           <button action='submit' className='btn btn-primary'>Sign in</button>
         </form>
+      </div>
       </div>
     );
   };

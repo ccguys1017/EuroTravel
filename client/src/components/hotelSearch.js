@@ -6,6 +6,8 @@ import {bindActionCreators} from 'redux';
 import * as actionCreators from '../actions';
 import {ListGroup, ListGroupItem} from 'react-bootstrap';
 import Checkbox from './checkbox';
+import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
+
 import axios from 'axios';
 
 const ROOT_URL = 'http://localhost:8080/api/v1';
@@ -254,7 +256,20 @@ class hotelSearch extends React.Component{
         render(){
             return(
               <div className="tripresults">
+                          <Navbar>
+    <Navbar.Header>
+      <Navbar.Brand>
+        <a href="/">GuideTrip</a>
+      </Navbar.Brand>
+    </Navbar.Header>
+    <Nav>
+      <NavItem eventKey={2} href="/">Home</NavItem>
+      <NavItem eventKey={1} href="/dashboard">Dashboard</NavItem>
+      <NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
+    </Nav>
+  </Navbar>
         <h3>Nearby Hotels</h3>
+        <div id="map"></div>
         <div id="listing">
       <table id="resultsTable">
         <tbody id="results"></tbody>
@@ -289,8 +304,6 @@ class hotelSearch extends React.Component{
     </div>
         <div className="row">
           <div className="col-sm-12">
-          <div id="map">
-          </div>
             <form action='/dashboard' onSubmit={this.handleFormSubmit}>
             
             
@@ -298,6 +311,19 @@ class hotelSearch extends React.Component{
             </form>
           </div>
         </div>
+        <footer style={{position:"relative"}} id="sticky">
+            
+              <a href="/"> Home</a>
+              <a href="/dashboard"> Dashboard</a>
+              <a href="/hotelBuild"> Find Hotels</a>
+            
+            <div class="footer-copyright">
+        <div class="container-fluid">
+            © 2017 Copyright: <a href="/"> GuideTrip </a>
+
+        </div>
+    </div>
+      </footer>
       </div>
             )
         }

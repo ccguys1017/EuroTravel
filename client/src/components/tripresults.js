@@ -8,6 +8,8 @@ import axios from 'axios';
 import {bindActionCreators} from 'redux';
 import * as actionCreators from '../actions';
 import {ListGroup, ListGroupItem} from 'react-bootstrap';
+import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
+
 
 import Checkbox from './checkbox';
 
@@ -144,6 +146,18 @@ class Tripresults extends Component {
     
     return (
       <div className="tripresults">
+                  <Navbar>
+    <Navbar.Header>
+      <Navbar.Brand>
+        <a href="/">GuideTrip</a>
+      </Navbar.Brand>
+    </Navbar.Header>
+    <Nav>
+      <NavItem eventKey={2} href="/">Home</NavItem>
+      <NavItem eventKey={1} href="/dashboard">Dashboard</NavItem>
+      <NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
+    </Nav>
+  </Navbar>
         <h3>Your Custom Itinerary Results</h3>
 
         <h4>Lengend:</h4>
@@ -183,14 +197,29 @@ class Tripresults extends Component {
           <div className="col-sm-12">
             {this.IterateOverPlaces()}
             <form action='/dashboard' onSubmit={this.handleFormSubmit}>
+            <div id="map"></div>
             <ListGroup>
               {this.createCheckboxes()}
             </ListGroup>
-            <button onClick={this.onButtonClick.bind(this)} className='btn btn-default'>Find Hotels In Area</button> 
               <button className="btn btn-default" type="submit">Save</button>
             </form>
+            <button onClick={this.onButtonClick.bind(this)} className='btn btn-default'>Find Hotels In Area</button> 
+
           </div>
         </div>
+        <footer style={{position:"relative"}}id="sticky">
+            
+              <a href="/"> Home</a>
+              <a href="/dashboard"> Dashboard</a>
+              <a href="/hotelBuild"> Find Hotels</a>
+            
+            <div class="footer-copyright">
+        <div class="container-fluid">
+            © 2017 Copyright: <a href="/"> GuideTrip </a>
+
+        </div>
+    </div>
+      </footer>
       </div>
     );
   }

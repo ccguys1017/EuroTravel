@@ -7,6 +7,8 @@ import Dashboard from './dashboard';
 import PlacesSearch from './search';
 import {bindActionCreators} from 'redux';
 import * as actionCreators from '../actions';
+import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
+
 import Autocomplete from 'react-google-autocomplete';
 const ROOT_URL = 'http://localhost:8080/api/v1';
 
@@ -166,10 +168,21 @@ componentWillMount = () => {
   }
 
   render() {
-    document.getElementById('map').innerHTML = "";
     return ( 
       <div className='tripbuild'>
-        <h3>Create Your Custom Itinerary</h3>
+                    <Navbar>
+    <Navbar.Header>
+      <Navbar.Brand>
+        <a href="/">GuideTrip</a>
+      </Navbar.Brand>
+    </Navbar.Header>
+    <Nav>
+      <NavItem eventKey={2} href="/">Home</NavItem>
+      <NavItem eventKey={1} href="/dashboard">Dashboard</NavItem>
+      <NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
+    </Nav>
+  </Navbar>
+        <h3 style={{textAlign: "center"}}>Create Your Custom Itinerary</h3>
         <form action='/tripresults' onSubmit={this.handleFormSubmit}>
           <div className='form-group'>
             <label className='col-md-3 control-label'>Check your Itinerary Items</label>  
@@ -283,6 +296,19 @@ componentWillMount = () => {
           <button className='btn btn-default' type='submit'>Click to Generate Itinerary</button>
         </form>
         <button onClick={this.onClick.bind(this)} className='btn btn-default'>Back</button>
+        <footer id="sticky">
+            
+              <a href="/"> Home</a>
+              <a href="/dashboard"> Dashboard</a>
+              <a href="/hotelBuild"> Find Hotels</a>
+            
+            <div class="footer-copyright">
+        <div class="container-fluid">
+            © 2017 Copyright: <a href="/"> GuideTrip </a>
+
+        </div>
+    </div>
+      </footer>
       </div>
     );
   }

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { DefaultPlayer as Video } from 'react-html5video';
 import * as actions from '../actions';
 import PropTypes from 'prop-types';
+import {Col} from 'react-bootstrap';
 
 class Homepage extends Component {
   static contextTypes = {
@@ -73,8 +74,7 @@ class Homepage extends Component {
         <div id='video-carousel-example2' className='carousel slide carousel-fade' data-ride='carousel'>
           <ol className='carousel-indicators'>
             <li data-target='#video-carousel-example2' data-slide-to='0' className='active'></li>
-            <li data-target='#video-carousel-example2' data-slide-to='1'></li>
-            <li data-target='#video-carousel-example2' data-slide-to='2'></li>
+            
           </ol>
 
           <div className='carousel-inner' role='listbox'>
@@ -87,48 +87,24 @@ class Homepage extends Component {
               </div>
               <div className='carousel-caption'>
                 <div className='flex-center animated fadeIn'>
-                  <ul>
+                  <ul id="home" style={{"list-style-type": "none"}}>
                     <li><h1 className='h1-responsive'>Guide Trip</h1></li>
                     <li><p>Guide Trip is your final destination for all your travel needs</p></li>
-                    <li><a target='_blank' href='/' className='btn btn-primary rounded waves-effect' rel='nofollow'>Sign up!</a></li>
+                    
+                    <div id="homeBTN">
+                    <Col xs={4} md={6}>
+                    <li ><a href='/signup' className='btn btn-primary rounded waves-effect' rel='nofollow'>Sign up!</a></li>
+                    </Col>
+                    <li ><a  href='/signin' className='btn btn-primary rounded waves-effect' rel='nofollow'>Log In!</a></li>
+                    
+                    </div>
                   </ul>
                 </div>
+                
               </div>
             </div>
-            <div className='carousel-item'>
-              <div className='view hm-blue-slight'>
-                <Video className='video-full' controls autoPlay loop>
-                    <source src='https://mdbootstrap.com/img/video/Lines.mp4' type='video/mp4' />
-                </Video>
-                <div className='mask'></div>
-              </div>
-              <div className='carousel-caption'>
-                <div className='flex-center animated fadeInDown'>
-                  <ul>
-                    <li><h1 className='h1-responsive'>Guide Trip does all the work in no time</h1></li>
-                    <li><p>Your Vacation No Worries!</p></li>
-                    <li><a target='_blank' href='https://mdbootstrap.com/bootstrap-tutorial/' className='btn btn-primary rounded waves-effect' rel='nofollow'>Start learning</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className='carousel-item'>
-              <div className='view hm-black-light'>
-                <Video className='video-full' controls autoPlay loop>
-                    <source src='https://mdbootstrap.com/img/video/forest.mp4' type='video/mp4' />
-                </Video>
-                <div className='mask'></div>
-              </div>
-              <div className='carousel-caption'>
-                <div className='flex-center animated fadeInDown'>
-                  <ul>
-                    <li><h1 className='h1-responsive'>Sign Up Now For Free</h1></li>
-                    <li><p>Vacation...You Deserve It</p></li>
-                    <li><a target='_blank' href='https://mdbootstrap.com/forums/forum/support/' className='btn btn-default btn-lg' rel='nofollow'>Support forum</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+            
+            
           </div>
           <a className='carousel-control-prev' href='#video-carousel-example2' role='button' data-slide='prev'>
           <span className='carousel-control-prev-icon' aria-hidden='true'></span>
@@ -138,68 +114,19 @@ class Homepage extends Component {
           <span className='sr-only'>Next</span></a>
         </div>
 
-        <footer className='page-footer center-on-small-only'>
-          <div className='container-fluid'>
-            <div className='row'>
-              <div className='col-lg-3 col-md-6 ml-auto'>
-                <h5 className='title mb-3'><strong>About Guide Trip</strong></h5>
-                <p>Guide Trip is designed by 6 awesome guys.</p>
-                <p>We did all the work so you don’t have to.</p>
-              </div>
+        <footer style={{position:"relative"}}id="sticky">
+        
+          <a href="/"> Home</a>
+          <a href="/dashboard"> Dashboard</a>
+          <a href="/hotelBuild"> Find Hotels</a>
+        
+        <div class="footer-copyright">
+    <div class="container-fluid">
+        © 2017 Copyright: <a href="/"> GuideTrip </a>
 
-              <hr className='w-100 clearfix d-sm-none' />
-
-              <div className='col-lg-2 col-md-6 ml-auto'>
-                <h5 className='title mb-3'><strong>First column</strong></h5>
-                <ul>
-                  <li><a href='#!'>Link 1</a></li>
-                  <li><a href='#!'>Link 2</a></li>
-                  <li><a href='#!'>Link 3</a></li>
-                  <li><a href='#!'>Link 4</a></li>
-                </ul>
-              </div>
-
-              <hr className='w-100 clearfix d-sm-none' />
-
-              <div className='col-lg-2 col-md-6 ml-auto'>
-                <h5 className='title mb-3'><strong>Second column</strong></h5>
-                <ul>
-                  <li><a href='#!'>Link 1</a></li>
-                  <li><a href='#!'>Link 2</a></li>
-                  <li><a href='#!'>Link 3</a></li>
-                  <li><a href='#!'>Link 4</a></li>
-                </ul>
-              </div>
-
-              <hr className='w-100 clearfix d-sm-none' />
-
-              <div className='col-lg-2 col-md-6 ml-auto'>
-                <h5 className='title mb-3'><strong>Third column</strong></h5>
-                <ul>
-                  <li><a href='#!'>Link 1</a></li>
-                  <li><a href='#!'>Link 2</a></li>
-                  <li><a href='#!'>Link 3</a></li>
-                  <li><a href='#!'>Link 4</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <hr />
-
-          <div className='call-to-action'>
-            <h4>Guide Trip</h4>
-            <ul>
-              <li><h5>Sign Up For Free</h5></li>
-              <li><a target='_blank' href='/' className='btn rounded waves-effect red' rel='nofollow'>Sign up!</a></li>
-            </ul>
-          </div>
-          <div className='footer-copyright'>
-            <div className='container-fluid'>
-            © 2017 Copyright: <a href='https://www.guidetrip.me'> guidetrip.me </a>
-            </div>
-          </div>
-        </footer>
+    </div>
+</div>
+  </footer>
     </div>
     );
   }
