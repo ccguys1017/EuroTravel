@@ -223,8 +223,7 @@ class manualSearch extends React.Component{
               markerColor = '/static/js/png/orange_MarkerY.png';
               break;
             default:
-              //markerColor = '/static/js/png/paleblue_MarkerZ.png';
-              markerColor = 'https://www.dropbox.com/s/si40udyyzt0nzds/paleblue_MarkerZ.png?dl=0';
+              markerColor = '/static/js/png/paleblue_MarkerZ.png';
           };
   
 
