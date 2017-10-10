@@ -13,6 +13,8 @@ import Tripresults from './tripresults';
 import Places from './places';
 import manualSearch from './manualSearch';
 import manualBuild from './manualBuild';
+import hotelBuild from './hotelBuild';
+import hotelSearch from './hotelSearch'
 
 export default class App extends Component {
   render () {
@@ -26,6 +28,8 @@ export default class App extends Component {
           <Route path='/dashboard' component={Dashboard} />
           <Route path='/places' component={Places} />          
           <Route path='/tripbuild' component={Tripbuild} />
+          <Route path='/hotelBuild' component={hotelBuild} />
+          <Route path='/hotelSearch' component={hotelSearch} />
           <Route path='/manualSearch' component={manualSearch} />
           <Route path='/manualBuild' component={manualBuild} />
           <Route path='/tripresults' component={Tripresults} />

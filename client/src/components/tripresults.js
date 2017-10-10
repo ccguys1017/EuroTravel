@@ -125,6 +125,9 @@ class Tripresults extends Component {
     console.log("HANDLE SAVE FUNCTION COMPLETED");
   } //End handleSave()
 
+  onButtonClick () {
+    this.context.router.history.push('/hotelSearch');
+  };
 
   IterateOverPlaces = () => (
     this.placesForAllTypes.add('test'),
@@ -183,6 +186,7 @@ class Tripresults extends Component {
             <ListGroup>
               {this.createCheckboxes()}
             </ListGroup>
+            <button onClick={this.onButtonClick.bind(this)} className='btn btn-default'>Find Hotels In Area</button> 
               <button className="btn btn-default" type="submit">Save</button>
             </form>
           </div>

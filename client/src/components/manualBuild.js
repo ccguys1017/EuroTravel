@@ -159,7 +159,9 @@ componentWillMount = () => {
  onClick () {
     this.context.router.history.push('/dashboard');
   }
-
+  onButtonClick () {
+    this.context.router.history.push('/hotelSearch');
+  };
   render() {
     document.getElementById('map').innerHTML = "";
     return ( 
@@ -277,6 +279,7 @@ componentWillMount = () => {
           </div>
           <button className='btn btn-default' type='submit'>Click to Generate Itinerary</button>
         </form>
+        <button onClick={this.onButtonClick.bind(this)} className='btn btn-default'>Search Hotels In Area</button>
         <button onClick={this.onClick.bind(this)} className='btn btn-default'>Dashboard</button>
       </div>
     );

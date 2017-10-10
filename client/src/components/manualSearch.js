@@ -51,7 +51,9 @@ class manualSearch extends React.Component{
   onClick () {
     this.context.router.history.push('/dashboard');
   };
-
+  onButtonClick () {
+    this.context.router.history.push('/hotelSearch');
+  };
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
 
@@ -295,6 +297,7 @@ class manualSearch extends React.Component{
             </ListGroup>
               <button className="btn btn-default" type="submit">Click to Save checked Itineraries</button>
             </form>
+            <button onClick={this.onButtonClick.bind(this)} className='btn btn-default'>Find Hotels In Area</button> 
             <button onClick={this.onClick.bind(this)} className='btn btn-default'>Dashboard</button> 
           </div>
         </div>

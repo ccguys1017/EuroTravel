@@ -39,6 +39,9 @@ class Dashboard extends Component {
   onBackClick () {
     this.context.router.history.push('/');
   }
+  onHotelClick(){
+    this.context.router.history.push('/hotelBuild');
+  }
   handleSave = place => {
     console.log(place);
     const user_email = localStorage.getItem('userEmail');
@@ -940,7 +943,7 @@ class Dashboard extends Component {
           }}  // end onPlaceSelected
           types={['(regions)']}
         />
-
+        <button onClick={this.onHotelClick.bind(this)} className='btn btn-default'>Search Hotels</button>
           <button onClick={this.onBackClick.bind(this)} className='btn btn-default'>Homepage</button>
         </div>
       </div>
