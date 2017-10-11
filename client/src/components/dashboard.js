@@ -957,7 +957,9 @@ class Dashboard extends Component {
               </div>
           </div>
           </form>
-        <div className='col-md-2'>
+
+
+          <div className='col-md-2'>
           <h2>Select City:</h2>
           <form action='/tripbuild' onSubmit={this.handleFormSubmit.bind(this)}>
             <div className='dashradio'>
