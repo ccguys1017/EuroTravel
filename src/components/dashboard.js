@@ -637,8 +637,8 @@ class Dashboard extends Component {
     return (      
       <div className='dashboard'>
         <h3>Dashboard</h3>
-        <div class="images">
-           <img style="margin-top: 25px" src="https://instagram.fphx1-1.fna.fbcdn.net/t51.2885-15/e35/20986761_1510124645677101_3346095233745027072_n.jpg">
+        <div className='images'>
+           <img style='margin-top: 25px' src='https://instagram.fphx1-1.fna.fbcdn.net/t51.2885-15/e35/20986761_1510124645677101_3346095233745027072_n.jpg'>
         </div>
         <div className='col-md-6'>
           <h4><strong>Your Previously saved Itineraries</strong></h4>
