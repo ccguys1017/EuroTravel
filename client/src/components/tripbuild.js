@@ -168,6 +168,35 @@ componentWillMount = () => {
   }
 
   render() {
+    const footerStyle = {
+        backgroundColor: "black",
+        fontSize: "20px",
+        color: "white",
+        borderTop: "1px solid #E7E7E7",
+        textAlign: "center",
+        padding: "20px",
+        position: "fixed",
+        left: "0",
+        bottom: "0",
+        height: "90px",
+        width: "100%"
+      };
+      
+      const phantomStyle = {
+        display: "block",
+        padding: "20px",
+        height: "60px",
+        width: "100%"
+      };
+      
+      function Footer({ children }) {
+        return (
+          <div>
+            <div style={phantomStyle} />
+            <div style={footerStyle}>{children}</div>
+          </div>
+        );
+      }
     return ( 
       <div className='tripbuild'>
                     <Navbar>
@@ -296,9 +325,8 @@ componentWillMount = () => {
           <button className='btn btn-default' type='submit'>Click to Generate Itinerary</button>
         </form>
         <button onClick={this.onClick.bind(this)} className='btn btn-default'>Back</button>
-        <footer id="sticky">
-            
-              <a href="/"> Home</a>
+        <Footer>
+        <a href="/"> Home</a>
               <a href="/dashboard"> Dashboard</a>
               <a href="/hotelBuild"> Find Hotels</a>
             
@@ -307,8 +335,8 @@ componentWillMount = () => {
             © 2017 Copyright: <a href="/"> GuideTrip </a>
 
         </div>
-    </div>
-      </footer>
+        </div>
+        </Footer>
       </div>
     );
   }

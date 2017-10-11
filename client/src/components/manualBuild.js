@@ -165,6 +165,35 @@ componentWillMount = () => {
     this.context.router.history.push('/hotelSearch');
   };
   render() {
+    const footerStyle = {
+        backgroundColor: "black",
+        fontSize: "20px",
+        color: "white",
+        borderTop: "1px solid #E7E7E7",
+        textAlign: "center",
+        padding: "20px",
+        position: "fixed",
+        left: "0",
+        bottom: "0",
+        height: "90px",
+        width: "100%"
+      };
+      
+      const phantomStyle = {
+        display: "block",
+        padding: "20px",
+        height: "60px",
+        width: "100%"
+      };
+      
+      function Footer({ children }) {
+        return (
+          <div>
+            <div style={phantomStyle} />
+            <div style={footerStyle}>{children}</div>
+          </div>
+        );
+      }
     return ( 
       <div className='tripbuild'>
                     <Navbar>
@@ -293,19 +322,19 @@ componentWillMount = () => {
           <button className='btn btn-default' type='submit'>Click to Generate Itinerary</button>
         </form>
         <button onClick={this.onButtonClick.bind(this)} className='btn btn-default'>Search Hotels In Area</button>
-        <footer id="sticky">
-            
-              <a href="/"> Home</a>
-              <a href="/dashboard"> Dashboard</a>
-              <a href="/hotelBuild"> Find Hotels</a>
-            
-            <div class="footer-copyright">
-        <div class="container-fluid">
-            © 2017 Copyright: <a href="/"> GuideTrip </a>
-
-        </div>
-    </div>
-      </footer>
+        
+          <Footer>
+          <a href="/"> Home</a>
+                <a href="/dashboard"> Dashboard</a>
+                <a href="/hotelBuild"> Find Hotels</a>
+              
+              <div class="footer-copyright">
+          <div class="container-fluid">
+              © 2017 Copyright: <a href="/"> GuideTrip </a>
+      
+          </div>
+          </div>
+          </Footer>
       </div>
     );
   }

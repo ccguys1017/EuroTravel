@@ -632,6 +632,35 @@ class Dashboard extends Component {
   }
 
   render() {
+    const footerStyle = {
+      backgroundColor: "black",
+      fontSize: "20px",
+      color: "white",
+      borderTop: "1px solid #E7E7E7",
+      textAlign: "center",
+      padding: "20px",
+      position: "fixed",
+      left: "0",
+      bottom: "0",
+      height: "80px",
+      width: "100%"
+    };
+    
+    const phantomStyle = {
+      display: "block",
+      padding: "20px",
+      height: "50px",
+      width: "100%"
+    };
+    
+    function Footer({ children }) {
+      return (
+        <div>
+          <div style={phantomStyle} />
+          <div style={footerStyle}>{children}</div>
+        </div>
+      );
+    }
     
     const itins_retrieved = this.state.itins_retrieved;
     if (!itins_retrieved) {
@@ -655,7 +684,7 @@ class Dashboard extends Component {
         <h3 style={{textAlign: "center"}}>Dashboard</h3>
         <div className='col-md-6'>
           <h4><strong>Your Previously saved Itineraries</strong></h4>
-          <Table striped hover className="table table-striped">
+          <Table  className="table table-striped">
               <thead>
                 <tr>
                   <td>Itinerary Type</td>
@@ -667,6 +696,53 @@ class Dashboard extends Component {
               </tbody>
             </Table>
         </div>
+        <br/><br/>
+        <h3>Search for your New Vacation!</h3>
+        <Autocomplete style={{width:'30%'}} 
+          onPlaceSelected={(place) => {
+
+          let selectedlatlong = place.geometry.location.toString();
+          let selLat = '';
+          let selLng = '';
+          let onlng = false;  
+
+          //console.log('selectedlatlong: ' + selectedlatlong);
+          //console.log('selectedlatlong.length: ' + selectedlatlong.length);
+          for (let i =0; i < selectedlatlong.length; i++) {
+            if(onlng === false) {
+              if ( i !== 0 && selectedlatlong[i] !== ',' ) {
+                selLat = selLat.concat(selectedlatlong[i]);
+              } else if (selectedlatlong[i] === ',') {
+                onlng = true;
+              }
+            } else if(onlng === true && selectedlatlong[i] !== ')' && selectedlatlong[i] !== ' ') {
+              selLng = selLng.concat(selectedlatlong[i]);
+            }
+          } // end for loop
+          //console.log('selectedlatlong: ' + selectedlatlong);
+          //console.log('Lat = '  + selLat + ' || Lng = ' + selLng);
+          this.props.addLocation(selLat, selLng, place.place_id);
+          console.log(this.props);
+          console.log(place);
+          localStorage.setItem('sel_city', place.address_components[0].long_name);
+          if(place.address_components.length > 3){
+            localStorage.setItem('sel_country', place.address_components[3].short_name);
+
+          }else if (place.address_components.length < 3){
+            localStorage.setItem('sel_country', place.address_components[2].short_name);
+
+          }
+
+          //localStorage.setItem('trip_lat', place.address_components[0].long_name);
+          //localStorage.setItem('trip_lng', place.address_components[3].short_name);
+          this.context.router.history.push('/manualBuild');
+         
+        
+          
+
+          }}  // end onPlaceSelected
+          types={['(regions)']}
+        />
         <form action='/dashboard' onChange={this.listCities.bind(this)}>
         <div className='col-md-2'>
           <h2>Select Country:</h2>
@@ -917,59 +993,13 @@ class Dashboard extends Component {
               <strong>or</strong>
             </div>
           </form>
-          <Autocomplete style={{width:'66%'}} 
-          onPlaceSelected={(place) => {
-
-          let selectedlatlong = place.geometry.location.toString();
-          let selLat = '';
-          let selLng = '';
-          let onlng = false;  
-
-          //console.log('selectedlatlong: ' + selectedlatlong);
-          //console.log('selectedlatlong.length: ' + selectedlatlong.length);
-          for (let i =0; i < selectedlatlong.length; i++) {
-            if(onlng === false) {
-              if ( i !== 0 && selectedlatlong[i] !== ',' ) {
-                selLat = selLat.concat(selectedlatlong[i]);
-              } else if (selectedlatlong[i] === ',') {
-                onlng = true;
-              }
-            } else if(onlng === true && selectedlatlong[i] !== ')' && selectedlatlong[i] !== ' ') {
-              selLng = selLng.concat(selectedlatlong[i]);
-            }
-          } // end for loop
-          //console.log('selectedlatlong: ' + selectedlatlong);
-          //console.log('Lat = '  + selLat + ' || Lng = ' + selLng);
-          this.props.addLocation(selLat, selLng, place.place_id);
-          console.log(this.props);
-          console.log(place);
-          localStorage.setItem('sel_city', place.address_components[0].long_name);
-          if(place.address_components.length > 3){
-            localStorage.setItem('sel_country', place.address_components[3].short_name);
-
-          }else if (place.address_components.length < 3){
-            localStorage.setItem('sel_country', place.address_components[2].short_name);
-
-          }
-
-          //localStorage.setItem('trip_lat', place.address_components[0].long_name);
-          //localStorage.setItem('trip_lng', place.address_components[3].short_name);
-          this.context.router.history.push('/manualBuild');
          
-        
-          
-
-          }}  // end onPlaceSelected
-          types={['(regions)']}
-        />
         <button onClick={this.onHotelClick.bind(this)} className='btn btn-default'>Search Hotels</button>
-          <button onClick={this.onBackClick.bind(this)} className='btn btn-default'>Homepage</button>
         </div>
         </div>
         
-        <footer style={{bottom:0, position:"absolute"}}id="sticky">
-            
-              <a href="/"> Home</a>
+        <Footer>
+        <a href="/"> Home</a>
               <a href="/dashboard"> Dashboard</a>
               <a href="/hotelBuild"> Find Hotels</a>
             
@@ -978,9 +1008,10 @@ class Dashboard extends Component {
             © 2017 Copyright: <a href="/"> GuideTrip </a>
 
         </div>
-    </div>
-      </footer>
-      </div>
+        </div>
+        </Footer>
+        </div>
+      
     
     
     );
