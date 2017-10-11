@@ -50,9 +50,6 @@ class manualSearch extends React.Component{
     
   )
 
-  onClick () {
-    this.context.router.history.push('/dashboard');
-  };
   onButtonClick () {
     this.context.router.history.push('/hotelSearch');
   };
@@ -298,40 +295,57 @@ class manualSearch extends React.Component{
       <NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
     </Nav>
   </Navbar>
-        <h3>Your Custom Itinerary Results</h3>
-        <h4>Lengend:</h4>
-        <div>
-          <span className="badge" id='testA'>A - Store</span>
-          <span className="badge" id='testB'>B - Lodging</span>
-          <span className="badge" id='testC'>C - Restaurant/Cafe</span>
-          <span className="badge" id='testD'>D - Museum/Art Gallery</span>
-          <span className="badge" id='testE'>E - Pharmacy</span>
-          <span className="badge" id='testF'>F - Subway</span>
-          <span className="badge" id='testG'>G - Airport</span>
-          <span className="badge" id='testH'>H - Hospital</span>
-          <span className="badge" id='testI'>I - Bus</span>
-        </div>
-        <div>
-          <span className="badge" id='testJ'>J - Park</span>
-          <span className="badge" id='testK'>K - ATM</span>
-          <span className="badge" id='testL'>L - Bank</span>
-          <span className="badge" id='testM'>M - Doctor/Dentist</span>
-          <span className="badge" id='testN'>N - Zoo</span>
-          <span className="badge" id='testO'>O - Police</span>
-          <span className="badge" id='testP'>P - Train</span>
-          <span className="badge" id='testQ'>Q - School</span>
-          <span className="badge" id='testR'>R - Bar</span>
-          <span className="badge" id='testS'>S - Church</span>
-        </div>
-        
-        <div>
-          <span className="badge" id='testT'>T - Synagogue</span>
-          <span className="badge" id='testU'>U - Mosque</span>
-          <span className="badge" id='testV'>V - University</span>
-          <span className="badge" id='testW'>W - Embassy</span>
-          <span className="badge" id='testX'>X - Library</span>
-          <span className="badge" id='testY'>Y - Spa</span>
-          <span className="badge" id='testZ'>Z - Other</span>
+    <h3 style={{textAlign: "center"}}><strong>Your Custom Itinerary Results</strong></h3>
+        <h4 style={{textAlign: "center"}}><strong>Marker Legend:</strong></h4>
+        <div className='row1'>
+          <div className='col-md-12 columns'>
+          <div className='col-md-1 columns'>
+            </div>
+            <div className='col-md-1 columns'>
+              <span className="badge" id='testA'>A - Store</span>
+              <span className="badge" id='testB'>B - Lodging</span>
+              <span className="badge" id='testC'>C - Restaurant/Cafe</span>
+              <span className="badge" id='testD'>D - Museum/Art Gallery</span>
+              <span className="badge" id='testE'>E - Pharmacy</span>
+              <span className="badge" id='testF'>F - Subway</span>
+            </div>
+            <div className='col-md-1 columns'>
+            </div>
+            <div className='col-md-1 columns'>
+              <span className="badge" id='testG'>G - Airport</span>
+              <span className="badge" id='testH'>H - Hospital</span>
+              <span className="badge" id='testI'>I - Bus</span>
+              <span className="badge" id='testJ'>J - Park</span>
+              <span className="badge" id='testK'>K - ATM</span>
+              <span className="badge" id='testL'>L - Bank</span>
+            </div>
+            <div className='col-md-1 columns'>
+            </div>
+            <div className='col-md-1 columns'>
+              <span className="badge" id='testM'>M - Doctor/Dentist</span>
+              <span className="badge" id='testN'>N - Zoo</span>
+              <span className="badge" id='testO'>O - Police</span>
+              <span className="badge" id='testP'>P - Train</span>
+              <span className="badge" id='testQ'>Q - School</span>
+              <span className="badge" id='testR'>R - Bar</span>
+            </div>
+            <div className='col-md-1 columns'>
+            </div>
+            <div className='col-md-1 columns'>
+              <span className="badge" id='testS'>S - Church</span>
+              <span className="badge" id='testT'>T - Synagogue</span>
+              <span className="badge" id='testU'>U - Mosque</span>
+              <span className="badge" id='testV'>V - University</span>
+              <span className="badge" id='testW'>W - Embassy</span>
+              <span className="badge" id='testX'>X - Library</span>
+            </div>
+            <div className='col-md-1 columns'>
+            </div>
+            <div className='col-md-1 columns'>
+              <span className="badge" id='testY'>Y - Spa</span>
+              <span className="badge" id='testZ'>Z - Other</span>
+            </div>
+          </div>
         </div>
         <div id="map">
           </div>
@@ -344,7 +358,7 @@ class manualSearch extends React.Component{
               <button className="btn btn-default" type="submit">Click to Save checked Itineraries</button>
             </form>
             <button onClick={this.onButtonClick.bind(this)} className='btn btn-default'>Find Hotels In Area</button> 
-            <button onClick={this.onClick.bind(this)} className='btn btn-default'>Dashboard</button> 
+
           </div>
         </div>
         <br/>
@@ -375,7 +389,3 @@ class manualSearch extends React.Component{
       manualSearch = connect(mapStateToProps, mapDispatchToProps)(manualSearch);
       
       export default manualSearch;
-
-    
-
-

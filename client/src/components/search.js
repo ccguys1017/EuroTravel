@@ -206,7 +206,6 @@
     render() {
       return(
         <div>
-          <button onClick={this.onClick.bind(this)} className='btn btn-default'>Dashboard</button>  
         </div>
       )
     }

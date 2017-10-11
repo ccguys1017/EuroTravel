@@ -22,6 +22,7 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid #8B8BE2 86px;
     border-radius: 4px 0 0 4px;
     background-color: #8B8BE2
   }
@@ -37,6 +38,7 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid #C66060 69px;
     border-radius: 4px 0 0 4px;
     background-color: #C66060
   }
@@ -52,6 +54,7 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid #37B537 20px;
     border-radius: 4px 0 0 4px;
     background-color: #37B537
   }
@@ -82,6 +85,7 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid orange 62px;
     border-radius: 4px 0 0 4px;
     background-color: orange
   }
@@ -97,6 +101,7 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid #BED2DB 76px;
     border-radius: 4px 0 0 4px;
     background-color: #BED2DB
   }
@@ -112,6 +117,7 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid pink 74px;
     border-radius: 4px 0 0 4px;
     background-color: pink
   }
@@ -127,6 +133,7 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid purple 67px;
     border-radius: 4px 0 0 4px;
     background-color: purple
   }
@@ -142,6 +149,7 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid #DC8E8E 99px;
     border-radius: 4px 0 0 4px;
     background-color: #DC8E8E
   }
@@ -157,6 +165,7 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid yellow 92px;
     border-radius: 4px 0 0 4px;
     background-color: yellow
   }
@@ -172,6 +181,7 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid #8B8BE2 92px;
     border-radius: 4px 0 0 4px;
     background-color: #8B8BE2
   }
@@ -187,6 +197,7 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid #C66060 89px;
     border-radius: 4px 0 0 4px;
     background-color: #C66060
   }
@@ -202,6 +213,7 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid #37B537 28px;
     border-radius: 4px 0 0 4px;
     background-color: #37B537
   }
@@ -217,6 +229,7 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid #99D69A 95px;
     border-radius: 4px 0 0 4px;
     background-color: #99D69A
   }
@@ -232,6 +245,7 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid orange 81px;
     border-radius: 4px 0 0 4px;
     background-color: orange
   }
@@ -247,6 +261,7 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid #BED2DB 90px;
     border-radius: 4px 0 0 4px;
     background-color: #BED2DB
   }
@@ -262,6 +277,7 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid pink 77px;
     border-radius: 4px 0 0 4px;
     background-color: pink
   }
@@ -277,6 +293,7 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid purple 100px;
     border-radius: 4px 0 0 4px;
     background-color: purple
   }
@@ -292,6 +309,7 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid #DC8E8E 73px;
     border-radius: 4px 0 0 4px;
     background-color: #DC8E8E
   }
@@ -306,6 +324,7 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid yellow 49px;
     border-radius: 4px 0 0 4px;
     background-color: yellow
   }
@@ -320,6 +339,7 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid #8B8BE2 68px;
     border-radius: 4px 0 0 4px;
     background-color: #8B8BE2
   }
@@ -334,6 +354,7 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid #C66060 55px;
     border-radius: 4px 0 0 4px;
     background-color: #C66060
   }
@@ -348,6 +369,7 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid #37B537 58px;
     border-radius: 4px 0 0 4px;
     background-color: #37B537
   }
@@ -362,6 +384,7 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid #99D69A 75px;
     border-radius: 4px 0 0 4px;
     background-color: #99D69A
   }
@@ -377,6 +400,7 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid orange 95px;
     border-radius: 4px 0 0 4px;
     background-color: orange
   }
@@ -392,9 +416,11 @@ body {
     height: 30px;
     margin-right: 5px;
     margin-bottom: 5px;
+    border-right: solid #5D8B9F 85px;
     border-radius: 4px 0 0 4px;
     background-color: #5D8B9F
   }
+
   body {
     margin:0; /*gets rid of white space around body*/
     margin-top:16px;

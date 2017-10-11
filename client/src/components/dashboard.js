@@ -681,7 +681,7 @@ class Dashboard extends Component {
     </Nav>
   </Navbar>
   <div className='dashboard'>
-        <h3 style={{textAlign: "center"}}>Dashboard</h3>
+        <h3 style={{textAlign: "center"}}><strong>Dashboard</strong></h3>
         <div className='col-md-6'>
           <h4><strong>Your Previously saved Itineraries</strong></h4>
           <Table  className="table table-striped">
