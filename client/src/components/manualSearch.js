@@ -265,7 +265,7 @@ class manualSearch extends React.Component{
             position: "fixed",
             left: "0",
             bottom: "0",
-            height: "90px",
+            height: "80px",
             width: "100%"
           };
           
@@ -347,6 +347,8 @@ class manualSearch extends React.Component{
             <button onClick={this.onClick.bind(this)} className='btn btn-default'>Dashboard</button> 
           </div>
         </div>
+        <br/>
+        <br/>
         <Footer>
         <a href="/"> Home</a>
               <a href="/dashboard"> Dashboard</a>

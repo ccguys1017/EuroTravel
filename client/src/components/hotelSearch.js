@@ -305,7 +305,7 @@ class hotelSearch extends React.Component{
       </table>
     </div>
 
-    <div style={{display: "none"}}>
+    <div style={{display: "none", float:"right"}}>
       <div id="info-content">
         <table>
           <tr id="iw-url-row" class="iw_table_row">
