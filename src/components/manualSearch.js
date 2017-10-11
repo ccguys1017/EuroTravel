@@ -147,84 +147,109 @@ class manualSearch extends React.Component{
           console.log('place: ' + place);                       // DEBUG (RAB) Capture Places data
 
           switch (placeType) {
-            case 'store':
-              markerColor = '/static/js/png/blue_MarkerA.png';
-              break;
-            case 'lodging':
-              markerColor = '/static/js/png/brown_MarkerB.png';
-              break;
-            case 'cafe':
-              markerColor = '/static/js/png/darkgreen_MarkerC.png';
-              break;
-            case 'museum':
-              markerColor = '/static/js/png/green_MarkerD.png';
-              break;
-            case 'pharmacy':
-              markerColor = '/static/js/png/orange_MarkerE.png';
-              break;
-            case 'subway_station':
-              markerColor = '/static/js/png/paleblue_MarkerF.png';
-              break;
-            case 'airport':
-              markerColor = '/static/js/png/pink_MarkerG.png';
-              break;
-            case 'hospital':
-              markerColor = '/static/js/png/purple_MarkerH.png';
-              break;
-            case 'bus_station':
-              markerColor = '/static/js/png/red_MarkerI.png';
-              break;
-            case 'park':
-              markerColor = '/static/js/png/yellow_MarkerJ.png';
-              break;
-            case 'atm':
-              markerColor = '/static/js/png/blue_MarkerK.png';
-              break;
-            case 'bank':
-              markerColor = '/static/js/png/brown_MarkerL.png';
-              break;
-            case 'doctor':
-              markerColor = '/static/js/png/darkgreen_MarkerM.png';
-              break;
-            case 'zoo':
-              markerColor = '/static/js/png/green_MarkerN.png';
-              break;
-            case 'police':
-              markerColor = '/static/js/png/orange_MarkerO.png';
-              break;
-            case 'train_station':
-              markerColor = '/static/js/png/paleblue_MarkerP.png';
-              break;
-            case 'school':
-              markerColor = '/static/js/png/pink_MarkerQ.png';
-              break;
-            case 'bar':
-              markerColor = '/static/js/png/purple_MarkerR.png';
-              break;
-            case 'church':
-              markerColor = '/static/js/png/red_MarkerS.png';
-              break;
-            case 'synagogue':
-              markerColor = '/static/js/png/yellow_MarkerT.png';
-              break;
-            case 'mosque':
-              markerColor = '/static/js/png/blue_MarkerU.png';
-              break;
-            case 'university':
-              markerColor = '/static/js/png/brown_MarkerV.png';
-              break;
-            case 'embassy':
-              markerColor = '/static/js/png/darkgreen_MarkerW.png';
-              break;
-            case 'library':
-              markerColor = '/static/js/png/green_MarkerX.png';
-              break;
-            case 'spa':
-              markerColor = '/static/js/png/orange_MarkerY.png';
-              break;
-            default:
-              //markerColor = 'png/paleblue_MarkerZ.png';
-              markerColor = 'https://www.dropbox.com/s/si40udyyzt0nzds/paleblue_MarkerZ.png?dl=0';
+          case 'store':
+            //markerColor = '/png/blue_markerA.png';
+            markerColor = 'https://www.dropbox.com/s/pl0x77jq9a3tgow/blue_MarkerA.png?dl=0';
+            break;
+          case 'lodging':
+            //markerColor = '/png/brown_markerB.png';
+            markerColor = 'https://www.dropbox.com/s/mf30cqgcqe9iqia/brown_MarkerB.png?dl=0';
+            break;
+          case 'cafe':
+            //markerColor = '/png/darkgreen_markerC.png';
+            markerColor = 'https://www.dropbox.com/s/fvdkh0qphzxqqyq/darkgreen_MarkerC.png?dl=0';
+            break;
+          case 'museum':
+            //markerColor = '/png/green_markerD.png';
+            markerColor = 'https://www.dropbox.com/s/7xsn2tjeiy5lov3/green_MarkerD.png?dl=0';
+            break;
+          case 'pharmacy':
+            //markerColor = '/png/orange_markerE.png';
+            markerColor = 'https://www.dropbox.com/s/rgjuu3bcxipbarm/orange_MarkerE.png?dl=0';
+            break;
+          case 'subway_station':
+            //markerColor = '/png/paleblue_markerF.png';
+            markerColor = 'https://www.dropbox.com/s/f1xeir6pt5sq3er/paleblue_MarkerF.png?dl=0';
+            break;
+          case 'airport':
+            //markerColor = '/png/pink_markerG.png';
+            markerColor = 'https://www.dropbox.com/s/hj1g0596frd4s5a/pink_MarkerG.png?dl=0';
+            break;
+          case 'hospital':
+            //markerColor = '/png/purple_markerH.png';
+            markerColor = 'https://www.dropbox.com/s/3pra0v2l9jlzyem/purple_MarkerH.png?dl=0';
+            break;
+          case 'bus_station':
+            //markerColor = '/png/red_markerI.png';
+            markerColor = 'https://www.dropbox.com/s/s92gw8uyfa7s38t/red_MarkerI.png?dl=0';
+            break;
+          case 'park':
+            //markerColor = '/png/yellow_markerJ.png';
+            markerColor = 'https://www.dropbox.com/s/7v0ele13cmxzgzl/yellow_MarkerJ.png?dl=0';
+            break;
+          case 'atm':
+            //markerColor = '/png/blue_markerK.png';
+            markerColor = 'https://www.dropbox.com/s/bdmuyza6gs4b3s2/blue_MarkerK.png?dl=0';
+            break;
+          case 'bank':
+            //markerColor = '/png/brown_markerL.png';
+            markerColor = 'https://www.dropbox.com/s/3wap321spjqf0fk/brown_MarkerL.png?dl=0';
+            break;
+          case 'doctor':
+            //markerColor = '/png/darkgreen_markerM.png';
+            markerColor = 'https://www.dropbox.com/s/wdb3at4a4wnca0g/darkgreen_MarkerM.png?dl=0';
+            break;
+          case 'zoo':
+            //markerColor = '/png/green_markerN.png';
+            markerColor = 'https://www.dropbox.com/s/rfgklz888rk7ht0/green_MarkerN.png?dl=0';
+            break;
+          case 'police':
+            //markerColor = '/png/orange_markerO.png';
+            markerColor = 'https://www.dropbox.com/s/i17r3a3862awvhj/orange_MarkerO.png?dl=0';
+            break;
+          case 'train_station':
+            //markerColor = '/png/paleblue_markerP.png';
+            markerColor = 'https://www.dropbox.com/s/fbhqalsip8bo8yr/paleblue_MarkerP.png?dl=0';
+            break;
+          case 'school':
+            //markerColor = '/png/pink_markerQ.png';
+            markerColor = 'https://www.dropbox.com/s/x6o5dw6c4id35p8/pink_MarkerQ.png?dl=0';
+            break;
+          case 'bar':
+            //markerColor = '/png/purple_markerR.png';
+            markerColor = 'https://www.dropbox.com/s/xrt6le6ek6sv6h5/purple_MarkerR.png?dl=0';
+            break;
+          case 'church':
+            //markerColor = '/png/red_markerS.png';
+            markerColor = 'https://www.dropbox.com/s/cv2stohbta1u2ev/red_MarkerS.png?dl=0';
+            break;
+          case 'synagogue':
+            //markerColor = '/png/yellow_markerT.png';
+            markerColor = 'https://www.dropbox.com/s/ecejo0h8905wnl3/yellow_MarkerT.png?dl=0';
+            break;
+          case 'mosque':
+            //markerColor = '/png/blue_markerU.png';
+            markerColor = 'https://www.dropbox.com/s/9zoqlsm2i1sixm1/blue_MarkerU.png?dl=0';
+            break;
+          case 'university':
+            //markerColor = '/png/brown_markerV.png';
+            markerColor = 'https://www.dropbox.com/s/o5gxzh19mr1lf0t/brown_MarkerV.png?dl=0';
+            break;
+          case 'embassy':
+            //markerColor = '/png/darkgreen_markerW.png';
+            markerColor = 'https://www.dropbox.com/s/l1rfp9l42yxvpy5/darkgreen_MarkerW.png?dl=0';
+            break;
+          case 'library':
+            //markerColor = '/png/green_markerX.png';
+            markerColor = 'https://www.dropbox.com/s/nfaj7szlllxset4/green_MarkerX.png?dl=0';
+            break;
+          case 'spa':
+            //markerColor = '/png/orange_markerY.png';
+            markerColor = 'https://www.dropbox.com/s/jyh78wo71qfn824/orange_MarkerY.png?dl=0';
+            break;
+          default:
+            //markerColor = 'markerColor = '/png/paleblue_markerZ.png';
+            markerColor = 'https://www.dropbox.com/s/si40udyyzt0nzds/paleblue_MarkerZ.png?dl=0';
           };
   
 
