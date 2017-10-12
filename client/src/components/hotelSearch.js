@@ -142,8 +142,12 @@ class hotelSearch extends React.Component{
           };
         
       console.log(this.props);
-        let location = {lat:Number(this.props.state.maps.selectedLocation.lat), lng: Number(this.props.state.maps.selectedLocation.lng)};
-        //let location ={lat:Number(localStorage.getItem('trip_lat')), lng:Number(localStorage.getItem('trip_lng'))};
+      if (Number(localStorage.getItem('trip_lat')) != null && localStorage.getItem('trip_lng') != null){
+        var location = {lat:Number(localStorage.getItem('trip_lat')), lng: Number(localStorage.getItem('trip_lng'))}
+      } else {
+        var location = {lat:Number(this.props.state.maps.selectedLocation.lat), lng: Number(this.props.state.maps.selectedLocation.lng)};
+        
+      }        //let location ={lat:Number(localStorage.getItem('trip_lat')), lng:Number(localStorage.getItem('trip_lng'))};
         console.log('location: ' + location);
         let map = new google.maps.Map(document.getElementById('map'), {
             center: location,

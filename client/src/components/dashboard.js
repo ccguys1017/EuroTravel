@@ -730,6 +730,8 @@ class Dashboard extends Component {
           this.props.addLocation(selLat, selLng, place.place_id);
           console.log(this.props);
           console.log(place);
+          localStorage.setItem('trip_lat', selLat);
+          localStorage.setItem('trip_lng', selLng);
           localStorage.setItem('sel_city', place.address_components[0].long_name);
           localStorage.setItem('sel_country', place.address_components[2].long_name)  // length = 3
           if(place.address_components.length > 3){

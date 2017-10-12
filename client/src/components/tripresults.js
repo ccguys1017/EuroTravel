@@ -156,18 +156,18 @@ class Tripresults extends Component {
       color: "white",
       borderTop: "1px solid #E7E7E7",
       textAlign: "center",
-      padding: "20px",
+      padding: "15px",
       position: "fixed",
       left: "0",
       bottom: "0",
-      height: "90px",
+      height: "70px",
       width: "100%"
     };
     
     const phantomStyle = {
       display: "block",
-      padding: "20px",
-      height: "60px",
+      padding: "15px",
+      height: "40px",
       width: "100%"
     };
     
@@ -247,12 +247,6 @@ class Tripresults extends Component {
           </div>
         </div>
 
-
-
-
-
-
-
         <div className="row">
           <div className="col-sm-12">
             {this.IterateOverPlaces()}
@@ -263,10 +257,13 @@ class Tripresults extends Component {
             </ListGroup>
               <button className="btn btn-default" type="submit">Save</button>
             </form>
-            <button onClick={this.onButtonClick.bind(this)} className='btn btn-default'>Find Hotels In Area</button> 
+            <form action='/hotelSearch' onSubmit={this.onButtonClick}>
+        <button type="submit" className='btn btn-default'>Find Hotels In Area</button> 
+      </form>
 
           </div>
         </div>
+        <br/> <br/> <br/>
         <Footer>
         <a href="/"> Home</a>
               <a href="/dashboard"> Dashboard</a>
