@@ -12,7 +12,10 @@ body {
     margin-left: auto;
     margin-right: auto;
   }
-
+  #listing{
+    margin-left: auto;
+    margin-right: auto;
+  }
   #testA {
     display: inline-block;
     font-size: small;

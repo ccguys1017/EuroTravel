@@ -49,9 +49,9 @@ class Tripresults extends Component {
     }
   }
   
-  componentWillReceiveProps(nextProps){
-    this.props.maps.places.map(this.createCheckbox)
-  }
+  // componentWillReceiveProps(nextProps){
+  //   this.props.maps.places.map(this.createCheckbox)
+  // }
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
 
@@ -152,22 +152,22 @@ class Tripresults extends Component {
   render() {
     const footerStyle = {
       backgroundColor: "black",
-      fontSize: "20px",
+      fontSize: "15px",
       color: "white",
       borderTop: "1px solid #E7E7E7",
       textAlign: "center",
-      padding: "15px",
+      padding: "0px",
       position: "fixed",
       left: "0",
       bottom: "0",
-      height: "70px",
+      height: "40px",
       width: "100%"
     };
     
     const phantomStyle = {
       display: "block",
-      padding: "15px",
-      height: "40px",
+      padding: "20px",
+      height: "60px",
       width: "100%"
     };
     

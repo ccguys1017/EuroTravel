@@ -16,15 +16,15 @@ class hotelBuild extends React.Component{
     render(){
       const footerStyle = {
         backgroundColor: "black",
-        fontSize: "20px",
+        fontSize: "15px",
         color: "white",
         borderTop: "1px solid #E7E7E7",
         textAlign: "center",
-        padding: "20px",
+        padding: "0px",
         position: "fixed",
         left: "0",
         bottom: "0",
-        height: "90px",
+        height: "40px",
         width: "100%"
       };
       
@@ -85,10 +85,16 @@ class hotelBuild extends React.Component{
           console.log(this.props);
           console.log(place);
           localStorage.setItem('sel_city', place.address_components[0].long_name);
-          localStorage.setItem('sel_country', place.address_components[3].short_name);
+          localStorage.setItem('sel_country', place.address_components[2].long_name)  // length = 3
+          if(place.address_components.length > 3){
+            localStorage.setItem('sel_country', place.address_components[3].long_name);
+          }else if (place.address_components.length < 3){
+            localStorage.setItem('sel_country', place.address_components[2].short_name);
 
-          localStorage.setItem('trip_lat', place.address_components[0].long_name);
-          localStorage.setItem('trip_lng', place.address_components[3].short_name);
+          }
+
+          localStorage.setItem('trip_lat', selLat);
+          localStorage.setItem('trip_lng', selLng);
           this.context.router.history.push('/hotelSearch');
          
         

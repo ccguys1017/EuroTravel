@@ -253,7 +253,7 @@ class hotelSearch extends React.Component{
                 fullUrl = website;
               }
               document.getElementById('iw-website-row').style.display = '';
-              document.getElementById('iw-website').innerHTML = '<a href="' + website + '">' + website + '</a>';
+              document.getElementById('iw-website').innerHTML = '<a href="' + website + '" target="_blank">' + website + '</a>';
             } else {
               document.getElementById('iw-website-row').style.display = 'none';
             }
@@ -265,15 +265,15 @@ class hotelSearch extends React.Component{
         render(){
           const footerStyle = {
             backgroundColor: "black",
-            fontSize: "20px",
+            fontSize: "15px",
             color: "white",
             borderTop: "1px solid #E7E7E7",
             textAlign: "center",
-            padding: "20px",
+            padding: "0px",
             position: "fixed",
             left: "0",
             bottom: "0",
-            height: "90px",
+            height: "40px",
             width: "100%"
           };
           
@@ -306,12 +306,14 @@ class hotelSearch extends React.Component{
       <NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
     </Nav>
   </Navbar>
-        <h3>Nearby Hotels</h3>
+        <h3 style={{textAlign: "center"}}>Nearby Hotels</h3>
         <div id="map"></div>
+        <div style={{"margin-left":"auto", "margin-right": "auto"}}>
         <div id="listing">
       <table id="resultsTable">
         <tbody id="results"></tbody>
       </table>
+    </div>
     </div>
 
     <div style={{display: "none", float:"right"}}>

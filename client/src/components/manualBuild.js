@@ -168,15 +168,15 @@ componentWillMount = () => {
   render() {
     const footerStyle = {
         backgroundColor: "black",
-        fontSize: "20px",
+        fontSize: "15px",
         color: "white",
         borderTop: "1px solid #E7E7E7",
         textAlign: "center",
-        padding: "20px",
+        padding: "0px",
         position: "fixed",
         left: "0",
         bottom: "0",
-        height: "90px",
+        height: "40px",
         width: "100%"
       };
       
