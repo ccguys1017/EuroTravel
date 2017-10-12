@@ -7,8 +7,10 @@ body {
   }
   
   #map{
-    height: 30em;
-    width: 40em;
+    height: 40em;
+    width: 50em;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   #testA {
@@ -468,4 +470,7 @@ div#homeBTN{
   display:inline;
   margin: 0 auto;
   
+}
+.badge {
+   background-color:brown; 
 }

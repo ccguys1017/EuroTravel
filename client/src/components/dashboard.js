@@ -10,7 +10,9 @@ import {bindActionCreators} from 'redux';
 import * as actionCreators from '../actions';
 import Autocomplete from 'react-google-autocomplete';
 import PlacesSearch from './search';
+
 const ROOT_URL = 'http://localhost:8080/api/v1';
+//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
 
 let saved_itineraries = [];
 
@@ -56,9 +58,12 @@ class Dashboard extends Component {
     }
     const cb_vicinity = place.vicinity;
 
+    const cb_city = localStorage.getItem('sel_city');
+    const cb_country = localStorage.getItem('sel_country');
+
     /* (CRUD) Send the user checkboxed itinerary data to the server to store the user-specific     itinerary data in the DB */
 
-    axios.post(`${ROOT_URL}/save_itin`, { user_email, cb_name, cb_place_id, cb_price_level, cb_rating, cb_type, cb_vicinity, if(cb_photo){return cb_photo} })
+    axios.post(`${ROOT_URL}/save_itin`, { user_email, cb_name, cb_place_id, cb_price_level, cb_rating, cb_type, cb_vicinity, cb_city, cb_country, if(cb_photo){return cb_photo} })
     .then(response => {
       this.setState({
         itins_saved: true
@@ -687,8 +692,9 @@ class Dashboard extends Component {
           <Table  className="table table-striped">
               <thead>
                 <tr>
-                  <td>Itinerary Type</td>
-                  <td>Place</td>
+                  <td><strong>Country</strong></td>
+                  <td><strong>Itinerary Type</strong></td>
+                  <td><strong>Place</strong></td>
                 </tr>
               </thead>
               <tbody>
@@ -725,9 +731,9 @@ class Dashboard extends Component {
           console.log(this.props);
           console.log(place);
           localStorage.setItem('sel_city', place.address_components[0].long_name);
+          localStorage.setItem('sel_country', place.address_components[2].long_name)  // length = 3
           if(place.address_components.length > 3){
-            localStorage.setItem('sel_country', place.address_components[3].short_name);
-
+            localStorage.setItem('sel_country', place.address_components[3].long_name);
           }else if (place.address_components.length < 3){
             localStorage.setItem('sel_country', place.address_components[2].short_name);
 

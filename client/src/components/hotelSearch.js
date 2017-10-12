@@ -11,6 +11,8 @@ import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
 import axios from 'axios';
 
 const ROOT_URL = 'http://localhost:8080/api/v1';
+//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
+
 class hotelSearch extends React.Component{
     constructor(props){
         super(props)
@@ -69,7 +71,10 @@ class hotelSearch extends React.Component{
 
       /* (CRUD) Send the user checkboxed itinerary data to the server to store the user-specific     itinerary data in the DB */
 
-      axios.post(`${ROOT_URL}/save_itin`, { user_email, cb_name, cb_place_id, cb_price_level, cb_rating, cb_type, cb_vicinity, if(cb_photo){return cb_photo} })
+      const cb_city = localStorage.getItem('sel_city');
+      const cb_country = localStorage.getItem('sel_country');
+
+      axios.post(`${ROOT_URL}/save_itin`, { user_email, cb_name, cb_place_id, cb_price_level, cb_rating, cb_type, cb_vicinity, cb_city, cb_country, if(cb_photo){return cb_photo} })
       .then(response => {
         this.setState({
           itins_saved: true

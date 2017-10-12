@@ -9,7 +9,12 @@ exports.saveItinerary = function (req, res, next) {
     const rating = req.body.cb_rating;
     const type = req.body.cb_type;
     const vicinity = req.body.cb_vicinity;
+    const city = req.body.cb_city;
+    const country = req.body.cb_country;
     const photo = req.body.cb_photo;
+
+    console.log('city' + city);
+    console.log('country' + country);
 
     // See if a Itin with the given place_id exists
     Itin.findOne({ email: email, place_id: place_id }, function (err, existingItin) {
@@ -29,7 +34,9 @@ exports.saveItinerary = function (req, res, next) {
         rating: rating,
         type: type,
         vicinity: vicinity,
-        photo: photo
+        photo: photo,
+        city: city,
+        country: country
       });
   
       itin.save(function (err) {
@@ -46,10 +53,9 @@ exports.readItinerary = function(req, res, next) {
     [
       {
         $match: { email : email }
-      },
-    ]).sort({ updatedAt: -1, type: 1 })
+      }
+    ]).sort({ country: 1, updatedAt: -1, type: 1 })
     .then(function(savedItin) {
-
       res.send({ payload: savedItin })
     })
     .catch(function(err) {

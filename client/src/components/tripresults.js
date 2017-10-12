@@ -14,7 +14,7 @@ import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
 import Checkbox from './checkbox';
 
 const ROOT_URL = 'http://localhost:8080/api/v1';
-const ROOT_URL = 
+//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
 
 const places = [];  /* This will be the object array for the real data returned from the 
                        looped Google Places API call */
@@ -69,9 +69,12 @@ class Tripresults extends Component {
       }
       const cb_vicinity = checkbox.vicinity;
 
+      const cb_city = localStorage.getItem('sel_city');
+      const cb_country = localStorage.getItem('sel_country');
+
       /* (CRUD) Send the user checkboxed itinerary data to the server to store the user-specific     itinerary data in the DB */
 
-      axios.post(`${ROOT_URL}/save_itin`, { user_email, cb_name, cb_place_id, cb_price_level, cb_rating, cb_type, cb_vicinity, if(cb_photo){return cb_photo} })
+      axios.post(`${ROOT_URL}/save_itin`, { user_email, cb_name, cb_place_id, cb_price_level, cb_rating, cb_type, cb_vicinity, cb_city, cb_country, if(cb_photo){return cb_photo} })
       .then(response => {
         this.setState({
           itins_saved: true
@@ -103,15 +106,19 @@ class Tripresults extends Component {
       const cb_price_level = place.price_level;
       const cb_rating = place.rating;
       const cb_type = place.types[0];
+
       if(place.photos){
         const cb_photo = place.photos[0].html_attributions[0];
         
       }
       const cb_vicinity = place.vicinity;
 
+      const cb_city = localStorage.getItem('sel_city');
+      const cb_country = localStorage.getItem('sel_country');
+
       /* (CRUD) Send the user checkboxed itinerary data to the server to store the user-specific     itinerary data in the DB */
 
-      axios.post(`${ROOT_URL}/save_itin`, { user_email, cb_name, cb_place_id, cb_price_level, cb_rating, cb_type, cb_vicinity, if(cb_photo){return cb_photo} })
+      axios.post(`${ROOT_URL}/save_itin`, { user_email, cb_name, cb_place_id, cb_price_level, cb_rating, cb_type, cb_vicinity, cb_city, cb_country, if(cb_photo){return cb_photo} })
       .then(response => {
         this.setState({
           itins_saved: true

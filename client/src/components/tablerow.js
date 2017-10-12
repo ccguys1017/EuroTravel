@@ -23,6 +23,7 @@ class TableRow extends Component {
       render() {
         return (
             <tr>
+              <td><strong><span className="badge">{this.props.obj.country}</span></strong></td>
               <td><span className="badge">{this.props.obj.type}</span>
               </td>
               <td>

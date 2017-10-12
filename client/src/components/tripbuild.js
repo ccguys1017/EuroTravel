@@ -11,6 +11,7 @@ import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
 
 import Autocomplete from 'react-google-autocomplete';
 const ROOT_URL = 'http://localhost:8080/api/v1';
+//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
 
 let cities = [];
 let places_type = [];
