@@ -13,8 +13,8 @@ import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
 
 import Checkbox from './checkbox';
 
-const ROOT_URL = 'http://localhost:8080/api/v1';
-//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
+//const ROOT_URL = 'http://localhost:8080/api/v1';
+const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
 
 const places = [];  /* This will be the object array for the real data returned from the 
                        looped Google Places API call */
