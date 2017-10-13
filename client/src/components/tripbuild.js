@@ -11,7 +11,7 @@ import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
 
 import Autocomplete from 'react-google-autocomplete';
 const ROOT_URL = 'http://localhost:8080/api/v1';
-//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
+//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
 
 let cities = [];
 let places_type = [];
@@ -169,6 +169,10 @@ componentWillMount = () => {
   }
 
   render() {
+
+    const cb_city = localStorage.getItem('sel_city');
+    const cb_country = localStorage.getItem('sel_country');
+
     const footerStyle = {
         backgroundColor: "black",
         fontSize: "15px",
@@ -212,7 +216,7 @@ componentWillMount = () => {
       <NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
     </Nav>
   </Navbar>
-    <h3 style={{textAlign: "center"}}><strong>Create Your Custom Itinerary</strong></h3>
+    <h3 style={{textAlign: "center"}}><strong>Create Your Custom Itinerary for: </strong><span>{ cb_city}, {cb_country}</span></h3>
         <form action='/tripresults' onSubmit={this.handleFormSubmit}>
           <div className='form-group'>
             <label className='col-md-2 control-label'>Check your Itinerary Items</label>  

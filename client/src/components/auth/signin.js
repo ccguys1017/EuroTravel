@@ -60,18 +60,22 @@ class Signin extends Component {
 </Nav>
 </Navbar>
       <div className='tg-login__wrapper'>
+      <div className='col-md-5'>
+      </div>
+      <div className='col-md-6'>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <fieldset className='form-group'>
-            <label>Email:</label>
-            <input {...email} className='form-control' placeholder='Enter email' />
+            <label><strong>Email:</strong></label>
+            <input {...email} style={{width:'40%'}} className='form-control' placeholder='Enter email' />
           </fieldset>
           <fieldset className='form-group'>
-            <label>Password:</label>
-            <input {...password} type='password' className='form-control' placeholder='Enter password' />
+            <label><strong>Password:</strong></label>
+            <input {...password} style={{width:'40%'}} type='password' className='form-control' placeholder='Enter password' />
           </fieldset>
           {this.renderAlert()}
           <button action='submit' className='btn btn-primary'>Sign in</button>
         </form>
+      </div>
       </div>
       </div>
     );

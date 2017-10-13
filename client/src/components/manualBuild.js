@@ -11,7 +11,7 @@ import Autocomplete from 'react-google-autocomplete';
 import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
 
 const ROOT_URL = 'http://localhost:8080/api/v1';
-//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
+//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
 
 let cities = [];
 let places_type = [];
@@ -30,31 +30,6 @@ class manualBuild extends Component {
   static contextTypes = {
     router: PropTypes.object
   };
-
-componentWillMount = () => {
-    // let longitude = 0;
-    // let latitude = 0;
-    
-    // const city = localStorage.getItem('sel_city');
-    // const country = localStorage.getItem('sel_country');
-    // //console.log('tripbuild city: ' + this.props.city);
-    // //console.log('tripbuild country: ' + this.props.country); 
-
-    // axios.post(`${ROOT_URL}/cities_lng_lat`, { city: city, country: country })
-    // .then(response => {
-    //   cities = response.data.payload;
-    //   longitude = response.data.payload[0].lng;
-    //   latitude = response.data.payload[0].lat;
-    //   this.setState({
-    //       lng: longitude,
-    //       lat: latitude,
-    //   });
-    // })
-    // .catch(err => {
-    //   this.setState({
-    //   });        
-    // })
-  }
 
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
@@ -166,6 +141,10 @@ componentWillMount = () => {
     this.context.router.history.push('/hotelSearch');
   };
   render() {
+
+    const cb_city = localStorage.getItem('sel_city');
+    const cb_country = localStorage.getItem('sel_country');
+
     const footerStyle = {
         backgroundColor: "black",
         fontSize: "15px",
@@ -209,7 +188,7 @@ componentWillMount = () => {
       <NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
     </Nav>
   </Navbar>
-    <h3 style={{textAlign: "center"}}><strong>Create Your Custom Itinerary</strong></h3>
+    <h3 style={{textAlign: "center"}}><strong>Create Your Custom Itinerary for: </strong><span>{ cb_city}, {cb_country}</span></h3>
         <form action='/tripresults' onSubmit={this.handleFormSubmit}>
           <div className='form-group'>
             <label className='col-md-2 control-label'>Check your Itinerary Items</label>  

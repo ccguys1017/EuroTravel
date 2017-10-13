@@ -12,7 +12,7 @@ import {
 import * as types from './types';
 
 const ROOT_URL = 'http://localhost:8080/api/v1';
-//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
+//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
 
 export function signinUser ({ email, password }) {
   return function (dispatch) {
@@ -54,6 +54,11 @@ export function authError (error) {
 export function signoutUser () {
   localStorage.removeItem('token');
   localStorage.removeItem('userEmail');
+  localStorage.removeItem('sel_city');
+  localStorage.removeItem('sel_country');
+  localStorage.removeItem('trip_lat');
+  localStorage.removeItem('trip_lng');
+  localStorage.removeItem('test_places');
   return { type: UNAUTH_USER };
 };
 

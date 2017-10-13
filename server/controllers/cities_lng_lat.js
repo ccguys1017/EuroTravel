@@ -6,7 +6,6 @@ exports.getLngLat = function (req, res, next) {
   // See if a city/country exists in the DB
   City.find({ city_ascii : city, country : country })
     .then(function(cityCountry) {
-      console.log(JSON.stringify(cityCountry));
       res.send({ 
         payload : cityCountry
        });

@@ -19,14 +19,11 @@ class Homepage extends Component {
     if (this.props.authenticated) {
       // show a link for user to go to Dashboard or Sign Out
       return [
-        <li className='nav-item' key={1}>{this.props.message}
-        </li>
-        ,
-        <li className='nav-item' key={2}>
+        <li className='nav-item' key={1}>
           <Link className='btn btn-default tg-login__btn' to='/dashboard'>Dashboard</Link>
         </li>
         ,
-        <li className='nav-item' key={3}>
+        <li className='nav-item' key={2}>
           <Link className='nav-link' to='/signout'>Sign Out</Link>
         </li>
       ];

@@ -57,8 +57,8 @@ class hotelBuild extends React.Component{
       <NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
     </Nav>
   </Navbar>
-  <h4>Find a Hotel Near you! </h4>
-<Autocomplete style={{width:'66%'}} 
+  <h4><strong>Find a Hotel Near you!</strong></h4>
+<Autocomplete style={{width:'30%'}} 
           onPlaceSelected={(place) => {
 
           let selectedlatlong = place.geometry.location.toString();

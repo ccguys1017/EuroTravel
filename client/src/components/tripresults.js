@@ -14,10 +14,10 @@ import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
 import Checkbox from './checkbox';
 
 const ROOT_URL = 'http://localhost:8080/api/v1';
-//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
+//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
 
-const places = [];  /* This will be the object array for the real data returned from the 
-                       looped Google Places API call */
+const places = [];  
+
 let testPlaces =  localStorage.getItem('test_places');
 console.log(testPlaces);
 
@@ -150,6 +150,10 @@ class Tripresults extends Component {
   )
 
   render() {
+
+    const cb_city = localStorage.getItem('sel_city');
+    const cb_country = localStorage.getItem('sel_country');
+
     const footerStyle = {
       backgroundColor: "black",
       fontSize: "15px",
@@ -194,8 +198,8 @@ class Tripresults extends Component {
       <NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
     </Nav>
   </Navbar>
-    <h3 style={{textAlign: "center"}}><strong>Your Custom Itinerary Results</strong></h3>
-        <h4 style={{textAlign: "center"}}><strong>Marker Legend:</strong></h4>
+    <h3 style={{textAlign: "center"}}><strong>Your Custom Itinerary Results for: </strong><span>{ cb_city}, {cb_country}</span></h3>
+        <h4 style={{textAlign: "center"}}><strong>Marker Legend</strong></h4>
         <div className='row1'>
           <div className='col-md-12 columns'>
           <div className='col-md-1 columns'>

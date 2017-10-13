@@ -11,7 +11,7 @@ import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
 import axios from 'axios';
 
 const ROOT_URL = 'http://localhost:8080/api/v1';
-//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
+//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
 
 class hotelSearch extends React.Component{
     constructor(props){
@@ -263,6 +263,10 @@ class hotelSearch extends React.Component{
         
         }
         render(){
+
+          const cb_city = localStorage.getItem('sel_city');
+          const cb_country = localStorage.getItem('sel_country');
+                
           const footerStyle = {
             backgroundColor: "black",
             fontSize: "15px",
@@ -306,7 +310,7 @@ class hotelSearch extends React.Component{
       <NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
     </Nav>
   </Navbar>
-        <h3 style={{textAlign: "center"}}>Nearby Hotels</h3>
+        <h3 style={{textAlign: "center"}}><strong>Nearby Hotels for: </strong><span>{ cb_city}, {cb_country}</span></h3>
         <div id="map"></div>
         <div style={{"margin-left":"auto", "margin-right": "auto"}}>
         <div id="listing">

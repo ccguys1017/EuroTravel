@@ -11,7 +11,7 @@ import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
 
 
 const ROOT_URL = 'http://localhost:8080/api/v1';
-//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
+//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
 
 class manualSearch extends React.Component{
     constructor(props){
@@ -137,12 +137,12 @@ class manualSearch extends React.Component{
         function createMarker(place, x) {
           let markerColor = '/png/blue_markerA.png';
 
-          let placeLoc = place.geometry.location;   // DEBUG (RAB) Capture Places data
-          let placeName = place.name;               // DEBUG (RAB) Capture Places data
-          let placeType = place.types[0];           // DEBUG (RAB) Capture Places data
-          let placeAddr = place.vicinity;           // DEBUG (RAB) Capture Places data
-          let placeRating = place.rating;           // DEBUG (RAB) Capture Places data
-          console.log('place: ' + place);                       // DEBUG (RAB) Capture Places data
+          let placeLoc = place.geometry.location;   
+          let placeName = place.name;               
+          let placeType = place.types[0];           
+          let placeAddr = place.vicinity;           
+          let placeRating = place.rating;           
+          console.log('place: ' + place);                       
           
           switch (placeType) {
             case 'store':
@@ -256,6 +256,10 @@ class manualSearch extends React.Component{
         
         }
         render(){
+
+          const cb_city = localStorage.getItem('sel_city');
+          const cb_country = localStorage.getItem('sel_country');
+
           const footerStyle = {
             backgroundColor: "black",
             fontSize: "15px",
@@ -299,8 +303,8 @@ class manualSearch extends React.Component{
       <NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
     </Nav>
   </Navbar>
-    <h3 style={{textAlign: "center"}}><strong>Your Custom Itinerary Results</strong></h3>
-        <h4 style={{textAlign: "center"}}><strong>Marker Legend:</strong></h4>
+    <h3 style={{textAlign: "center"}}><strong>Your Custom Itinerary Results for: </strong><span>{ cb_city}, {cb_country}</span></h3>
+        <h4 style={{textAlign: "center"}}><strong>Marker Legend</strong></h4>
         <div className='row1'>
           <div className='col-md-12 columns'>
           <div className='col-md-1 columns'>

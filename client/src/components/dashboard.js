@@ -12,7 +12,7 @@ import Autocomplete from 'react-google-autocomplete';
 import PlacesSearch from './search';
 
 const ROOT_URL = 'http://localhost:8080/api/v1';
-//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
+//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
 
 let saved_itineraries = [];
 
@@ -616,7 +616,7 @@ class Dashboard extends Component {
 
   deleteData(id){
     axios.get(`${ROOT_URL}/remove_itin`+id)
-    .then().catch(err => console.log(err))
+    .then().catch(err => console.log(err))    // (RAB)
   }
 
   tabRow(){
@@ -706,7 +706,7 @@ class Dashboard extends Component {
             </Table>
         </div>
         <br/><br/>
-        <h3>Search for your New Vacation!</h3>
+        <h3><strong>Search for your New Vacation!</strong></h3>
         <Autocomplete style={{width:'30%'}} 
           onPlaceSelected={(place) => {
 
@@ -756,7 +756,7 @@ class Dashboard extends Component {
         />
         <form action='/dashboard' onChange={this.listCities.bind(this)}>
         <div className='col-md-2'>
-          <h2>Select Country:</h2>
+          <h2><strong>Select Country:</strong></h2>
             <div className='dashradio'>
               <div className='dashradio-item'>
                 <input type='radio' name='radio' id='countrydashradio1' />
@@ -971,7 +971,7 @@ class Dashboard extends Component {
 
 
           <div className='col-md-2'>
-          <h2>Select City:</h2>
+          <h2><strong>Select City:</strong></h2>
           <form action='/tripbuild' onSubmit={this.handleFormSubmit.bind(this)}>
             <div className='dashradio'>
               <div className='dashradio-item'>
@@ -1008,6 +1008,9 @@ class Dashboard extends Component {
           </form>
           
         <button onClick={this.onHotelClick.bind(this)} className='btn btn-default'>Search Hotels</button>
+        <div>
+              <strong>or</strong>
+            </div>
         <button onClick={this.findLocation.bind(this)} className='btn btn-default'>Find Places Near You</button>
 
         </div>
