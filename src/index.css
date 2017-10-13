@@ -1,0 +1,396 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+  
+  }
+  
+  #map{
+    height: 30em;
+    width: 40em;
+  }
+
+  #testA {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: #8B8BE2
+  }
+
+  #testB {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: #C66060
+  }
+
+  #testC {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: #37B537
+  }
+
+  #testD {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: #99D69A
+  }
+
+  #testE {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: orange
+  }
+
+  #testF {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: #BED2DB
+  }
+
+  #testG {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: pink
+  }
+
+  #testH {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: purple
+  }
+
+  #testI {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: #DC8E8E
+  }
+
+  #testJ {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: yellow
+  }
+
+  #testK {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: #8B8BE2
+  }
+
+  #testL {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: #C66060
+  }
+
+  #testM {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: #37B537
+  }
+
+  #testN {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: #99D69A
+  }
+
+  #testO {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: orange
+  }
+
+  #testP {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: #BED2DB
+  }
+
+  #testQ {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: pink
+  }
+
+  #testR {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: purple
+  }
+
+  #testS {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: #DC8E8E
+  }
+  #testT {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: yellow
+  }
+  #testU {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: #8B8BE2
+  }
+  #testV {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: #C66060
+  }
+  #testW {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: #37B537
+  }
+  #testX {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: #99D69A
+  }
+
+  #testY {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: orange
+  }
+
+  #testZ {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px 0 0 4px;
+    background-color: #5D8B9F
+  }
