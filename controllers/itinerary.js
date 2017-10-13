@@ -74,4 +74,3 @@ exports.deleteItinerary = function(req, res, next) {
     }
   })
 };
-};
