@@ -12,7 +12,7 @@ import Autocomplete from 'react-google-autocomplete';
 import PlacesSearch from './search';
 
 //const ROOT_URL = 'http://localhost:8080/api/v1';
-const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
+const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
 
 let saved_itineraries = [];
 
