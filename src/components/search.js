@@ -87,7 +87,12 @@
   
       var x = 0; //Counter for info marker open/close
       function createMarker(place, x) {
-        let markerColor = '/png/blue_markerA.png';
+        //let markerColor = '/png/blue_markerA.png';
+        
+        let markerColor = '';     //RAB
+        let markerLabel = '';     //RAB
+        let pinColor = 'FFFFFF';  //RAB
+        
         let placeLoc = place.geometry.location;   // DEBUG (RAB) Capture Places data
         let placeName = place.name;               // DEBUG (RAB) Capture Places data
         let placeType = place.types[0];           // DEBUG (RAB) Capture Places data
@@ -95,6 +100,148 @@
         let placeRating = place.rating;           // DEBUG (RAB) Capture Places data
         console.log('place: ' + place);                       // DEBUG (RAB) Capture Places data
 
+        switch (placeType) {
+          case 'store':
+            pinColor = "0000FF";  // blue
+            markerLabel = 'A';
+            //markerColor = '/png/blue_markerA.png';
+            break;
+          case 'lodging':
+            pinColor = "A52A2A";  // brown
+            markerLabel = 'B';
+              //markerColor = '/png/brown_markerB.png';
+            break;
+          case 'cafe':
+            pinColor = "006400";
+            markerLabel = 'C';
+              //markerColor = '/png/darkgreen_markerC.png';
+            break;
+          case 'museum':
+            pinColor = "008000";
+            markerLabel = 'D';
+              //markerColor = '/png/green_markerD.png';
+            break;
+          case 'pharmacy':
+            pinColor = "FFA500";
+            markerLabel = 'E';
+              //markerColor = '/png/orange_markerE.png';
+            break;
+          case 'subway_station':
+            pinColor = "66CDAA";
+            markerLabel = 'F';
+              //markerColor = '/png/paleblue_markerF.png';
+            break;
+          case 'airport':
+            pinColor = "FFC0CB";
+            markerLabel = 'G';
+              //markerColor = '/png/pink_markerG.png';
+            break;
+          case 'hospital':
+            pinColor = "800080";
+            markerLabel = 'H';
+              //markerColor = '/png/purple_markerH.png';
+            break;
+          case 'bus_station':
+            pinColor = "FF0000";
+            markerLabel = 'I';
+              //markerColor = '/png/red_markerI.png';
+            break;
+          case 'park':
+            pinColor = "FFFF00";
+            markerLabel = 'J';
+              //markerColor = '/png/yellow_markerJ.png';
+            break;
+          case 'atm':
+            pinColor = "0000FF";
+            markerLabel = 'K';
+              //markerColor = '/png/blue_markerK.png';
+            break;
+          case 'bank':
+            pinColor = "A52A2A";
+            markerLabel = 'L';
+              //markerColor = '/png/brown_markerL.png';
+            break;
+          case 'doctor':
+            pinColor = "006400";
+            markerLabel = 'M';
+              //markerColor = '/png/darkgreen_markerM.png';
+            break;
+          case 'zoo':
+            pinColor = "008000";
+            markerLabel = 'N';
+              //markerColor = '/png/green_markerN.png';
+            break;
+          case 'police':
+            pinColor = "FFA500";
+            markerLabel = 'O';
+              //markerColor = '/png/orange_markerO.png';
+            break;
+          case 'train_station':
+            pinColor = "66CDAA";
+            markerLabel = 'P';
+              //markerColor = '/png/paleblue_markerP.png';
+            break;
+          case 'school':
+            pinColor = "FFC0CB";
+            markerLabel = 'Q';
+              //markerColor = '/png/pink_markerQ.png';
+            break;
+          case 'bar':
+            pinColor = "800080";
+            markerLabel = 'R';
+              //markerColor = '/png/purple_markerR.png';
+            break;
+          case 'church':
+            pinColor = "FF0000";
+            markerLabel = 'S';
+              //markerColor = '/png/red_markerS.png';
+            break;
+          case 'synagogue':
+            pinColor = "FFFF00";
+            markerLabel = 'T';
+              //markerColor = '/png/yellow_markerT.png';
+            break;
+          case 'mosque':
+            pinColor = "0000FF";
+            markerLabel = 'U';
+              //markerColor = '/png/blue_markerU.png';
+            break;
+          case 'university':
+            pinColor = "A52A2A";
+            markerLabel = 'V';
+              //markerColor = '/png/brown_markerV.png';
+            break;
+          case 'embassy':
+            pinColor = "006400";
+            markerLabel = 'W';
+              //markerColor = '/png/darkgreen_markerW.png';
+            break;
+          case 'library':
+            pinColor = "008000";
+            markerLabel = 'X';
+              //markerColor = '/png/green_markerX.png';
+            break;
+          case 'spa':
+            pinColor = "FFA500";
+            markerLabel = 'Y';
+              //markerColor = '/png/orange_markerY.png';
+            break;
+          default:
+            pinColor = "66CDAA";
+            markerLabel = 'Z';
+              //markerColor = '/png/paleblue_markerZ.png';
+        };
+
+        var pinImage = new google.maps.MarkerImage("http://www.googlemapsmarkers.com/v1/" + pinColor + "/",
+        new google.maps.Size(21, 34),
+        new google.maps.Point(0,0),
+        new google.maps.Point(10,34));
+
+        markerColor = pinImage;
+        
+        
+        
+ /*       
         switch (placeType) {
           case 'store':
             markerColor = '/png/blue_markerA.png';
@@ -182,6 +329,18 @@
           icon: markerColor,
           position: place.geometry.location
         });
+        
+*/
+        
+        let infowindow = new google.maps.InfoWindow();
+        let marker = new google.maps.Marker({
+          map: map,
+          icon: markerColor,
+          label: markerLabel,
+          position: place.geometry.location
+        });
+        
+        
         google.maps.event.addListener(marker, 'click', function() {
           console.log(place);
           infowindow.close();
