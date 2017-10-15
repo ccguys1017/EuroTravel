@@ -54,7 +54,7 @@ class Homepage extends Component {
                 <span className="icon-bar"></span>
               </button>
               <a className="navbar-brand" href="#">
-              <strong>Guide Trip</strong></a>
+              <strong>App Name Here</strong></a>
             </div>
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul className="nav navbar-nav">

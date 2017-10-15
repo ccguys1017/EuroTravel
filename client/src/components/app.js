@@ -22,9 +22,6 @@ export default class App extends Component {
           <Route path='/signup' component={Signup} />
           <Route path='/signout' component={Signout} />
           <Route path='/dashboard' component={Dashboard} />
-          {/* <Route path='/places' component={Places} />          
-          <Route path='/tripbuild' component={Tripbuild} />
-          <Route path='/tripresults' component={Tripresults} /> */}
           <Route path='/feature' component={RequireAuth(Feature)} />
         </div>
       </Router>

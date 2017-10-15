@@ -18,7 +18,7 @@ class Dashboard extends Component {
     //     // This component is also linked to your global redux state defined in reducers, and actions
     // };
   }    
-
+  //How to redirect pages + go back EX: this.context.router.history.push('/directory');
   static contextTypes = {
     router: PropTypes.object
   };
@@ -45,6 +45,10 @@ class Dashboard extends Component {
   // }
 
   render() {
+    //Grabs the users email from localStorage
+      // localStorage.setItem("USER_EMAIL", email) -- to set a variable email to the local storage variable of USER_EMAIL
+      // localStorage.getItem("USER_EMAIL") -- gets the variable USER_EMAIL from localStorage
+    let Email = localStorage.getItem('userEmail');
   return (      
       <div className='dashboard'>
         <h3>Dashboard</h3>
@@ -58,7 +62,12 @@ class Dashboard extends Component {
             </li>
             )}
           </ul> */}
+
           <h4>Welcome to the dashboard, you have logged in correctly :) </h4>
+          {
+            Email ? `<p>Your email is, ${Email}` : <p>Something went wrong I think </p>
+          }
+          
         </div>
         <div className='col-md-3'>
           <h2>Dylan Jackson is so cool haha</h2>
