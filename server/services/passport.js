@@ -25,6 +25,7 @@ const localLogin = new LocalStrategy(localOptions, function (email, password, do
 });
 
 // Setup options for JWT Strategy
+//secretOrKey is essentially your password for encryption/decrypting user passwords
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromHeader('authorization'),
   secretOrKey: 'mysupersecretbananapants'

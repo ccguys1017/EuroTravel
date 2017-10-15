@@ -4,7 +4,7 @@ import authReducer from './auth_reducer';
 import maps from './map.reducer';
 const rootReducer = combineReducers({
   form,
-  maps,
+  // maps,
   auth: authReducer
 });
 

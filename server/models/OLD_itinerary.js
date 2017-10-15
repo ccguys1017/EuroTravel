@@ -1,3 +1,8 @@
+/*
+  I kept this as an example of how to save things, like itineraries, or hair styles, user profile pictures, posts, etc, to users data
+
+*/
+
 // grab the things we need
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;

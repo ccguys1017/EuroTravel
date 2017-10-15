@@ -4,9 +4,10 @@ import {
   UNAUTH_USER,
   AUTH_ERROR,
   FETCH_MESSAGE,
-  FETCH_CITY_LONLAT,
-  SAVE_ITINERARY,
-  NEW_TYPE
+  // FETCH_CITY_LONLAT,
+  // SAVE_ITINERARY,
+  // NEW_TYPE,
+  // SAVE_PLACE
 } from './types';
 import * as types from './types';
 const ROOT_URL = 'http://localhost:8080/api/v1';
@@ -69,7 +70,9 @@ export function fetchMessage () {
 };
 
 
-export const addPlace = (place) => ({type: types.NEW_PLACE, place });
-export const addLocation = (lat, lng) => ({type:types.NEW_LOCATION, lat, lng});
-export const handleClick = () => ({type:types.HANDLE_CLICK});
-export const addType = (thing) => ({type: NEW_TYPE, thing});
+// export const addPlace = (place) => ({type: types.NEW_PLACE, place });
+// export const addLocation = (lat, lng) => ({type:types.NEW_LOCATION, lat, lng});
+// export const handleClick = () => ({type:types.HANDLE_CLICK});
+// export const addType = (thing) => ({type: NEW_TYPE, thing});
+// export const savePlace = (item) => ({type: SAVE_PLACE, item});
+

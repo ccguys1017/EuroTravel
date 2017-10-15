@@ -15,7 +15,8 @@ const cors = require('cors');
 const index = require('./routes/index');
 
 // DB Setup
-mongoose.connect('mongodb://ccguys1017:fiveCCguys1017$@ds025583.mlab.com:25583/eurotravel');
+// Un-Comment line 19 out and insert your mongoDB connection String
+// mongoose.connect('INSERT YOUR MONGODB STRING HERE');
 
 // App Setup
 app.use(morgan('combined'));
