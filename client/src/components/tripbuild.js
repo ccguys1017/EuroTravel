@@ -385,6 +385,7 @@ this.setState({
             </div>
             </div>
           </div>
+          <br/>
           <button className='btn btn-default' type='submit'>Click to Generate Itinerary</button>
         </form>
         <button onClick={this.onClick.bind(this)} className='btn btn-default'>Back</button>

@@ -384,8 +384,9 @@ componentWillMount = () => {
             </div>
           </div>
           <button className='btn btn-default' type='submit'>Click to Generate Itinerary</button>
+          <button onClick={this.onButtonClick.bind(this)} className='btn btn-default'>Search Hotels In Area</button>
+
         </form>
-        <button onClick={this.onButtonClick.bind(this)} className='btn btn-default'>Search Hotels In Area</button>
         
           <Footer>
           <a href="/"> Home</a>

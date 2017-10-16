@@ -49,7 +49,6 @@ class UserLocation extends React.Component{
                     localStorage.setItem('sel_city', city);
                     localStorage.setItem('sel_country', country)  
                     props.addLocation(latlng.lat, latlng.lng, results[0].place_id);
-                    
                     console.log(country);
                     console.log(city);
                     
