@@ -39,21 +39,24 @@ componentWillMount = () => {
     const country = localStorage.getItem('sel_country');
     //console.log('tripbuild city: ' + this.props.city);
     //console.log('tripbuild country: ' + this.props.country); 
-
-    axios.post(`${ROOT_URL}/cities_lng_lat`, { city: city, country: country })
-    .then(response => {
-      cities = response.data.payload;
-      longitude = response.data.payload[0].lng;
-      latitude = response.data.payload[0].lat;
-      this.setState({
-          lng: longitude,
-          lat: latitude,
-      });
-    })
-    .catch(err => {
-      this.setState({
-      });        
-    })
+this.setState({
+    lng: this.props.state.maps.selectedLocation.lng,
+    lat: this.props.state.maps.selectedLocation.lat
+})
+    // axios.post(`${ROOT_URL}/cities_lng_lat`, { city: city, country: country })
+    // .then(response => {
+    //   cities = response.data.payload;
+    //   longitude = response.data.payload[0].lng;
+    //   latitude = response.data.payload[0].lat;
+    //   this.setState({
+    //       lng: longitude,
+    //       lat: latitude,
+    //   });
+    // })
+    // .catch(err => {
+    //   this.setState({
+    //   });        
+    // })
   }
 
   handleFormSubmit = formSubmitEvent => {
@@ -144,16 +147,13 @@ componentWillMount = () => {
         places_type.push('spa');
     }
 
-    console.log('longitude: ' + JSON.stringify(this.state.lng));
-    console.log('latitude: ' + JSON.stringify(this.state.lat));
-    console.log('Place Type Array: [' + places_type + ']');
-
-    localStorage.setItem('trip_lat', JSON.stringify(this.state.lat));
-    localStorage.setItem('trip_lng', JSON.stringify(this.state.lng));
+    localStorage.setItem('trip_lat', this.state.lat);
+    localStorage.setItem('trip_lng', this.state.lng);
+    
     localStorage.setItem('place_type_array', places_type);
     console.log(places_type);
     console.log("============ LOOK HERE =========");
-    this.props.wipePlaces(); // to reset the places per search
+    // this.props.wipePlaces(); // to reset the places per search
     for (var i = 0; i < places_type.length; i ++){
         this.props.addType(places_type[i]);
         console.log("type added: " + places_type[i]);

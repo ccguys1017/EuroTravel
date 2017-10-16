@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -99,11 +101,48 @@ class Dashboard extends Component {
       trip_city = this.state.trip_city6;
     }
 
+
+
     console.log('this.state.city: ' + trip_city);
     console.log('this.state.country: ' + this.state.trip_country);    
 
     localStorage.setItem('sel_city', trip_city);
     localStorage.setItem('sel_country', this.state.trip_country);
+    var geocoder = new google.maps.Geocoder();
+    var props = this.props;
+    var address = trip_city + ", " + this.state.trip_country;
+    geocoder.geocode({'address': address}, function(results, status) {
+      if (status === 'OK') {
+      console.log(results[0]);
+      console.log(results[0].place_id);
+      let latlng = results[0].geometry.location.toString();
+        let comIdx = 0;
+      for (let i =0; i <latlng.length; i ++){
+        if(latlng[i] == ","){
+          comIdx = i;
+        }
+      }
+
+      let newLat = latlng.splice(1,comIdx);
+      let newLng = latlng.splice(comIdx + 2, latlng.length -1)
+      console.log(newLat + " : " + newLng);
+      console.log(results[0].geometry.location.toString());
+      let lng = results[0].geometry.bounds.b.b;
+      let lat = results[0].geometry.bounds.f.f;
+      
+      let next = false;
+
+      console.log(lat + " : " + lng);
+      let locPlaceid = results[0].place_id;
+
+      localStorage.setItem('trip_lat', lat);
+      localStorage.setItem('trip_lng', lng);
+      props.addLocation(lat, lng, locPlaceid);
+      
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
     this.setState({city : trip_city});
     this.setState({country : this.state.trip_country});
 

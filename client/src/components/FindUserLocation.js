@@ -15,13 +15,14 @@ class UserLocation extends React.Component{
     
     componentDidMount() {
 
-        var infoWindow;
+        ;
           let map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: -34.397, lng: 150.644},
             zoom: 15
           });
-          infoWindow = new google.maps.InfoWindow();
-        
+          var infoWindow = new google.maps.InfoWindow();
+          var geocoder = new google.maps.Geocoder;
+          var props = this.props;
           // Try HTML5 geolocation.
           if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
@@ -33,7 +34,33 @@ class UserLocation extends React.Component{
               console.log(position);
               localStorage.setItem('trip_lat', pos.lat);
               localStorage.setItem('trip_lng', pos.lng);
+              var latlng = {lat: parseFloat(pos.lat), lng: parseFloat(pos.lng)};
               
+              let country = "";
+              let city = "";
+              geocoder.geocode({'location': latlng}, function(results, status) {
+                if (status === 'OK') {
+                  if (results[0]) {
+                    console.log(results);
+                    
+
+                    country = results[0].address_components[6].short_name;
+                    city = results[0].address_components[3].long_name;
+                    localStorage.setItem('sel_city', city);
+                    localStorage.setItem('sel_country', country)  
+                    props.addLocation(latlng.lat, latlng.lng, results[0].place_id);
+                    
+                    console.log(country);
+                    console.log(city);
+                    
+                  } else {
+                    window.alert('No results found');
+                  }
+                } else {
+                  window.alert('Geocoder failed due to: ' + status);
+                }
+              });
+
               infoWindow.setPosition(pos);
               infoWindow.setContent('Location found.');
               infoWindow.open(map);
