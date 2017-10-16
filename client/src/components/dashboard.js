@@ -722,23 +722,23 @@ class Dashboard extends Component {
 
   render() {
     const footerStyle = {
-      backgroundColor: "black",
+      backgroundColor: "#8fe1f0",
       fontSize: "15px",
-      color: "white",
-      borderTop: "1px solid #E7E7E7",
+      color: "blue",
+      borderTop: "1px solid #7fa5f7",
       textAlign: "center",
-      padding: "0px",
+      padding: "5px",
       position: "fixed",
       left: "0",
       bottom: "0",
-      height: "40px",
+      height: "33px",
       width: "100%"
     };
     
     const phantomStyle = {
       display: "block",
       padding: "20px",
-      height: "60px",
+      height: "50px",
       width: "100%"
     };
     
@@ -1083,17 +1083,12 @@ class Dashboard extends Component {
         </div>
         
         <Footer>
-        <a href="/"> Home</a>
-              <a href="/dashboard"> Dashboard</a>
-              <a href="/hotelBuild"> Find Hotels</a>
-            
-            <div className="footer-copyright">
-        <div className="container-fluid">
-            © 2017 Copyright: <a href="/"> GuideTrip </a>
-
+        <div className="absolute">
+          <div className="absoute">
+            © 2017 Copyright: <a href="/"> www.guidetrip.me </a>
+          </div>
         </div>
-        </div>
-        </Footer>
+      </Footer>
         </div>
     );
   }
