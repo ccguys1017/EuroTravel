@@ -44,11 +44,7 @@ class Homepage extends Component {
   render () {
     return (
       <div className='tg-header'>
-<<<<<<< HEAD:client/src/components/homepage.js
         <nav className="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
-=======
-        <nav className='navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar'>
->>>>>>> 5cc3b42f849f734e36e0e25d5f08899c471b3ecf:src/components/homepage.js
           <div className="container-fluid">
             <div className="navbar-header">
               <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
