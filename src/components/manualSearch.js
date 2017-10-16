@@ -11,7 +11,7 @@ import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
 
 
 const ROOT_URL = 'http://localhost:8080/api/v1';
-//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
+//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
 
 class manualSearch extends React.Component{
     constructor(props){
@@ -55,7 +55,6 @@ class manualSearch extends React.Component{
   )
 
   onButtonClick () {
-    localStorage.setItem('hotel_flag', false);
     this.context.router.history.push('/hotelSearch');
   };
 
@@ -154,18 +153,6 @@ class manualSearch extends React.Component{
           let placeRating = place.rating;          
           console.log('place: ' + place);                      
           
-            
-          let markerColor = '';
-          let markerLabel = '';
-          let pinColor = 'FFFFFF'
-
-          let placeLoc = place.geometry.location;   // DEBUG (RAB) Capture Places data
-          let placeName = place.name;               // DEBUG (RAB) Capture Places data
-          let placeType = place.types[0];           // DEBUG (RAB) Capture Places data
-          let placeAddr = place.vicinity;           // DEBUG (RAB) Capture Places data
-          let placeRating = place.rating;           // DEBUG (RAB) Capture Places data
-          console.log('place: ' + place);                       // DEBUG (RAB) Capture Places data
-
           switch (placeType) {
             case 'store':
               pinColor = "8B8BE2";  // blue
@@ -297,140 +284,10 @@ class manualSearch extends React.Component{
             icon: markerColor,
             label: markerLabel,
             position: place.geometry.location
-          });     
-*/          
-            
-          switch (placeType) {
-            case 'store':
-              pinColor = "0000FF";  // blue
-              markerLabel = 'A';
-              break;
-            case 'lodging':
-              pinColor = "A52A2A";  // brown
-              markerLabel = 'B';
-              break;
-            case 'cafe':
-              pinColor = "006400";  // darkgreen
-              markerLabel = 'C';
-              break;
-            case 'museum':
-              pinColor = "008000";  // green
-              markerLabel = 'D';
-              break;
-            case 'pharmacy':
-              pinColor = "FFA500";  // orange
-              markerLabel = 'E';
-              break;
-            case 'subway_station':
-              pinColor = "66CDAA";  // paleblue
-              markerLabel = 'F';
-              break;
-            case 'airport':
-              pinColor = "FFC0CB";  // pink
-              markerLabel = 'G';
-              break;
-            case 'hospital':
-              pinColor = "800080";  // purple
-              markerLabel = 'H';
-              break;
-            case 'bus_station':
-              pinColor = "FF0000";  // red
-              markerLabel = 'I';
-              break;
-            case 'park':
-              pinColor = "FFFF00";  // yellow
-              markerLabel = 'J';
-              break;
-            case 'atm':
-              pinColor = "0000FF";  // blue
-              markerLabel = 'K';
-              break;
-            case 'bank':
-              pinColor = "A52A2A";  // brown
-              markerLabel = 'L';
-              break;
-            case 'doctor':
-              pinColor = "006400";  // darkgreen
-              markerLabel = 'M';
-              break;
-            case 'zoo':
-              pinColor = "008000";  // green
-              markerLabel = 'N';
-              break;
-            case 'police':
-              pinColor = "FFA500";  // orange
-              markerLabel = 'O';
-              break;
-            case 'train_station':
-              pinColor = "66CDAA";  // paleblue
-              markerLabel = 'P';
-              break;
-            case 'school':
-              pinColor = "FFC0CB";  // pink
-              markerLabel = 'Q';
-              break;
-            case 'bar':
-              pinColor = "800080";  // purple
-              markerLabel = 'R';
-              break;
-            case 'church':
-              pinColor = "FF0000";  // red
-              markerLabel = 'S';
-              break;
-            case 'synagogue':
-              pinColor = "FFFF00";  // yellow
-              markerLabel = 'T';
-              break;
-            case 'mosque':
-              pinColor = "0000FF";  // blue
-              markerLabel = 'U';
-              break;
-            case 'university':
-              pinColor = "A52A2A";  // brown
-              markerLabel = 'V';
-              break;
-            case 'embassy':
-              pinColor = "006400";  // darkgreen
-              markerLabel = 'W';
-              break;
-            case 'library':
-              pinColor = "008000";  // green
-              markerLabel = 'X';
-              break;
-            case 'spa':
-              pinColor = "FFA500";  // orange
-              markerLabel = 'Y';
-              break;
-            default:
-              pinColor = "66CDAA";  // paleblue
-              markerLabel = 'Z';
-          };
-
-          var pinImage = new google.maps.MarkerImage("http://www.googlemapsmarkers.com/v1/" + pinColor + "/",
-          new google.maps.Size(21, 34),
-          new google.maps.Point(0,0),
-          new google.maps.Point(10,34));
-
-          markerColor = pinImage;
-
-          let infowindow = new google.maps.InfoWindow();
-
-          let marker = new google.maps.Marker({
-            map: map,
-            //icon: markerColor[x],
-            icon: markerColor,
-            label: markerLabel,
-            position: place.geometry.location
           });
-<<<<<<< HEAD:client/src/components/manualSearch.js
         
           var prev_infowindow =false; 
           var markerCount = 0;
-=======
-
-            
-            
->>>>>>> 5cc3b42f849f734e36e0e25d5f08899c471b3ecf:src/components/manualSearch.js
           google.maps.event.addListener(marker, 'click', function() {
             console.log(place);
             
@@ -595,8 +452,4 @@ function mapDispatchToProps(dispatch){
 
 manualSearch = connect(mapStateToProps, mapDispatchToProps)(manualSearch);
       
-<<<<<<< HEAD:client/src/components/manualSearch.js
 export default manualSearch;
-=======
-      export default manualSearch;
->>>>>>> 5cc3b42f849f734e36e0e25d5f08899c471b3ecf:src/components/manualSearch.js
