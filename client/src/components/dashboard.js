@@ -115,20 +115,27 @@ class Dashboard extends Component {
       if (status === 'OK') {
       console.log(results[0]);
       console.log(results[0].place_id);
-      let latlng = results[0].geometry.location.toString();
+      var latlng = results[0].geometry.location.toString();
         let comIdx = 0;
       for (let i =0; i <latlng.length; i ++){
         if(latlng[i] == ","){
           comIdx = i;
         }
       }
-
-      let newLat = latlng.splice(1,comIdx);
-      let newLng = latlng.splice(comIdx + 2, latlng.length -1)
-      console.log(newLat + " : " + newLng);
+console.log(latlng);
+      // let newLat = latlng.splice(1,comIdx);
+      // let newLng = latlng.splice(comIdx + 2, latlng.length -1)
       console.log(results[0].geometry.location.toString());
-      let lng = results[0].geometry.bounds.b.b;
-      let lat = results[0].geometry.bounds.f.f;
+      let lng1 = results[0].geometry.bounds.b.b;
+      let lng2 = results[0].geometry.bounds.b.f;
+      
+      let lat1 = results[0].geometry.bounds.f.f;
+      let lat2 = results[0].geometry.bounds.f.b;
+
+      let lng = (lng1 + lng2) / 2;
+      let lat = (lat1 + lat2) / 2;
+      
+      
       
       let next = false;
 
