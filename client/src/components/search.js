@@ -27,15 +27,13 @@
       console.log(nextProps);
       let location = {lat:Number(this.props.selectedLocation.lat), lng: Number(this.props.selectedLocation.lng)};
       console.log(location);
-      
-      
     }
     
     componentDidMount() {
 
       let state = this.state;
       let location = {lat:Number(this.props.selectedLocation.lat), lng: Number(this.props.selectedLocation.lng)};
-      //let location ={lat:Number(localStorage.getItem('trip_lat')), lng:Number(localStorage.getItem('trip_lng'))};
+
       console.log('location: ' + location);
       let map = new google.maps.Map(document.getElementById('map'), {
           center: location,
@@ -59,14 +57,10 @@
               for (let i =0; i < results.length; i++) {
                 createMarker(results[i], x);
                 props.addPlace(results[i]);
-                //store.addPlace(results[i]);
-                
-
               }
               
               console.log(props);
 
-              //onsole.log('results: ' + JSON.stringify(results));
             }
         });
       }
@@ -87,99 +81,148 @@
   
       var x = 0; //Counter for info marker open/close
       function createMarker(place, x) {
-        let markerColor = '/png/blue_markerA.png';
-        let placeLoc = place.geometry.location;   // DEBUG (RAB) Capture Places data
-        let placeName = place.name;               // DEBUG (RAB) Capture Places data
-        let placeType = place.types[0];           // DEBUG (RAB) Capture Places data
-        let placeAddr = place.vicinity;           // DEBUG (RAB) Capture Places data
-        let placeRating = place.rating;           // DEBUG (RAB) Capture Places data
-        console.log('place: ' + place);                       // DEBUG (RAB) Capture Places data
+
+        let markerColor = '';
+        let markerLabel = '';
+        let pinColor = 'FFFFFF'
+
+        let placeLoc = place.geometry.location;   
+        let placeName = place.name;               
+        let placeType = place.types[0];           
+        let placeAddr = place.vicinity;           
+        let placeRating = place.rating;           
+        console.log('place: ' + place);                       
 
         switch (placeType) {
           case 'store':
-            markerColor = '/png/blue_markerA.png';
+            pinColor = "8B8BE2";  // blue
+            markerLabel = 'A';
             break;
           case 'lodging':
-            markerColor = '/png/brown_markerB.png';
+            pinColor = "C66060";  // brown
+            markerLabel = 'B';
             break;
           case 'cafe':
-            markerColor = '/png/darkgreen_markerC.png';
+            pinColor = "37B537";  // darkgreen
+            markerLabel = 'C';
+            break;
+          case 'restaurant':
+            pinColor = "37B537";  // darkgreen
+            markerLabel = 'C';
             break;
           case 'museum':
-            markerColor = '/png/green_markerD.png';
+            pinColor = "99D69A";  // green
+            markerLabel = 'D';
+            break;
+          case 'art_gallery':
+            pinColor = "99D69A";  // green
+            markerLabel = 'D';
             break;
           case 'pharmacy':
-            markerColor = '/png/orange_markerE.png';
+            pinColor = "FFA500";  // orange
+            markerLabel = 'E';
             break;
           case 'subway_station':
-            markerColor = '/png/paleblue_markerF.png';
+            pinColor = "BED2DB";  // paleblue
+            markerLabel = 'F';
             break;
           case 'airport':
-            markerColor = '/png/pink_markerG.png';
+            pinColor = "FFC0CB";  // pink
+            markerLabel = 'G';
             break;
           case 'hospital':
-            markerColor = '/png/purple_markerH.png';
+            pinColor = "800080";  // purple
+            markerLabel = 'H';
             break;
           case 'bus_station':
-            markerColor = '/png/red_markerI.png';
+            pinColor = "DC8E8E";  // red
+            markerLabel = 'I';
             break;
           case 'park':
-            markerColor = '/png/yellow_markerJ.png';
+            pinColor = "FFFF00";  // yellow
+            markerLabel = 'J';
             break;
           case 'atm':
-            markerColor = '/png/blue_markerK.png';
+            pinColor = "8B8BE2";  // blue
+            markerLabel = 'K';
             break;
           case 'bank':
-            markerColor = '/png/brown_markerL.png';
+            pinColor = "C66060";  // brown
+            markerLabel = 'L';
             break;
           case 'doctor':
-            markerColor = '/png/darkgreen_markerM.png';
+            pinColor = "37B537";  // darkgreen
+            markerLabel = 'M';
+            break;
+          case 'dentist':
+            pinColor = "37B537";  // darkgreen
+            markerLabel = 'M';
             break;
           case 'zoo':
-            markerColor = '/png/green_markerN.png';
+            pinColor = "99D69A";  // green
+            markerLabel = 'N';
             break;
           case 'police':
-            markerColor = '/png/orange_markerO.png';
+            pinColor = "FFA500";  // orange
+            markerLabel = 'O';
             break;
           case 'train_station':
-            markerColor = '/png/paleblue_markerP.png';
+            pinColor = "BED2DB";  // paleblue
+            markerLabel = 'P';
             break;
           case 'school':
-            markerColor = '/png/pink_markerQ.png';
+            pinColor = "FFC0CB";  // pink
+            markerLabel = 'Q';
             break;
           case 'bar':
-            markerColor = '/png/purple_markerR.png';
+            pinColor = "800080";  // purple
+            markerLabel = 'R';
             break;
           case 'church':
-            markerColor = '/png/red_markerS.png';
+            pinColor = "DC8E8E";  // red
+            markerLabel = 'S';
             break;
           case 'synagogue':
-            markerColor = '/png/yellow_markerT.png';
+            pinColor = "FFFF00";  // yellow
+            markerLabel = 'T';
             break;
           case 'mosque':
-            markerColor = '/png/blue_markerU.png';
+            pinColor = "8B8BE2";  // blue
+            markerLabel = 'U';
             break;
           case 'university':
-            markerColor = '/png/brown_markerV.png';
+            pinColor = "C66060";  // brown
+            markerLabel = 'V';
             break;
           case 'embassy':
-            markerColor = '/png/darkgreen_markerW.png';
+            pinColor = "37B537";  // darkgreen
+            markerLabel = 'W';
             break;
           case 'library':
-            markerColor = '/png/green_markerX.png';
+            pinColor = "99D69A";  // green
+            markerLabel = 'X';
             break;
           case 'spa':
-            markerColor = '/png/orange_markerY.png';
+            pinColor = "FFA500";  // orange
+            markerLabel = 'Y';
             break;
           default:
-            markerColor = '/png/paleblue_markerZ.png';
+            pinColor = "5D8B9F";  // paleblue
+            markerLabel = 'Z';
         };
+
+        var pinImage = new google.maps.MarkerImage("http://www.googlemapsmarkers.com/v1/" + pinColor + "/",
+        new google.maps.Size(21, 44),
+        new google.maps.Point(0,-10),
+        new google.maps.Point(10,44));
+
+        markerColor = pinImage;
 
         let infowindow = new google.maps.InfoWindow();
         let marker = new google.maps.Marker({
           map: map,
-          //icon: markerColor[x],
           icon: markerColor,
+          label: markerLabel,
           position: place.geometry.location
         });
         google.maps.event.addListener(marker, 'click', function() {
@@ -201,8 +244,6 @@
 
     }
     
-    
-
     render() {
       return(
         <div>
@@ -210,12 +251,15 @@
       )
     }
 }
+
 const mapStateToProps = (state) =>{
   return {state: state};
 };
+
 function mapDispatchToProps(dispatch){
   return bindActionCreators(actionCreators, dispatch);
 }
+
 PlacesSearch = connect(mapStateToProps, mapDispatchToProps)(PlacesSearch);
 
 export default PlacesSearch;

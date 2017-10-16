@@ -10,6 +10,7 @@ import * as actionCreators from '../actions';
 import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
 
 import Autocomplete from 'react-google-autocomplete';
+
 const ROOT_URL = 'http://localhost:8080/api/v1';
 //const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
 
@@ -37,26 +38,12 @@ componentWillMount = () => {
     
     const city = localStorage.getItem('sel_city');
     const country = localStorage.getItem('sel_country');
-    //console.log('tripbuild city: ' + this.props.city);
-    //console.log('tripbuild country: ' + this.props.country); 
-this.setState({
-    lng: this.props.state.maps.selectedLocation.lng,
-    lat: this.props.state.maps.selectedLocation.lat
-})
-    // axios.post(`${ROOT_URL}/cities_lng_lat`, { city: city, country: country })
-    // .then(response => {
-    //   cities = response.data.payload;
-    //   longitude = response.data.payload[0].lng;
-    //   latitude = response.data.payload[0].lat;
-    //   this.setState({
-    //       lng: longitude,
-    //       lat: latitude,
-    //   });
-    // })
-    // .catch(err => {
-    //   this.setState({
-    //   });        
-    // })
+
+    this.setState({
+        lng: this.props.state.maps.selectedLocation.lng,
+        lat: this.props.state.maps.selectedLocation.lat
+    })
+
   }
 
   handleFormSubmit = formSubmitEvent => {
@@ -169,6 +156,10 @@ this.setState({
   }
 
   render() {
+
+    const cb_city = localStorage.getItem('sel_city');
+    const cb_country = localStorage.getItem('sel_country');
+
     const footerStyle = {
         backgroundColor: "black",
         fontSize: "15px",
@@ -212,7 +203,7 @@ this.setState({
       <NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
     </Nav>
   </Navbar>
-    <h3 style={{textAlign: "center"}}><strong>Create Your Custom Itinerary</strong></h3>
+    <h3 style={{textAlign: "center"}}><strong>Create Your Custom Itinerary for: </strong><span>{ cb_city}, {cb_country}</span></h3>
         <form action='/tripresults' onSubmit={this.handleFormSubmit}>
           <div className='form-group'>
             <label className='col-md-2 control-label'>Check your Itinerary Items</label>  
@@ -393,8 +384,8 @@ this.setState({
               <a href="/dashboard"> Dashboard</a>
               <a href="/hotelBuild"> Find Hotels</a>
             
-            <div class="footer-copyright">
-        <div class="container-fluid">
+            <div className="footer-copyright">
+        <div className="container-fluid">
             © 2017 Copyright: <a href="/"> GuideTrip </a>
 
         </div>
@@ -406,10 +397,13 @@ this.setState({
 }
 
 const mapStateToProps = (state) =>{
-    return {state: state};
-  };
+  return {state: state};
+};
+
 function mapDispatchToProps(dispatch){
-    return bindActionCreators(actionCreators, dispatch);
-  }
-  Tripbuild = connect(mapStateToProps, mapDispatchToProps)(Tripbuild);
-  export default Tripbuild;
+  return bindActionCreators(actionCreators, dispatch);
+}
+
+Tripbuild = connect(mapStateToProps, mapDispatchToProps)(Tripbuild);
+
+export default Tripbuild;

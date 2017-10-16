@@ -32,6 +32,7 @@ class manualSearch extends React.Component{
         key={place_id}
         handleSave={this.handleSave}
       />)
+
       componentWillMount = () => {
         this.selectedCheckboxes = new Set();
         this.placesForAllTypes = new Set();
@@ -46,6 +47,7 @@ class manualSearch extends React.Component{
           this.selectedCheckboxes.add(label);
         }
       }
+
   createCheckboxes = () => (
     
     this.props.state.maps.places.map(this.createCheckbox)
@@ -55,6 +57,7 @@ class manualSearch extends React.Component{
   onButtonClick () {
     this.context.router.history.push('/hotelSearch');
   };
+
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
 
@@ -66,16 +69,18 @@ class manualSearch extends React.Component{
       const cb_price_level = checkbox.price_level;
       const cb_rating = checkbox.rating;
       const cb_type = checkbox.types[0];
+
       if(checkbox.photos){
-        const cb_photo = checkbox.photos[0].html_attributions[0];
-        
+        const cb_photo = checkbox.photos[0].html_attributions[0];  
       }
       const cb_vicinity = checkbox.vicinity;
       
       const cb_city = localStorage.getItem('sel_city');
       const cb_country = localStorage.getItem('sel_country');
 
-      /* (CRUD) Send the user checkboxed itinerary data to the server to store the user-specific     itinerary data in the DB */
+      /* 
+      (CRUD) Send the user checkboxed itinerary data to the server to store the user-specific itinerary data in the DB 
+      */
 
       axios.post(`${ROOT_URL}/save_itin`, { user_email, cb_name, cb_place_id, cb_price_level, cb_rating, cb_type, cb_vicinity, cb_city, cb_country, if(cb_photo){return cb_photo} })
       .then(response => {
@@ -92,6 +97,7 @@ class manualSearch extends React.Component{
 
     this.context.router.history.push('/dashboard');
   }
+
     componentDidMount() {
         let location = {lat:Number(this.props.state.maps.selectedLocation.lat), lng: Number(this.props.state.maps.selectedLocation.lng)};
         console.log('location: ' + location);
@@ -135,101 +141,148 @@ class manualSearch extends React.Component{
         
         var x = 0; //Counter for info marker open/close
         function createMarker(place, x) {
-          let markerColor = '/png/blue_markerA.png';
 
-          let placeLoc = place.geometry.location;   // DEBUG (RAB) Capture Places data
-          let placeName = place.name;               // DEBUG (RAB) Capture Places data
-          let placeType = place.types[0];           // DEBUG (RAB) Capture Places data
-          let placeAddr = place.vicinity;           // DEBUG (RAB) Capture Places data
-          let placeRating = place.rating;           // DEBUG (RAB) Capture Places data
-          console.log('place: ' + place);                       // DEBUG (RAB) Capture Places data
+          let markerColor = '';
+          let markerLabel = '';
+          let pinColor = 'FFFFFF'
+  
+          let placeLoc = place.geometry.location;   
+          let placeName = place.name;              
+          let placeType = place.types[0];          
+          let placeAddr = place.vicinity;          
+          let placeRating = place.rating;          
+          console.log('place: ' + place);                      
           
           switch (placeType) {
             case 'store':
-              markerColor = '/png/blue_markerA.png';
+              pinColor = "8B8BE2";  // blue
+              markerLabel = 'A';
               break;
             case 'lodging':
-              markerColor = '/png/brown_markerB.png';
+              pinColor = "C66060";  // brown
+              markerLabel = 'B';
               break;
             case 'cafe':
-              markerColor = '/png/darkgreen_markerC.png';
+              pinColor = "37B537";  // darkgreen
+              markerLabel = 'C';
+              break;
+            case 'restaurant':
+              pinColor = "37B537";  // darkgreen
+              markerLabel = 'C';
               break;
             case 'museum':
-              markerColor = '/png/green_markerD.png';
+              pinColor = "99D69A";  // green
+              markerLabel = 'D';
+              break;
+            case 'art_gallery':
+              pinColor = "99D69A";  // green
+              markerLabel = 'D';
               break;
             case 'pharmacy':
-              markerColor = '/png/orange_markerE.png';
+              pinColor = "FFA500";  // orange
+              markerLabel = 'E';
               break;
             case 'subway_station':
-              markerColor = '/png/paleblue_markerF.png';
+              pinColor = "BED2DB";  // paleblue
+              markerLabel = 'F';
               break;
             case 'airport':
-              markerColor = '/png/pink_markerG.png';
+              pinColor = "FFC0CB";  // pink
+              markerLabel = 'G';
               break;
             case 'hospital':
-              markerColor = '/png/purple_markerH.png';
+              pinColor = "800080";  // purple
+              markerLabel = 'H';
               break;
             case 'bus_station':
-              markerColor = '/png/red_markerI.png';
+              pinColor = "DC8E8E";  // red
+              markerLabel = 'I';
               break;
             case 'park':
-              markerColor = '/png/yellow_markerJ.png';
+              pinColor = "FFFF00";  // yellow
+              markerLabel = 'J';
               break;
             case 'atm':
-              markerColor = '/png/blue_markerK.png';
+              pinColor = "8B8BE2";  // blue
+              markerLabel = 'K';
               break;
             case 'bank':
-              markerColor = '/png/brown_markerL.png';
+              pinColor = "C66060";  // brown
+              markerLabel = 'L';
               break;
             case 'doctor':
-              markerColor = '/png/darkgreen_markerM.png';
+              pinColor = "37B537";  // darkgreen
+              markerLabel = 'M';
+              break;
+            case 'dentist':
+              pinColor = "37B537";  // darkgreen
+              markerLabel = 'M';
               break;
             case 'zoo':
-              markerColor = '/png/green_markerN.png';
+              pinColor = "99D69A";  // green
+              markerLabel = 'N';
               break;
             case 'police':
-              markerColor = '/png/orange_markerO.png';
+              pinColor = "FFA500";  // orange
+              markerLabel = 'O';
               break;
             case 'train_station':
-              markerColor = '/png/paleblue_markerP.png';
+              pinColor = "BED2DB";  // paleblue
+              markerLabel = 'P';
               break;
             case 'school':
-              markerColor = '/png/pink_markerQ.png';
+              pinColor = "FFC0CB";  // pink
+              markerLabel = 'Q';
               break;
             case 'bar':
-              markerColor = '/png/purple_markerR.png';
+              pinColor = "800080";  // purple
+              markerLabel = 'R';
               break;
             case 'church':
-              markerColor = '/png/red_markerS.png';
+              pinColor = "DC8E8E";  // red
+              markerLabel = 'S';
               break;
             case 'synagogue':
-              markerColor = '/png/yellow_markerT.png';
+              pinColor = "FFFF00";  // yellow
+              markerLabel = 'T';
               break;
             case 'mosque':
-              markerColor = '/png/blue_markerU.png';
+              pinColor = "8B8BE2";  // blue
+              markerLabel = 'U';
               break;
             case 'university':
-              markerColor = '/png/brown_markerV.png';
+              pinColor = "C66060";  // brown
+              markerLabel = 'V';
               break;
             case 'embassy':
-              markerColor = '/png/darkgreen_markerW.png';
+              pinColor = "37B537";  // darkgreen
+              markerLabel = 'W';
               break;
             case 'library':
-              markerColor = '/png/green_markerX.png';
+              pinColor = "99D69A";  // green
+              markerLabel = 'X';
               break;
             case 'spa':
-              markerColor = '/png/orange_markerY.png';
+              pinColor = "FFA500";  // orange
+              markerLabel = 'Y';
               break;
             default:
-              markerColor = '/png/paleblue_markerZ.png';
+              pinColor = "5D8B9F";  // paleblue
+              markerLabel = 'Z';
           };
   
-
+          var pinImage = new google.maps.MarkerImage("http://www.googlemapsmarkers.com/v1/" + pinColor + "/",
+          new google.maps.Size(21, 44),
+          new google.maps.Point(0,-10),
+          new google.maps.Point(10,44));
+  
+          markerColor = pinImage;
+  
           let infowindow = new google.maps.InfoWindow();
           let marker = new google.maps.Marker({
             map: map,
-            //icon: markerColor[x],
             icon: markerColor,
+            label: markerLabel,
             position: place.geometry.location
           });
         
@@ -256,6 +309,10 @@ class manualSearch extends React.Component{
         
         }
         render(){
+
+          const cb_city = localStorage.getItem('sel_city');
+          const cb_country = localStorage.getItem('sel_country');
+
           const footerStyle = {
             backgroundColor: "black",
             fontSize: "15px",
@@ -299,8 +356,8 @@ class manualSearch extends React.Component{
       <NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
     </Nav>
   </Navbar>
-    <h3 style={{textAlign: "center"}}><strong>Your Custom Itinerary Results</strong></h3>
-        <h4 style={{textAlign: "center"}}><strong>Marker Legend:</strong></h4>
+    <h3 style={{textAlign: "center"}}><strong>Your Custom Itinerary Results for: </strong><span>{ cb_city}, {cb_country}</span></h3>
+        <h4 style={{textAlign: "center"}}><strong>Marker Legend</strong></h4>
         <div className='row1'>
           <div className='col-md-12 columns'>
           <div className='col-md-1 columns'>
@@ -372,8 +429,8 @@ class manualSearch extends React.Component{
               <a href="/dashboard"> Dashboard</a>
               <a href="/hotelBuild"> Find Hotels</a>
             
-            <div class="footer-copyright">
-        <div class="container-fluid">
+            <div className="footer-copyright">
+        <div className="container-fluid">
             © 2017 Copyright: <a href="/"> GuideTrip </a>
 
         </div>
@@ -384,12 +441,15 @@ class manualSearch extends React.Component{
             )
         }
     }
-    const mapStateToProps = (state) =>{
-        return {state: state};
-      };
-      function mapDispatchToProps(dispatch){
-        return bindActionCreators(actionCreators, dispatch);
-      }
-      manualSearch = connect(mapStateToProps, mapDispatchToProps)(manualSearch);
+
+const mapStateToProps = (state) =>{
+  return {state: state};
+};
+    
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(actionCreators, dispatch);
+}
+
+manualSearch = connect(mapStateToProps, mapDispatchToProps)(manualSearch);
       
-      export default manualSearch;
+export default manualSearch;

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import {ListGroupItem} from 'react-bootstrap';
+
 class Checkbox extends Component {
   state = {
     isChecked: false,

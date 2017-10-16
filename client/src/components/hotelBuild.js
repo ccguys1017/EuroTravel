@@ -6,13 +6,15 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
 
-class hotelBuild extends React.Component{
+class hotelBuild extends React.Component {
     constructor(props){
         super(props)
     }
+
     static contextTypes = {
         router: PropTypes.object
       };
+
     render(){
       const footerStyle = {
         backgroundColor: "black",
@@ -57,8 +59,8 @@ class hotelBuild extends React.Component{
       <NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
     </Nav>
   </Navbar>
-  <h4>Find a Hotel Near you! </h4>
-<Autocomplete style={{width:'66%'}} 
+  <h4><strong>Search the World for a Hotel!</strong></h4>
+<Autocomplete style={{width:'30%'}} 
           onPlaceSelected={(place) => {
 
           let selectedlatlong = place.geometry.location.toString();
@@ -66,8 +68,6 @@ class hotelBuild extends React.Component{
           let selLng = '';
           let onlng = false;  
 
-          //console.log('selectedlatlong: ' + selectedlatlong);
-          //console.log('selectedlatlong.length: ' + selectedlatlong.length);
           for (let i =0; i < selectedlatlong.length; i++) {
             if(onlng === false) {
               if ( i !== 0 && selectedlatlong[i] !== ',' ) {
@@ -79,27 +79,22 @@ class hotelBuild extends React.Component{
               selLng = selLng.concat(selectedlatlong[i]);
             }
           } // end for loop
-          //console.log('selectedlatlong: ' + selectedlatlong);
-          //console.log('Lat = '  + selLat + ' || Lng = ' + selLng);
+
           this.props.addLocation(selLat, selLng, place.place_id);
           console.log(this.props);
           console.log(place);
           localStorage.setItem('sel_city', place.address_components[0].long_name);
           localStorage.setItem('sel_country', place.address_components[2].long_name)  // length = 3
-          if(place.address_components.length > 3){
-            localStorage.setItem('sel_country', place.address_components[3].long_name);
-          }else if (place.address_components.length < 3){
-            localStorage.setItem('sel_country', place.address_components[2].short_name);
 
+          if (place.address_components.length > 3) {
+            localStorage.setItem('sel_country', place.address_components[3].long_name);
+          } else if (place.address_components.length < 3) {
+            localStorage.setItem('sel_country', place.address_components[2].short_name);
           }
 
           localStorage.setItem('trip_lat', selLat);
           localStorage.setItem('trip_lng', selLng);
           this.context.router.history.push('/hotelSearch');
-         
-        
-          
-
           }}  // end onPlaceSelected
           types={['(regions)']}
         />
@@ -108,8 +103,8 @@ class hotelBuild extends React.Component{
               <a href="/dashboard"> Dashboard</a>
               <a href="/hotelBuild"> Find Hotels</a>
             
-            <div class="footer-copyright">
-        <div class="container-fluid">
+            <div className="footer-copyright">
+        <div className="container-fluid">
             © 2017 Copyright: <a href="/"> GuideTrip </a>
     
         </div>
@@ -122,10 +117,13 @@ class hotelBuild extends React.Component{
 }
 
 const mapStateToProps = (state) =>{
-    return {state: state};
-  };
+  return {state: state};
+};
+
 function mapDispatchToProps(dispatch){
-    return bindActionCreators(actionCreators, dispatch);
-  }
-  hotelBuild = connect(mapStateToProps, mapDispatchToProps)(hotelBuild);
-  export default hotelBuild;
+  return bindActionCreators(actionCreators, dispatch);
+}
+
+hotelBuild = connect(mapStateToProps, mapDispatchToProps)(hotelBuild);
+
+export default hotelBuild;

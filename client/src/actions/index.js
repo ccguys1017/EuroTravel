@@ -54,12 +54,20 @@ export function authError (error) {
 export function signoutUser () {
   localStorage.removeItem('token');
   localStorage.removeItem('userEmail');
+  localStorage.removeItem('sel_city');
+  localStorage.removeItem('sel_country');
+  localStorage.removeItem('trip_lat');
+  localStorage.removeItem('trip_lng');
+  localStorage.removeItem('latitude');
+  localStorage.removeItem('longitude');
+  localStorage.removeItem('hotel_flag');  
+  localStorage.removeItem('test_places');
   return { type: UNAUTH_USER };
 };
 
 export function fetchMessage () {
   return function (dispatch) {
-    axios.get('http://localhost:8080/', {
+    axios.get('http://localhost:8080/api/v1', {
       headers: { authorization: localStorage.getItem('token') }
     })
       .then(response => {

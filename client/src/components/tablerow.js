@@ -17,7 +17,7 @@ class TableRow extends Component {
       handleSubmit(event) {
         event.preventDefault();
         this.addItemService.deleteData(this.props.obj._id);
-        this.setState({itin_deleted : true});
+        alert('Your Itinerary item has been deleted! Reload dashboard to update saved itinerary list.');
       }
 
       render() {
@@ -27,7 +27,7 @@ class TableRow extends Component {
               <td><span className="badge">{this.props.obj.type}</span>
               </td>
               <td>
-                {this.props.obj.name} <br/>{this.props.obj.vicinity}
+              <strong>{this.props.obj.name}</strong> <br/>{this.props.obj.vicinity}
               </td>
               <td>
                 <form onSubmit={this.handleSubmit}>
@@ -40,11 +40,3 @@ class TableRow extends Component {
     }
     
     export default TableRow;
-    
-
-    /*
-
-              <td>
-                {this.props.obj.photo}
-              </td>
-    */

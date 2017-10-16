@@ -17,6 +17,20 @@ const ROOT_URL = 'http://localhost:8080/api/v1';
 //const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
 
 let saved_itineraries = [];
+let cities = [];
+let places_type = [];
+
+let default_saved_itin = [{"_id":"59df8feca979cb0950260bea",
+"updatedAt":"2017-10-12T15:53:16.270Z","createdAt":"2017-10-12T15:53:16.270Z",
+"email":"codercampsguys@gmail.com",
+"name":"Name of Saved Place",
+"place_id":"ChIJXUJKE2eTC0cRMfHHdAdz-jA",
+"rating":3,
+"type":"Type of Saved Place",
+"vicinity":"Address of Saved Place",
+"city":"Prague",
+"country":"Country",
+"__v":0}];
 
 class Dashboard extends Component {
   constructor(props) {
@@ -43,12 +57,15 @@ class Dashboard extends Component {
   onBackClick () {
     this.context.router.history.push('/');
   }
-  onHotelClick(){
+
+  onHotelClick() {
     this.context.router.history.push('/hotelBuild');
   }
-  findLocation(){
+
+  findLocation() {
     this.context.router.history.push('/userLocation');
   }
+
   handleSave = place => {
     console.log(place);
     const user_email = localStorage.getItem('userEmail');
@@ -57,6 +74,7 @@ class Dashboard extends Component {
     const cb_price_level = place.price_level;
     const cb_rating = place.rating;
     const cb_type = place.types[0];
+
     if(place.photos){
       const cb_photo = place.photos[0].html_attributions[0];
       
@@ -66,7 +84,9 @@ class Dashboard extends Component {
     const cb_city = localStorage.getItem('sel_city');
     const cb_country = localStorage.getItem('sel_country');
 
-    /* (CRUD) Send the user checkboxed itinerary data to the server to store the user-specific     itinerary data in the DB */
+    /* 
+    (CRUD) Send the user checkboxed itinerary data to the server to store the user-specific     itinerary data in the DB 
+    */
 
     axios.post(`${ROOT_URL}/save_itin`, { user_email, cb_name, cb_place_id, cb_price_level, cb_rating, cb_type, cb_vicinity, cb_city, cb_country, if(cb_photo){return cb_photo} })
     .then(response => {
@@ -79,13 +99,13 @@ class Dashboard extends Component {
         itins_saved: false
       });        
     })
-  
-
   console.log("HANDLE SAVE FUNCTION COMPLETED");
 } //End handleSave()
+
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
     let trip_city = '';
+    let routerFlag = true;
 
     if (document.getElementById('citydashradio1').checked) {
       trip_city = this.state.trip_city1;
@@ -101,21 +121,28 @@ class Dashboard extends Component {
       trip_city = this.state.trip_city6;
     }
 
-
-
     console.log('this.state.city: ' + trip_city);
     console.log('this.state.country: ' + this.state.trip_country);    
 
     localStorage.setItem('sel_city', trip_city);
     localStorage.setItem('sel_country', this.state.trip_country);
+
     var geocoder = new google.maps.Geocoder();
     var props = this.props;
     var address = trip_city + ", " + this.state.trip_country;
+
     geocoder.geocode({'address': address}, function(results, status) {
       if (status === 'OK') {
       console.log(results[0]);
       console.log(results[0].place_id);
+
+      console.log(results[0].geometry.location);
+
       let latlng = results[0].geometry.location.toString();
+
+      latlng = latlng.replace('(', '');
+      latlng = latlng.replace(')', '');
+
         let comIdx = 0;
       for (let i =0; i <latlng.length; i ++){
         if(latlng[i] == ","){
@@ -123,13 +150,18 @@ class Dashboard extends Component {
         }
       }
 
-      let newLat = latlng.splice(1,comIdx);
-      let newLng = latlng.splice(comIdx + 2, latlng.length -1)
-      console.log(newLat + " : " + newLng);
-      console.log(results[0].geometry.location.toString());
-      let lng = results[0].geometry.bounds.b.b;
-      let lat = results[0].geometry.bounds.f.f;
-      
+      let geoPos = latlng.split(',');
+/*
+      //let newLat = latlng.splice(1,comIdx);
+      //let newLng = latlng.splice(comIdx + 2, latlng.length -1)
+      //console.log(newLat + " : " + newLng);
+      //console.log(results[0].geometry.location.toString());
+      //let lng = results[0].geometry.bounds.b.b;
+      //let lat = results[0].geometry.bounds.f.f;
+*/
+      let lat = geoPos[0];
+      let lng = geoPos[1];
+
       let next = false;
 
       console.log(lat + " : " + lng);
@@ -137,16 +169,27 @@ class Dashboard extends Component {
 
       localStorage.setItem('trip_lat', lat);
       localStorage.setItem('trip_lng', lng);
+      localStorage.setItem('latitude', lat);
+      localStorage.setItem('longitude', lng);
+
       props.addLocation(lat, lng, locPlaceid);
       
-      } else {
-        alert('Geocode was not successful for the following reason: ' + status);
+      } else if (trip_city == '' || this.state.trip_country == '') {
+          alert('You must select a Country and a City to build an Itinerary');
+          routerFlag = false;
+        } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+          routerFlag = false;
       }
     });
     this.setState({city : trip_city});
     this.setState({country : this.state.trip_country});
 
-    this.context.router.history.push('/tripbuild');
+    if (routerFlag) {
+      this.context.router.history.push('/tripbuild');
+    } else {
+      this.context.router.history.push('/dashboard');
+    }
   }
 
   listCities() {
@@ -653,11 +696,6 @@ class Dashboard extends Component {
     }
   }
 
-  deleteData(id){
-    axios.get(`${ROOT_URL}/remove_itin`+id)
-    .then().catch(err => console.log(err))
-  }
-
   tabRow(){
     if(saved_itineraries instanceof Array){
       return saved_itineraries.map(function(object, i){
@@ -670,7 +708,11 @@ class Dashboard extends Component {
     const user_email = localStorage.getItem('userEmail');
     axios.post(`${ROOT_URL}/get_itin`, { user_email })
       .then(response => {
-        saved_itineraries = response.data.payload;
+        if (response.data.payload == '') {
+          saved_itineraries = default_saved_itin;
+        } else {
+          saved_itineraries = response.data.payload;
+        };
         this.setState({itins_retrieved : true});
       })
       .catch(err => {
@@ -745,7 +787,7 @@ class Dashboard extends Component {
             </Table>
         </div>
         <br/><br/>
-        <h3>Search for your New Vacation!</h3>
+        <h3><strong>Search for your New Vacation!</strong></h3>
         <Autocomplete style={{width:'30%'}} 
           onPlaceSelected={(place) => {
 
@@ -754,8 +796,6 @@ class Dashboard extends Component {
           let selLng = '';
           let onlng = false;  
 
-          //console.log('selectedlatlong: ' + selectedlatlong);
-          //console.log('selectedlatlong.length: ' + selectedlatlong.length);
           for (let i =0; i < selectedlatlong.length; i++) {
             if(onlng === false) {
               if ( i !== 0 && selectedlatlong[i] !== ',' ) {
@@ -767,8 +807,7 @@ class Dashboard extends Component {
               selLng = selLng.concat(selectedlatlong[i]);
             }
           } // end for loop
-          //console.log('selectedlatlong: ' + selectedlatlong);
-          //console.log('Lat = '  + selLat + ' || Lng = ' + selLng);
+
           this.props.addLocation(selLat, selLng, place.place_id);
           console.log(this.props);
           console.log(place);
@@ -776,26 +815,20 @@ class Dashboard extends Component {
           localStorage.setItem('trip_lng', selLng);
           localStorage.setItem('sel_city', place.address_components[0].long_name);
           localStorage.setItem('sel_country', place.address_components[2].long_name)  // length = 3
+
           if(place.address_components.length > 3){
             localStorage.setItem('sel_country', place.address_components[3].long_name);
           }else if (place.address_components.length < 3){
             localStorage.setItem('sel_country', place.address_components[2].short_name);
-
           }
 
-          //localStorage.setItem('trip_lat', place.address_components[0].long_name);
-          //localStorage.setItem('trip_lng', place.address_components[3].short_name);
           this.context.router.history.push('/manualBuild');
-         
-        
-          
-
           }}  // end onPlaceSelected
           types={['(regions)']}
         />
         <form action='/dashboard' onChange={this.listCities.bind(this)}>
         <div className='col-md-2'>
-          <h2>Select Country:</h2>
+          <h2><strong>Select Country:</strong></h2>
             <div className='dashradio'>
               <div className='dashradio-item'>
                 <input type='radio' name='radio' id='countrydashradio1' />
@@ -1007,11 +1040,9 @@ class Dashboard extends Component {
               </div>
           </div>
           </form>
-
-
           <div className='col-md-2'>
-          <h2>Select City:</h2>
-          <form action='/tripbuild' onSubmit={this.handleFormSubmit.bind(this)}>
+          <h2><strong>Select City:</strong></h2>
+          <form action='/dashboard' onSubmit={this.handleFormSubmit.bind(this)}>
             <div className='dashradio'>
               <div className='dashradio-item'>
                 <input type='radio' name='radio' id='citydashradio1' />
@@ -1045,10 +1076,9 @@ class Dashboard extends Component {
               <strong>or</strong>
             </div>
           </form>
-          
         <button onClick={this.onHotelClick.bind(this)} className='btn btn-default'>Search Hotels</button>
+        <div><strong>or</strong></div>
         <button onClick={this.findLocation.bind(this)} className='btn btn-default'>Find Places Near You</button>
-
         </div>
         </div>
         
@@ -1057,17 +1087,14 @@ class Dashboard extends Component {
               <a href="/dashboard"> Dashboard</a>
               <a href="/hotelBuild"> Find Hotels</a>
             
-            <div class="footer-copyright">
-        <div class="container-fluid">
+            <div className="footer-copyright">
+        <div className="container-fluid">
             © 2017 Copyright: <a href="/"> GuideTrip </a>
 
         </div>
         </div>
         </Footer>
         </div>
-      
-    
-    
     );
   }
 }
@@ -1076,7 +1103,11 @@ const mapStatetoProps = (state) => ({
   itins_retrieved: state.itins_retrieved,
   state:state
 });
+
 function mapDispatchToProps(dispatch){
   return bindActionCreators(actionCreators, dispatch);
 }
-export default connect(mapStatetoProps,mapDispatchToProps)(Dashboard);
+
+Dashboard = connect(mapStatetoProps,mapDispatchToProps)(Dashboard);
+
+export default Dashboard;

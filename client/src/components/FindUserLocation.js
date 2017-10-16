@@ -12,10 +12,8 @@ class UserLocation extends React.Component{
       router: PropTypes.object
     };
 
-    
     componentDidMount() {
-
-        ;
+      
           let map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: -34.397, lng: 150.644},
             zoom: 15

@@ -9,21 +9,21 @@ import Checkbox from './checkbox';
 import axios from 'axios';
 import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
 
-
 const ROOT_URL = 'http://localhost:8080/api/v1';
 //const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
 
 class Tripresults extends React.Component{
     constructor(props){
-        super(props)
+        super(props);
+
         this.state = {
           itins_saved: false,
         };
     }
+
     static contextTypes = {
       router: PropTypes.object
     };
-
 
     createCheckbox = (name, place_id) => (
       <Checkbox
@@ -32,7 +32,9 @@ class Tripresults extends React.Component{
         key={place_id}
         handleSave={this.handleSave}
       />)
+
       componentWillMount = () => {
+        localStorage.setItem('hotel_flag', false);
         this.selectedCheckboxes = new Set();
         this.placesForAllTypes = new Set();
     
@@ -46,6 +48,7 @@ class Tripresults extends React.Component{
           this.selectedCheckboxes.add(label);
         }
       }
+
   createCheckboxes = () => (
     
     this.props.state.maps.places.map(this.createCheckbox)
@@ -53,8 +56,10 @@ class Tripresults extends React.Component{
   )
 
   onButtonClick () {
+    localStorage.setItem('hotel_flag', true);
     this.context.router.history.push('/hotelSearch');
   };
+
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
 
@@ -66,6 +71,7 @@ class Tripresults extends React.Component{
       const cb_price_level = checkbox.price_level;
       const cb_rating = checkbox.rating;
       const cb_type = checkbox.types[0];
+
       if(checkbox.photos){
         const cb_photo = checkbox.photos[0].html_attributions[0];
         
@@ -75,7 +81,9 @@ class Tripresults extends React.Component{
       const cb_city = localStorage.getItem('sel_city');
       const cb_country = localStorage.getItem('sel_country');
 
-      /* (CRUD) Send the user checkboxed itinerary data to the server to store the user-specific     itinerary data in the DB */
+      /* 
+      (CRUD) Send the user checkboxed itinerary data to the server to store the user-specific itinerary data in the DB 
+      */
 
       axios.post(`${ROOT_URL}/save_itin`, { user_email, cb_name, cb_place_id, cb_price_level, cb_rating, cb_type, cb_vicinity, cb_city, cb_country, if(cb_photo){return cb_photo} })
       .then(response => {
@@ -92,6 +100,7 @@ class Tripresults extends React.Component{
 
     this.context.router.history.push('/dashboard');
   }
+
     componentDidMount() {
         let location = {lat:Number(this.props.state.maps.selectedLocation.lat), lng: Number(this.props.state.maps.selectedLocation.lng)};
         console.log('location: ' + location);
@@ -135,101 +144,148 @@ class Tripresults extends React.Component{
         
         var x = 0; //Counter for info marker open/close
         function createMarker(place, x) {
-          let markerColor = '/png/blue_markerA.png';
 
-          let placeLoc = place.geometry.location;   // DEBUG (RAB) Capture Places data
-          let placeName = place.name;               // DEBUG (RAB) Capture Places data
-          let placeType = place.types[0];           // DEBUG (RAB) Capture Places data
-          let placeAddr = place.vicinity;           // DEBUG (RAB) Capture Places data
-          let placeRating = place.rating;           // DEBUG (RAB) Capture Places data
-          console.log('place: ' + place);                       // DEBUG (RAB) Capture Places data
+          let markerColor = '';
+          let markerLabel = '';
+          let pinColor = 'FFFFFF'
+  
+          let placeLoc = place.geometry.location;   
+          let placeName = place.name;               
+          let placeType = place.types[0];           
+          let placeAddr = place.vicinity;           
+          let placeRating = place.rating;           
+          console.log('place: ' + place);                       
           
           switch (placeType) {
             case 'store':
-              markerColor = '/png/blue_markerA.png';
+              pinColor = "8B8BE2";  // blue
+              markerLabel = 'A';
               break;
             case 'lodging':
-              markerColor = '/png/brown_markerB.png';
+              pinColor = "C66060";  // brown
+              markerLabel = 'B';
               break;
             case 'cafe':
-              markerColor = '/png/darkgreen_markerC.png';
+              pinColor = "37B537";  // darkgreen
+              markerLabel = 'C';
+              break;
+            case 'restaurant':
+              pinColor = "37B537";  // darkgreen
+              markerLabel = 'C';
               break;
             case 'museum':
-              markerColor = '/png/green_markerD.png';
+              pinColor = "99D69A";  // green
+              markerLabel = 'D';
+              break;
+            case 'art_gallery':
+              pinColor = "99D69A";  // green
+              markerLabel = 'D';
               break;
             case 'pharmacy':
-              markerColor = '/png/orange_markerE.png';
+              pinColor = "FFA500";  // orange
+              markerLabel = 'E';
               break;
             case 'subway_station':
-              markerColor = '/png/paleblue_markerF.png';
+              pinColor = "BED2DB";  // paleblue
+              markerLabel = 'F';
               break;
             case 'airport':
-              markerColor = '/png/pink_markerG.png';
+              pinColor = "FFC0CB";  // pink
+              markerLabel = 'G';
               break;
             case 'hospital':
-              markerColor = '/png/purple_markerH.png';
+              pinColor = "800080";  // purple
+              markerLabel = 'H';
               break;
             case 'bus_station':
-              markerColor = '/png/red_markerI.png';
+              pinColor = "DC8E8E";  // red
+              markerLabel = 'I';
               break;
             case 'park':
-              markerColor = '/png/yellow_markerJ.png';
+              pinColor = "FFFF00";  // yellow
+              markerLabel = 'J';
               break;
             case 'atm':
-              markerColor = '/png/blue_markerK.png';
+              pinColor = "8B8BE2";  // blue
+              markerLabel = 'K';
               break;
             case 'bank':
-              markerColor = '/png/brown_markerL.png';
+              pinColor = "C66060";  // brown
+              markerLabel = 'L';
               break;
             case 'doctor':
-              markerColor = '/png/darkgreen_markerM.png';
+              pinColor = "37B537";  // darkgreen
+              markerLabel = 'M';
+              break;
+            case 'dentist':
+              pinColor = "37B537";  // darkgreen
+              markerLabel = 'M';
               break;
             case 'zoo':
-              markerColor = '/png/green_markerN.png';
+              pinColor = "99D69A";  // green
+              markerLabel = 'N';
               break;
             case 'police':
-              markerColor = '/png/orange_markerO.png';
+              pinColor = "FFA500";  // orange
+              markerLabel = 'O';
               break;
             case 'train_station':
-              markerColor = '/png/paleblue_markerP.png';
+              pinColor = "BED2DB";  // paleblue
+              markerLabel = 'P';
               break;
             case 'school':
-              markerColor = '/png/pink_markerQ.png';
+              pinColor = "FFC0CB";  // pink
+              markerLabel = 'Q';
               break;
             case 'bar':
-              markerColor = '/png/purple_markerR.png';
+              pinColor = "800080";  // purple
+              markerLabel = 'R';
               break;
             case 'church':
-              markerColor = '/png/red_markerS.png';
+              pinColor = "DC8E8E";  // red
+              markerLabel = 'S';
               break;
             case 'synagogue':
-              markerColor = '/png/yellow_markerT.png';
+              pinColor = "FFFF00";  // yellow
+              markerLabel = 'T';
               break;
             case 'mosque':
-              markerColor = '/png/blue_markerU.png';
+              pinColor = "8B8BE2";  // blue
+              markerLabel = 'U';
               break;
             case 'university':
-              markerColor = '/png/brown_markerV.png';
+              pinColor = "C66060";  // brown
+              markerLabel = 'V';
               break;
             case 'embassy':
-              markerColor = '/png/darkgreen_markerW.png';
+              pinColor = "37B537";  // darkgreen
+              markerLabel = 'W';
               break;
             case 'library':
-              markerColor = '/png/green_markerX.png';
+              pinColor = "99D69A";  // green
+              markerLabel = 'X';
               break;
             case 'spa':
-              markerColor = '/png/orange_markerY.png';
+              pinColor = "FFA500";  // orange
+              markerLabel = 'Y';
               break;
             default:
-              markerColor = '/png/paleblue_markerZ.png';
+              pinColor = "5D8B9F";  // paleblue
+              markerLabel = 'Z';
           };
   
-
+          var pinImage = new google.maps.MarkerImage("http://www.googlemapsmarkers.com/v1/" + pinColor + "/",
+          new google.maps.Size(21, 44),
+          new google.maps.Point(0,-10),
+          new google.maps.Point(10,44));
+  
+          markerColor = pinImage;
+  
           let infowindow = new google.maps.InfoWindow();
           let marker = new google.maps.Marker({
             map: map,
-            //icon: markerColor[x],
             icon: markerColor,
+            label: markerLabel,
             position: place.geometry.location
           });
         
@@ -256,6 +312,13 @@ class Tripresults extends React.Component{
         
         }
         render(){
+
+          const cb_city = localStorage.getItem('sel_city');
+          const cb_country = localStorage.getItem('sel_country');    
+          
+          console.log(localStorage.getItem('latitude'));
+          console.log(localStorage.getItem('longitude'));
+
           const footerStyle = {
             backgroundColor: "black",
             fontSize: "15px",
@@ -299,8 +362,8 @@ class Tripresults extends React.Component{
       <NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
     </Nav>
   </Navbar>
-    <h3 style={{textAlign: "center"}}><strong>Your Custom Itinerary Results</strong></h3>
-        <h4 style={{textAlign: "center"}}><strong>Marker Legend:</strong></h4>
+    <h3 style={{textAlign: "center"}}><strong>Your Custom Itinerary Results for: </strong><span>{ cb_city}, {cb_country}</span></h3>
+        <h4 style={{textAlign: "center"}}><strong>Marker Legend</strong></h4>
         <div className='row1'>
           <div className='col-md-12 columns'>
           <div className='col-md-1 columns'>
@@ -372,8 +435,8 @@ class Tripresults extends React.Component{
               <a href="/dashboard"> Dashboard</a>
               <a href="/hotelBuild"> Find Hotels</a>
             
-            <div class="footer-copyright">
-        <div class="container-fluid">
+            <div className="footer-copyright">
+        <div className="container-fluid">
             © 2017 Copyright: <a href="/"> GuideTrip </a>
 
         </div>
@@ -384,306 +447,15 @@ class Tripresults extends React.Component{
             )
         }
     }
-    const mapStateToProps = (state) =>{
-        return {state: state};
-      };
-      function mapDispatchToProps(dispatch){
-        return bindActionCreators(actionCreators, dispatch);
-      }
-      Tripresults = connect(mapStateToProps, mapDispatchToProps)(Tripresults);
+
+const mapStateToProps = (state) =>{
+  return {state: state};
+};
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(actionCreators, dispatch);
+}
+
+Tripresults = connect(mapStateToProps, mapDispatchToProps)(Tripresults);
       
-      export default Tripresults;
-
-
-// import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
-// import * as actions from '../actions';
-// import Tripbuild from './tripbuild';
-// import PlacesSearch from './search';
-// import axios from 'axios';
-// import {bindActionCreators} from 'redux';
-// import * as actionCreators from '../actions';
-// import {ListGroup, ListGroupItem} from 'react-bootstrap';
-// import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
-
-
-// import Checkbox from './checkbox';
-
-// const ROOT_URL = 'http://localhost:8080/api/v1';
-// //const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
-
-// const places = [];  /* This will be the object array for the real data returned from the 
-//                        looped Google Places API call */
-// let testPlaces =  localStorage.getItem('test_places');
-// console.log(testPlaces);
-
-// class Tripresults extends Component {
-//   constructor(props) {
-//     super(props);
-  
-//     this.state = {
-//       itins_saved: false,
-//       placeid: ''
-//     };
-//   }
-
-//   static contextTypes = {
-//     router: PropTypes.object
-//   };
-
-//   componentWillMount = () => {
-//     this.selectedCheckboxes = new Set();
-//     this.placesForAllTypes = new Set();
-
-//   }
-
-//   toggleCheckbox = label => {
-//     if (this.selectedCheckboxes.has(label)) {
-//       this.selectedCheckboxes.delete(label);
-//     } else {
-//       this.selectedCheckboxes.add(label);
-//     }
-//   }
-  
-//   // componentWillReceiveProps(nextProps){
-//   //   this.props.maps.places.map(this.createCheckbox)
-//   // }
-//   handleFormSubmit = formSubmitEvent => {
-//     formSubmitEvent.preventDefault();
-
-//     for (const checkbox of this.selectedCheckboxes) {   
-//       console.log(checkbox);
-//       const user_email = localStorage.getItem('userEmail');
-//       const cb_name = checkbox.name;
-//       const cb_place_id = checkbox.place_id;
-//       const cb_price_level = checkbox.price_level;
-//       const cb_rating = checkbox.rating;
-//       const cb_type = checkbox.types[0];
-//       if(checkbox.photos){
-//         const cb_photo = checkbox.photos[0].html_attributions[0];
-        
-//       }
-//       const cb_vicinity = checkbox.vicinity;
-
-//       const cb_city = localStorage.getItem('sel_city');
-//       const cb_country = localStorage.getItem('sel_country');
-
-//       /* (CRUD) Send the user checkboxed itinerary data to the server to store the user-specific     itinerary data in the DB */
-
-//       axios.post(`${ROOT_URL}/save_itin`, { user_email, cb_name, cb_place_id, cb_price_level, cb_rating, cb_type, cb_vicinity, cb_city, cb_country, if(cb_photo){return cb_photo} })
-//       .then(response => {
-//         this.setState({
-//           itins_saved: true
-//         });
-//       })
-//       .catch(err => {
-//         this.setState({
-//           itins_saved: false
-//         });        
-//       })
-//     }
-
-//     this.context.router.history.push('/dashboard');
-//   }
-
-//   createCheckbox = (name, place_id) => (
-//     <Checkbox
-//       label={name}
-//       handleCheckboxChange={this.toggleCheckbox}
-//       key={place_id}
-//       handleSave={this.handleSave}
-//     />
-//   )
-//   handleSave = place => {
-//       console.log(place);
-//       const user_email = localStorage.getItem('userEmail');
-//       const cb_name = place.name;
-//       const cb_place_id = place.place_id;
-//       const cb_price_level = place.price_level;
-//       const cb_rating = place.rating;
-//       const cb_type = place.types[0];
-
-//       if(place.photos){
-//         const cb_photo = place.photos[0].html_attributions[0];
-        
-//       }
-//       const cb_vicinity = place.vicinity;
-
-//       const cb_city = localStorage.getItem('sel_city');
-//       const cb_country = localStorage.getItem('sel_country');
-
-//       /* (CRUD) Send the user checkboxed itinerary data to the server to store the user-specific     itinerary data in the DB */
-
-//       axios.post(`${ROOT_URL}/save_itin`, { user_email, cb_name, cb_place_id, cb_price_level, cb_rating, cb_type, cb_vicinity, cb_city, cb_country, if(cb_photo){return cb_photo} })
-//       .then(response => {
-//         this.setState({
-//           itins_saved: true
-//         });
-//       })
-//       .catch(err => {
-//         this.setState({
-//           itins_saved: false
-//         });        
-//       })
-    
-
-//     console.log("HANDLE SAVE FUNCTION COMPLETED");
-//   } //End handleSave()
-
-//   onButtonClick () {
-//     this.context.router.history.push('/hotelSearch');
-//   };
-
-//   IterateOverPlaces = () => (
-//     this.placesForAllTypes.add('test'),
-//     <PlacesSearch style={{width:'20%'}} types={['(regions)']} handleSave = {this.handleSave} selectedLocation={{lat:localStorage.getItem('trip_lat'), lng:localStorage.getItem('trip_lng')}} placeid={this.state.placeid} />
-//   )
-
-//   createCheckboxes = () => (
-    
-//     this.props.maps.places.map(this.createCheckbox)
-    
-//   )
-
-//   render() {
-//     const footerStyle = {
-//       backgroundColor: "black",
-//       fontSize: "15px",
-//       color: "white",
-//       borderTop: "1px solid #E7E7E7",
-//       textAlign: "center",
-//       padding: "0px",
-//       position: "fixed",
-//       left: "0",
-//       bottom: "0",
-//       height: "40px",
-//       width: "100%"
-//     };
-    
-//     const phantomStyle = {
-//       display: "block",
-//       padding: "20px",
-//       height: "60px",
-//       width: "100%"
-//     };
-    
-//     function Footer({ children }) {
-//       return (
-//         <div>
-//           <div style={phantomStyle} />
-//           <div style={footerStyle}>{children}</div>
-//         </div>
-//       );
-//     }
-    
-//     return (
-//       <div className="tripresults">
-//                   <Navbar>
-//     <Navbar.Header>
-//       <Navbar.Brand>
-//         <a href="/">GuideTrip</a>
-//       </Navbar.Brand>
-//     </Navbar.Header>
-//     <Nav>
-//       <NavItem eventKey={2} href="/">Home</NavItem>
-//       <NavItem eventKey={1} href="/dashboard">Dashboard</NavItem>
-//       <NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
-//     </Nav>
-//   </Navbar>
-//     <h3 style={{textAlign: "center"}}><strong>Your Custom Itinerary Results</strong></h3>
-//         <h4 style={{textAlign: "center"}}><strong>Marker Legend:</strong></h4>
-//         <div className='row1'>
-//           <div className='col-md-12 columns'>
-//           <div className='col-md-1 columns'>
-//             </div>
-//             <div className='col-md-1 columns'>
-//               <span className="badge" id='testA'>A - Store</span>
-//               <span className="badge" id='testB'>B - Lodging</span>
-//               <span className="badge" id='testC'>C - Restaurant/Cafe</span>
-//               <span className="badge" id='testD'>D - Museum/Art Gallery</span>
-//               <span className="badge" id='testE'>E - Pharmacy</span>
-//               <span className="badge" id='testF'>F - Subway</span>
-//             </div>
-//             <div className='col-md-1 columns'>
-//             </div>
-//             <div className='col-md-1 columns'>
-//               <span className="badge" id='testG'>G - Airport</span>
-//               <span className="badge" id='testH'>H - Hospital</span>
-//               <span className="badge" id='testI'>I - Bus</span>
-//               <span className="badge" id='testJ'>J - Park</span>
-//               <span className="badge" id='testK'>K - ATM</span>
-//               <span className="badge" id='testL'>L - Bank</span>
-//             </div>
-//             <div className='col-md-1 columns'>
-//             </div>
-//             <div className='col-md-1 columns'>
-//               <span className="badge" id='testM'>M - Doctor/Dentist</span>
-//               <span className="badge" id='testN'>N - Zoo</span>
-//               <span className="badge" id='testO'>O - Police</span>
-//               <span className="badge" id='testP'>P - Train</span>
-//               <span className="badge" id='testQ'>Q - School</span>
-//               <span className="badge" id='testR'>R - Bar</span>
-//             </div>
-//             <div className='col-md-1 columns'>
-//             </div>
-//             <div className='col-md-1 columns'>
-//               <span className="badge" id='testS'>S - Church</span>
-//               <span className="badge" id='testT'>T - Synagogue</span>
-//               <span className="badge" id='testU'>U - Mosque</span>
-//               <span className="badge" id='testV'>V - University</span>
-//               <span className="badge" id='testW'>W - Embassy</span>
-//               <span className="badge" id='testX'>X - Library</span>
-//             </div>
-//             <div className='col-md-1 columns'>
-//             </div>
-//             <div className='col-md-1 columns'>
-//               <span className="badge" id='testY'>Y - Spa</span>
-//               <span className="badge" id='testZ'>Z - Other</span>
-//             </div>
-//           </div>
-//         </div>
-
-//         <div className="row">
-//           <div className="col-sm-12">
-//             {this.IterateOverPlaces()}
-//             <form action='/dashboard' onSubmit={this.handleFormSubmit}>
-//             <div id="map"></div>
-//             <ListGroup>
-//               {this.createCheckboxes()}
-//             </ListGroup>
-//               <button className="btn btn-default" type="submit">Save</button>
-//             </form>
-//             <form action='/hotelSearch' onSubmit={this.onButtonClick}>
-//         <button type="submit" className='btn btn-default'>Find Hotels In Area</button> 
-//       </form>
-
-//           </div>
-//         </div>
-//         <br/> <br/> <br/>
-//         <Footer>
-//         <a href="/"> Home</a>
-//               <a href="/dashboard"> Dashboard</a>
-//               <a href="/hotelBuild"> Find Hotels</a>
-            
-//             <div class="footer-copyright">
-//         <div class="container-fluid">
-//             © 2017 Copyright: <a href="/"> GuideTrip </a>
-
-//         </div>
-//         </div>
-//         </Footer>
-//       </div>
-//     );
-//   }
-// }
-
-// const mapStateToProps = (state) => ({
-//   itins_saved: state.itins_saved,
-//   maps: state.maps
-// });
-
-// function mapDispatchToProps(dispatch){
-//   return bindActionCreators(actionCreators, dispatch);
-// }
-// export default Tripresults = connect(mapStateToProps, mapDispatchToProps)(Tripresults);
+export default Tripresults;

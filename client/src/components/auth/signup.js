@@ -5,7 +5,6 @@ import * as actions from '../../actions';
 import PropTypes from 'prop-types';
 import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
 
-
 class Signup extends Component {
   constructor(props) {
     super(props);
@@ -91,39 +90,30 @@ class Signup extends Component {
     </Nav>
   </Navbar>
       <div className="tg-login__wrapper">
-
+      <div className='col-md-5'>
+      </div>
+      <div className='col-md-6'>
       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
         <fieldset className='form-group'>
-          <label>Email:</label>
-          <input className='form-control' {...email} placeholder='Enter email' />
+          <label><strong>Email:</strong></label>
+          <input className='form-control' {...email} style={{width:'40%'}} placeholder='Enter email' />
           {email.touched && email.error && <div className='error'>{email.error}</div>}        
         </fieldset>
         <fieldset className='form-group'>
-          <label>Password:</label>
-          <input className='form-control' {...password} type='password' placeholder='Enter password' />
+          <label><strong>Password:</strong></label>
+          <input className='form-control' {...password} style={{width:'40%'}} type='password' placeholder='Enter password' />
           {password.touched && password.error && <div className='error'>{password.error}</div>}
         </fieldset>
         <fieldset className='form-group'>
-          <label>Confirm Password:</label>
-          <input className='form-control' {...passwordConfirm} type='password' placeholder='Enter password again' />
+          <label><strong>Confirm Password:</strong></label>
+          <input className='form-control' {...passwordConfirm} style={{width:'40%'}} type='password' placeholder='Enter password again' />
           {passwordConfirm.touched && passwordConfirm.error && <div className='error'>{passwordConfirm.error}</div>}          
         </fieldset>
         {this.renderAlert()}
         <button action='submit' className='btn btn-primary'>Sign up!</button>
       </form>
       </div>
-      <Footer>
-        <a href="/"> Home</a>
-              <a href="/dashboard"> Dashboard</a>
-              <a href="/hotelBuild"> Find Hotels</a>
-            
-            <div class="footer-copyright">
-        <div class="container-fluid">
-            © 2017 Copyright: <a href="/"> GuideTrip </a>
-
-        </div>
-        </div>
-        </Footer>
+      </div>
       </div>
     )
   }

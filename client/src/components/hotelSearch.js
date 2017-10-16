@@ -13,7 +13,7 @@ import axios from 'axios';
 const ROOT_URL = 'http://localhost:8080/api/v1';
 //const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
 
-class hotelSearch extends React.Component{
+class hotelSearch extends React.Component {
     constructor(props){
         super(props)
         this.state = {
@@ -24,7 +24,6 @@ class hotelSearch extends React.Component{
       router: PropTypes.object
     };
 
-
     createCheckbox = (name, place_id) => (
       <Checkbox
         label={name}
@@ -32,6 +31,7 @@ class hotelSearch extends React.Component{
         key={place_id}
         handleSave={this.handleSave}
       />)
+
       componentWillMount = () => {
         this.selectedCheckboxes = new Set();
         this.placesForAllTypes = new Set();
@@ -46,10 +46,9 @@ class hotelSearch extends React.Component{
           this.selectedCheckboxes.add(label);
         }
       }
+
   createCheckboxes = () => (
-    
     this.props.state.maps.places.map(this.createCheckbox)
-    
   )
 
   handleFormSubmit = formSubmitEvent => {
@@ -63,13 +62,15 @@ class hotelSearch extends React.Component{
       const cb_price_level = checkbox.price_level;
       const cb_rating = checkbox.rating;
       const cb_type = checkbox.types[0];
+
       if(checkbox.photos){
         const cb_photo = checkbox.photos[0].html_attributions[0];
-        
       }
       const cb_vicinity = checkbox.vicinity;
 
-      /* (CRUD) Send the user checkboxed itinerary data to the server to store the user-specific     itinerary data in the DB */
+      /* 
+      (CRUD) Send the user checkboxed itinerary data to the server to store the user-specific     itinerary data in the DB 
+      */
 
       const cb_city = localStorage.getItem('sel_city');
       const cb_country = localStorage.getItem('sel_country');
@@ -142,12 +143,20 @@ class hotelSearch extends React.Component{
           };
         
       console.log(this.props);
-      if (Number(localStorage.getItem('trip_lat')) != null && localStorage.getItem('trip_lng') != null){
-        var location = {lat:Number(localStorage.getItem('trip_lat')), lng: Number(localStorage.getItem('trip_lng'))}
-      } else {
-        var location = {lat:Number(this.props.state.maps.selectedLocation.lat), lng: Number(this.props.state.maps.selectedLocation.lng)};
+
+      if (localStorage.getItem('hotel_flag')) {
+        if (Number(localStorage.getItem('latitude')) != null && localStorage.getItem('longitude') != null){
+          var location = {lat:Number(localStorage.getItem('latitude')), lng: Number(localStorage.getItem('longitude'))}
+        } else {
+          var location = {lat:Number(this.props.state.maps.selectedLocation.lat), lng: Number(this.props.state.maps.selectedLocation.lng)}; 
+        }} else {
+          if (Number(localStorage.getItem('trip_lat')) != null && localStorage.getItem('trip_lng') != null){
+            var location = {lat:Number(localStorage.getItem('trip_lat')), lng: Number(localStorage.getItem('trip_lng'))}
+          } else {
+            var location = {lat:Number(this.props.state.maps.selectedLocation.lat), lng: Number(this.props.state.maps.selectedLocation.lng)}; 
+          }
+        }    
         
-      }        //let location ={lat:Number(localStorage.getItem('trip_lat')), lng:Number(localStorage.getItem('trip_lng'))};
         console.log('location: ' + location);
         let map = new google.maps.Map(document.getElementById('map'), {
             center: location,
@@ -172,8 +181,7 @@ class hotelSearch extends React.Component{
             if (status === google.maps.places.PlacesServiceStatus.OK) {
               clearResults();
               clearMarkers();
-              // Create a marker for each hotel found, and
-              // assign a letter of the alphabetic to each marker icon.
+              // Create a marker for each hotel found, and assign a letter of the alphabetic to each marker icon.
               for (var i = 0; i < results.length; i++) {
                 var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
                 var markerIcon = MARKER_PATH + markerLetter + '.png';
@@ -183,8 +191,7 @@ class hotelSearch extends React.Component{
                   animation: google.maps.Animation.DROP,
                   icon: markerIcon
                 });
-                // If the user clicks a hotel marker, show the details of that hotel
-                // in an info window.
+                // If the user clicks a hotel marker, show the details of that hotel in an info window.
                 markers[i].placeResult = results[i];
                 google.maps.event.addListener(markers[i], 'click', showInfoWindow);
                 setTimeout(dropMarker(i), i * 100);
@@ -225,9 +232,7 @@ class hotelSearch extends React.Component{
               document.getElementById('iw-phone-row').style.display = 'none';
             }
     
-            // Assign a five-star rating to the hotel, using a black star ('&#10029;')
-            // to indicate the rating the hotel has earned, and a white star ('&#10025;')
-            // for the rating points not achieved.
+            // Assign a five-star rating to the hotel, using a black star ('&#10029;') to indicate the rating the hotel has earned, and a white star ('&#10025;') for the rating points not achieved.
             if (place.rating) {
               var ratingHtml = '';
               for (var i = 0; i < 5; i++) {
@@ -243,8 +248,7 @@ class hotelSearch extends React.Component{
               document.getElementById('iw-rating-row').style.display = 'none';
             }
     
-            // The regexp isolates the first part of the URL (domain plus subdomain)
-            // to give a short URL for displaying in the info window.
+            // The regexp isolates the first part of the URL (domain plus subdomain) to give a short URL for displaying in the info window.
             if (place.website) {
               var fullUrl = place.website;
               var website = hostnameRegexp.exec(place.website);
@@ -260,9 +264,12 @@ class hotelSearch extends React.Component{
           }
         var x = 0; //Counter for info marker open/close
 
-        
         }
         render(){
+
+          const cb_city = localStorage.getItem('sel_city');
+          const cb_country = localStorage.getItem('sel_country');
+
           const footerStyle = {
             backgroundColor: "black",
             fontSize: "15px",
@@ -306,11 +313,11 @@ class hotelSearch extends React.Component{
       <NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
     </Nav>
   </Navbar>
-        <h3 style={{textAlign: "center"}}>Nearby Hotels</h3>
+        <h3 style={{textAlign: "center"}}><strong>Nearby Hotels for: </strong><span>{ cb_city}, {cb_country}</span></h3>
         <div id="map"></div>
         <div style={{"margin-left":"auto", "margin-right": "auto"}}>
         <div id="listing">
-      <table id="resultsTable">
+      <table id="resultsTable" style={{"margin-left":"auto", "margin-right": "auto"}}>
         <tbody id="results"></tbody>
       </table>
     </div>
@@ -344,9 +351,7 @@ class hotelSearch extends React.Component{
     </div>
         <div className="row">
           <div className="col-sm-12">
-            <form action='/dashboard' onSubmit={this.handleFormSubmit}>
-            
-            
+            <form action='/dashboard' onSubmit={this.handleFormSubmit}>  
               <button className="btn btn-default" type="submit">Save</button>
             </form>
           </div>
@@ -356,8 +361,8 @@ class hotelSearch extends React.Component{
               <a href="/dashboard"> Dashboard</a>
               <a href="/hotelBuild"> Find Hotels</a>
             
-            <div class="footer-copyright">
-        <div class="container-fluid">
+            <div className="footer-copyright">
+        <div className="container-fluid">
             © 2017 Copyright: <a href="/"> GuideTrip </a>
     
         </div>
@@ -367,16 +372,15 @@ class hotelSearch extends React.Component{
             )
         }
     }
-    const mapStateToProps = (state) =>{
-        return {state: state};
-      };
-      function mapDispatchToProps(dispatch){
-        return bindActionCreators(actionCreators, dispatch);
-      }
-      hotelSearch = connect(mapStateToProps, mapDispatchToProps)(hotelSearch);
+
+const mapStateToProps = (state) =>{
+  return {state: state};
+};
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(actionCreators, dispatch);
+}
+
+hotelSearch = connect(mapStateToProps, mapDispatchToProps)(hotelSearch);
       
-      export default hotelSearch;
-
-    
-
-
+export default hotelSearch;
