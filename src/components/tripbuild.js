@@ -11,13 +11,9 @@ import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
 
 import Autocomplete from 'react-google-autocomplete';
 
-<<<<<<< HEAD:client/src/components/tripbuild.js
-const ROOT_URL = 'http://localhost:8080/api/v1';
-//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
-=======
+
 //const ROOT_URL = 'http://localhost:8080/api/v1';
-const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
->>>>>>> 5cc3b42f849f734e36e0e25d5f08899c471b3ecf:src/components/tripbuild.js
+const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
 
 let cities = [];
 let places_type = [];
