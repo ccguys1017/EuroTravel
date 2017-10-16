@@ -142,7 +142,6 @@ class manualSearch extends React.Component{
         
         var x = 0; //Counter for info marker open/close
         function createMarker(place, x) {
-<<<<<<< HEAD:client/src/components/manualSearch.js
 
           let markerColor = '';
           let markerLabel = '';
@@ -155,13 +154,10 @@ class manualSearch extends React.Component{
           let placeRating = place.rating;          
           console.log('place: ' + place);                      
           
-=======
             
           let markerColor = '';
           let markerLabel = '';
           let pinColor = 'FFFFFF'
-            
-          //let markerColor = '/png/blue_markerA.png';
 
           let placeLoc = place.geometry.location;   // DEBUG (RAB) Capture Places data
           let placeName = place.name;               // DEBUG (RAB) Capture Places data
@@ -170,11 +166,6 @@ class manualSearch extends React.Component{
           let placeRating = place.rating;           // DEBUG (RAB) Capture Places data
           console.log('place: ' + place);                       // DEBUG (RAB) Capture Places data
 
-            
-            
-            
- /*           
->>>>>>> 5cc3b42f849f734e36e0e25d5f08899c471b3ecf:src/components/manualSearch.js
           switch (placeType) {
             case 'store':
               pinColor = "8B8BE2";  // blue
