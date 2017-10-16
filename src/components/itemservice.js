@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-//const ROOT_URL = 'http://localhost:8080/api/v1';
-const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
+const ROOT_URL = 'http://localhost:8080/api/v1';
+//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
 
 class ItemService extends Component {
   constructor(props) {
