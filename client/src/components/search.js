@@ -49,7 +49,7 @@
       for (let x=0; x < searchTypes.length; x++){
         service.nearbySearch({
           location:location,
-          radius: 500,                
+          radius: 1500,                
           type: [searchTypes[x]]            // DEBUG (DEJ)
           
         }, function(results, status) {

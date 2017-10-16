@@ -163,6 +163,7 @@ componentWillMount = () => {
 }
 
   onButtonClick () {
+    localStorage.setItem('hotel_flag', false);
     this.context.router.history.push('/hotelSearch');
   };
 

@@ -59,10 +59,12 @@ class Dashboard extends Component {
   }
 
   onHotelClick() {
+    localStorage.setItem('hotel_flag', false);
     this.context.router.history.push('/hotelBuild');
   }
 
   findLocation() {
+    localStorage.setItem('hotel_flag', true);
     this.context.router.history.push('/userLocation');
   }
 

@@ -149,7 +149,7 @@ class hotelSearch extends React.Component {
           var location = {lat:Number(localStorage.getItem('latitude')), lng: Number(localStorage.getItem('longitude'))}
         } else {
           var location = {lat:Number(this.props.state.maps.selectedLocation.lat), lng: Number(this.props.state.maps.selectedLocation.lng)}; 
-        }} else {
+      }} else {
           if (Number(localStorage.getItem('trip_lat')) != null && localStorage.getItem('trip_lng') != null){
             var location = {lat:Number(localStorage.getItem('trip_lat')), lng: Number(localStorage.getItem('trip_lng'))}
           } else {
