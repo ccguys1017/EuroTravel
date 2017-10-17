@@ -10,8 +10,8 @@ import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
 
 import axios from 'axios';
 
-//const ROOT_URL = 'http://localhost:8080/api/v1';
-const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
+const ROOT_URL = 'http://localhost:8080/api/v1';
+//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
 
 class hotelSearch extends React.Component {
     constructor(props){
@@ -149,7 +149,7 @@ class hotelSearch extends React.Component {
           var location = {lat:Number(localStorage.getItem('latitude')), lng: Number(localStorage.getItem('longitude'))}
         } else {
           var location = {lat:Number(this.props.state.maps.selectedLocation.lat), lng: Number(this.props.state.maps.selectedLocation.lng)}; 
-      }} else {
+        }} else {
           if (Number(localStorage.getItem('trip_lat')) != null && localStorage.getItem('trip_lng') != null){
             var location = {lat:Number(localStorage.getItem('trip_lat')), lng: Number(localStorage.getItem('trip_lng'))}
           } else {
@@ -271,10 +271,10 @@ class hotelSearch extends React.Component {
           const cb_country = localStorage.getItem('sel_country');
 
           const footerStyle = {
-            backgroundColor: "black",
+            backgroundColor: "#261e72",
             fontSize: "15px",
             color: "white",
-            borderTop: "1px solid #E7E7E7",
+            borderTop: "1px solid #7fa5f7",
             textAlign: "center",
             padding: "0px",
             position: "fixed",
@@ -283,7 +283,7 @@ class hotelSearch extends React.Component {
             height: "40px",
             width: "100%"
           };
-          
+      
           const phantomStyle = {
             display: "block",
             padding: "20px",
@@ -358,16 +358,16 @@ class hotelSearch extends React.Component {
         </div>
         <Footer>
         <a href="/"> Home</a>
-              <a href="/dashboard"> Dashboard</a>
-              <a href="/hotelBuild"> Find Hotels</a>
-            
-            <div className="footer-copyright">
-        <div className="container-fluid">
-            © 2017 Copyright: <a href="/"> GuideTrip </a>
-    
+        <a href="/dashboard"> Dashboard</a>
+        <a href="/hotelBuild"> Hotels</a>
+
+        <div className="footer-copyright">
+          <div className="container-fluid">
+            © 2017 Copyright:{" "}
+            <a href="http://www.guidetrip.me"> www.Guidetrip.me </a>
+          </div>
         </div>
-        </div>
-        </Footer>
+      </Footer>
       </div>
             )
         }
