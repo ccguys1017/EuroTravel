@@ -98,6 +98,7 @@ class hotelBuild extends React.Component {
 
           localStorage.setItem('trip_lat', selLat);
           localStorage.setItem('trip_lng', selLng);
+          localStorage.setItem('hotel_flag', false);
           this.context.router.history.push('/hotelSearch');
           }}  // end onPlaceSelected
           types={['(regions)']}
