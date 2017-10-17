@@ -497,4 +497,14 @@ body {
   .badge {
     background-color: brown;
   }
+  .checkbox {
+      width: 50%;
+      margin-left: auto;
+      margin-right: auto;
+  }
+  .cardList {
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+}
   
