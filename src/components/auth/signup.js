@@ -45,16 +45,16 @@ class Signup extends Component {
 
   render () {
     const footerStyle = {
-      backgroundColor: "black",
-      fontSize: "20px",
+      backgroundColor: "#261e72",
+      fontSize: "15px",
       color: "white",
-      borderTop: "1px solid #E7E7E7",
+      borderTop: "1px solid #7fa5f7",
       textAlign: "center",
-      padding: "20px",
+      padding: "0px",
       position: "fixed",
       left: "0",
       bottom: "0",
-      height: "90px",
+      height: "40px",
       width: "100%"
     };
     
@@ -112,6 +112,17 @@ class Signup extends Component {
         {this.renderAlert()}
         <button action='submit' className='btn btn-primary'>Sign up!</button>
       </form>
+      <Footer>
+              <a href="/"> Home</a>
+              <a href="/hotelBuild"> Hotels</a>
+
+              <div className="footer-copyright">
+                <div className="container-fluid">
+                  © 2017 Copyright:{" "}
+                  <a href="http://www.guidetrip.me"> www.Guidetrip.me </a>
+                </div>
+              </div>
+            </Footer>      
       </div>
       </div>
       </div>
