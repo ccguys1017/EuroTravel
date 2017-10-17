@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -304,13 +303,13 @@ class hotelSearch extends React.Component {
                           <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
-        <a href="/">GuideTrip</a>
+        <a href="/"><strong>GuideTrip</strong></a>
       </Navbar.Brand>
     </Navbar.Header>
     <Nav>
-      <NavItem eventKey={2} href="/">Home</NavItem>
-      <NavItem eventKey={1} href="/dashboard">Dashboard</NavItem>
-      <NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
+      <NavItem eventKey={2} href="/"><strong>Home</strong></NavItem>
+      <NavItem eventKey={1} href="/dashboard"><strong>Dashboard</strong></NavItem>
+      <NavItem eventKey={1} href="/hotelBuild"><strong>Hotels</strong></NavItem>
     </Nav>
   </Navbar>
         <h3 style={{textAlign: "center"}}><strong>Nearby Hotels for: </strong><span>{ cb_city}, {cb_country}</span></h3>
