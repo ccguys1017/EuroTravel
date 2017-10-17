@@ -22,7 +22,7 @@ class Checkbox extends Component {
     const { isChecked } = this.state;
 
     return (
-      <ListGroupItem>
+      <ListGroupItem className='cardList' style={{width:'50%'}}>
       <div className="checkbox">
         <label>
           <input
@@ -31,7 +31,7 @@ class Checkbox extends Component {
             checked={isChecked}
             onChange={this.toggleCheckboxChange}
           /><span className="badge">{this.props.label.types[0]}</span>
-          <i>Name: </i><strong>{ this.props.label.name }</strong> <i>Address: </i>{ this.props.label.vicinity } 
+          <h4><strong>  { this.props.label.name }</strong></h4> <h4>{ this.props.label.vicinity } </h4>
           
         </label>
       </div>

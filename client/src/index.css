@@ -28,7 +28,7 @@ body {
     width: 50em;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 15px;
+    margin-top: 25px;
     margin-bottom: 15px;
   }
 
@@ -497,4 +497,13 @@ body {
   .badge {
     background-color: brown;
   }
-  
+  .checkbox {
+      width: 50%;
+      margin-left: auto;
+      margin-right: auto;
+  }
+  .cardList {
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+}

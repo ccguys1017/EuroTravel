@@ -20,11 +20,11 @@ class Homepage extends Component {
       // show a link for user to go to Dashboard or Sign Out
       return [
         <li className='nav-item' key={1}>
-          <Link className='btn btn-default tg-login__btn' to='/dashboard'>Dashboard</Link>
+          <Link className='btn btn-default tg-login__btn' to='/dashboard'><strong>Dashboard</strong></Link>
         </li>
         ,
         <li className='nav-item' key={2}>
-          <Link className='nav-link' to='/signout'>Sign Out</Link>
+          <Link className='nav-link' to='/signout'><strong>Sign Out</strong></Link>
         </li>
       ];
     } else {
@@ -56,9 +56,9 @@ class Homepage extends Component {
             </div>
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul className="nav navbar-nav">
-                <li className="active"><a href="/">Home <span className="sr-only">(current)</span></a></li>
-                <li><a href="#">Trip Ideas</a></li>
-                <li><a href="#">Destinations</a></li>
+                <li className="active"><a href="/"><strong>Home</strong><span className="sr-only">(current)</span></a></li>
+                <li><a href="#"><strong>Trip Ideas</strong></a></li>
+                <li><a href="#"><strong>Destinations</strong></a></li>
 
               </ul>
               <ul className="nav navbar-nav navbar-right">
