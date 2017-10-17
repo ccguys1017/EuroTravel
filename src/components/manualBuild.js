@@ -7,8 +7,9 @@ import Dashboard from './dashboard';
 import PlacesSearch from './search';
 import {bindActionCreators} from 'redux';
 import * as actionCreators from '../actions';
-import Autocomplete from 'react-google-autocomplete';
 import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
+
+import Autocomplete from 'react-google-autocomplete';
 
 //const ROOT_URL = 'http://localhost:8080/api/v1';
 const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
@@ -16,7 +17,7 @@ const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
 let cities = [];
 let places_type = [];
 
-class manualBuild extends Component {
+class Tripbuild extends Component {
   constructor(props) {
     super(props);
   }    
@@ -38,20 +39,11 @@ componentWillMount = () => {
     const city = localStorage.getItem('sel_city');
     const country = localStorage.getItem('sel_country');
 
-    axios.post(`${ROOT_URL}/cities_lng_lat`, { city: city, country: country })
-    .then(response => {
-      cities = response.data.payload;
-      longitude = response.data.payload[0].lng;
-      latitude = response.data.payload[0].lat;
-      this.setState({
-          lng: longitude,
-          lat: latitude,
-      });
+    this.setState({
+        lng: this.props.state.maps.selectedLocation.lng,
+        lat: this.props.state.maps.selectedLocation.lat
     })
-    .catch(err => {
-      this.setState({
-      });        
-    })
+
   }
 
   handleFormSubmit = formSubmitEvent => {
@@ -142,29 +134,26 @@ componentWillMount = () => {
         places_type.push('spa');
     }
 
-    localStorage.setItem('trip_lat', JSON.stringify(this.state.lat));
-    localStorage.setItem('trip_lng', JSON.stringify(this.state.lng));
+    localStorage.setItem('trip_lat', this.state.lat);
+    localStorage.setItem('trip_lng', this.state.lng);
     
+    localStorage.setItem('place_type_array', places_type);
     console.log(places_type);
-
+    console.log("============ LOOK HERE =========");
+    // this.props.wipePlaces(); // to reset the places per search
     for (var i = 0; i < places_type.length; i ++){
         this.props.addType(places_type[i]);
-        console.log("Type added: " + places_type[i]);
+        console.log("type added: " + places_type[i]);
     }
 
     console.log("Places_type map completed");
     console.log(this.props);
-    this.context.router.history.push('/manualSearch');
-
+    this.context.router.history.push('/tripresults');
   }
 
  onClick () {
     this.context.router.history.push('/dashboard');
-}
-
-  onButtonClick () {
-    this.context.router.history.push('/hotelSearch');
-  };
+  }
 
   render() {
 
@@ -387,11 +376,10 @@ componentWillMount = () => {
             </div>
             </div>
           </div>
+          <br/>
           <button className='btn btn-default' type='submit'>Click to Generate Itinerary</button>
-          <button onClick={this.onButtonClick.bind(this)} className='btn btn-default'>Search Hotels In Area</button>
-
         </form>
-        
+        <button onClick={this.onClick.bind(this)} className='btn btn-default'>Back</button>
         <Footer>
         <a href="/"> Home</a>
         <a href="/dashboard"> Dashboard</a>
@@ -417,6 +405,6 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators(actionCreators, dispatch);
 }
 
-manualBuild = connect(mapStateToProps, mapDispatchToProps)(manualBuild);
+Tripbuild = connect(mapStateToProps, mapDispatchToProps)(Tripbuild);
 
-export default manualBuild;
+export default Tripbuild;
