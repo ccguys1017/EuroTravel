@@ -9,6 +9,7 @@ import Checkbox from './checkbox';
 import axios from 'axios';
 import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
 
+//const ROOT_URL = 'http://localhost:8080/api/v1';
 const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
 
 class Tripresults extends React.Component{
@@ -352,13 +353,13 @@ class Tripresults extends React.Component{
                                     <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
-        <a href="/">GuideTrip</a>
+        <a href="/"><strong>GuideTrip</strong></a>
       </Navbar.Brand>
     </Navbar.Header>
     <Nav>
-      <NavItem eventKey={2} href="/">Home</NavItem>
-      <NavItem eventKey={1} href="/dashboard">Dashboard</NavItem>
-      <NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
+      <NavItem eventKey={2} href="/"><strong>Home</strong></NavItem>
+      <NavItem eventKey={1} href="/dashboard"><strong>Dashboard</strong></NavItem>
+      <NavItem eventKey={1} href="/hotelBuild"><strong>Hotels</strong></NavItem>
     </Nav>
   </Navbar>
     <h3 style={{textAlign: "center"}}><strong>Your Custom Itinerary Results for: </strong><span>{ cb_city}, {cb_country}</span></h3>
