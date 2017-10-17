@@ -151,6 +151,13 @@ componentWillMount = () => {
     this.context.router.history.push('/tripresults');
   }
 
+ selectAll(source) {
+    let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = true;
+    }
+  }
+
  onClick () {
     this.context.router.history.push('/dashboard');
   }
@@ -204,12 +211,16 @@ componentWillMount = () => {
     </Nav>
   </Navbar>
     <h3 style={{textAlign: "center"}}><strong>Create Your Custom Itinerary for: </strong><span>{ cb_city}, {cb_country}</span></h3>
+    <label className='col-md-2 control-label'>Check your Itinerary Items</label> 
         <form action='/tripresults' onSubmit={this.handleFormSubmit}>
           <div className='form-group'>
-            <label className='col-md-2 control-label'>Check your Itinerary Items</label>  
+
             <div className='col-md-12 columns'>
             <div className='col-md-2 columns'>
-                </div>
+            <label className='checkbox-inline'>
+                    <input type='checkbox' onChange={this.selectAll.bind(this)}/><strong>Check All
+                </strong></label>
+            </div>
             <div className='row1'>
               <div className='col-md-1 columns'>
                 <label className='checkbox-inline'>

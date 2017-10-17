@@ -54,6 +54,13 @@ componentWillMount = () => {
     })
   }
 
+  selectAll(source) {
+    let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = true;
+    }
+  }
+
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
 
@@ -220,7 +227,10 @@ componentWillMount = () => {
             <label className='col-md-2 control-label'>Check your Itinerary Items</label>  
             <div className='col-md-12 columns'>
             <div className='col-md-2 columns'>
-                </div>
+            <label className='checkbox-inline'>
+                <input type='checkbox' onChange={this.selectAll.bind(this)}/><strong>Check All
+            </strong></label>
+            </div>
             <div className='row1'>
               <div className='col-md-1 columns'>
                 <label className='checkbox-inline'>
