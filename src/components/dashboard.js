@@ -13,8 +13,8 @@ import * as actionCreators from '../actions';
 import Autocomplete from 'react-google-autocomplete';
 import PlacesSearch from './search';
 
-//const ROOT_URL = 'http://localhost:8080/api/v1';
-const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
+const ROOT_URL = 'http://localhost:8080/api/v1';
+//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
 
 let saved_itineraries = [];
 let cities = [];
@@ -59,12 +59,10 @@ class Dashboard extends Component {
   }
 
   onHotelClick() {
-    localStorage.setItem('hotel_flag', false);
     this.context.router.history.push('/hotelBuild');
   }
 
   findLocation() {
-    localStorage.setItem('hotel_flag', true);
     this.context.router.history.push('/userLocation');
   }
 
@@ -724,23 +722,23 @@ class Dashboard extends Component {
 
   render() {
     const footerStyle = {
-      backgroundColor: "black",
+      backgroundColor: "#8fe1f0",
       fontSize: "15px",
-      color: "white",
-      borderTop: "1px solid #E7E7E7",
+      color: "blue",
+      borderTop: "1px solid #7fa5f7",
       textAlign: "center",
-      padding: "0px",
+      padding: "5px",
       position: "fixed",
       left: "0",
       bottom: "0",
-      height: "40px",
+      height: "33px",
       width: "100%"
     };
     
     const phantomStyle = {
       display: "block",
       padding: "20px",
-      height: "60px",
+      height: "50px",
       width: "100%"
     };
     
@@ -790,9 +788,16 @@ class Dashboard extends Component {
         </div>
         <br/><br/>
         <h3><strong>Search for your New Vacation!</strong></h3>
+
         <Autocomplete style={{width:'30%'}} 
           onPlaceSelected={(place) => {
-
+/*
+          document.getElementsByClassName('.dashboard')[0].addEventListener('click', function(event) {
+            if (event.key === 'Enter') {
+              event.preventDefault();
+              alert('Please click on a autocompleted selection. Try again.');
+          }});
+*/
           let selectedlatlong = place.geometry.location.toString();
           let selLat = '';
           let selLng = '';
@@ -828,6 +833,7 @@ class Dashboard extends Component {
           }}  // end onPlaceSelected
           types={['(regions)']}
         />
+
         <form action='/dashboard' onChange={this.listCities.bind(this)}>
         <div className='col-md-2'>
           <h2><strong>Select Country:</strong></h2>
@@ -1085,17 +1091,12 @@ class Dashboard extends Component {
         </div>
         
         <Footer>
-        <a href="/"> Home</a>
-              <a href="/dashboard"> Dashboard</a>
-              <a href="/hotelBuild"> Find Hotels</a>
-            
-            <div className="footer-copyright">
-        <div className="container-fluid">
-            © 2017 Copyright: <a href="/"> GuideTrip </a>
-
+        <div className="absolute">
+          <div className="absoute">
+            © 2017 Copyright: <a href="/"> www.guidetrip.me </a>
+          </div>
         </div>
-        </div>
-        </Footer>
+      </Footer>
         </div>
     );
   }
@@ -1113,3 +1114,4 @@ function mapDispatchToProps(dispatch){
 Dashboard = connect(mapStatetoProps,mapDispatchToProps)(Dashboard);
 
 export default Dashboard;
+
