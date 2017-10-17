@@ -11,9 +11,8 @@ import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
 
 import Autocomplete from 'react-google-autocomplete';
 
-
-//const ROOT_URL = 'http://localhost:8080/api/v1';
-const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
+const ROOT_URL = 'http://localhost:8080/api/v1';
+//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/';
 
 let cities = [];
 let places_type = [];
@@ -162,10 +161,10 @@ componentWillMount = () => {
     const cb_country = localStorage.getItem('sel_country');
 
     const footerStyle = {
-        backgroundColor: "black",
+        backgroundColor: "#261e72",
         fontSize: "15px",
         color: "white",
-        borderTop: "1px solid #E7E7E7",
+        borderTop: "1px solid #7fa5f7",
         textAlign: "center",
         padding: "0px",
         position: "fixed",
@@ -174,7 +173,7 @@ componentWillMount = () => {
         height: "40px",
         width: "100%"
       };
-      
+  
       const phantomStyle = {
         display: "block",
         padding: "20px",
@@ -383,16 +382,16 @@ componentWillMount = () => {
         <button onClick={this.onClick.bind(this)} className='btn btn-default'>Back</button>
         <Footer>
         <a href="/"> Home</a>
-              <a href="/dashboard"> Dashboard</a>
-              <a href="/hotelBuild"> Find Hotels</a>
-            
-            <div className="footer-copyright">
-        <div className="container-fluid">
-            © 2017 Copyright: <a href="/"> GuideTrip </a>
+        <a href="/dashboard"> Dashboard</a>
+        <a href="/hotelBuild"> Hotels</a>
 
+        <div className="footer-copyright">
+          <div className="container-fluid">
+            © 2017 Copyright:{" "}
+            <a href="http://www.guidetrip.me"> www.Guidetrip.me </a>
+          </div>
         </div>
-        </div>
-        </Footer>
+      </Footer>
       </div>
     );
   }
