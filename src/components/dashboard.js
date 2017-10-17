@@ -13,7 +13,8 @@ import * as actionCreators from '../actions';
 import Autocomplete from 'react-google-autocomplete';
 import PlacesSearch from './search';
 
-const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
+const ROOT_URL = 'http://localhost:8080/api/v1';
+//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
 
 let saved_itineraries = [];
 let cities = [];
@@ -759,13 +760,13 @@ class Dashboard extends Component {
           <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
-        <a href="/">GuideTrip</a>
+        <a href="/"><strong>GuideTrip</strong></a>
       </Navbar.Brand>
     </Navbar.Header>
     <Nav>
-      <NavItem eventKey={2} href="/">Home</NavItem>
-      <NavItem eventKey={1} href="/dashboard">Dashboard</NavItem>
-      <NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
+      <NavItem eventKey={2} href="/"><strong>Home</strong></NavItem>
+      <NavItem eventKey={1} href="/dashboard"><strong>Dashboard</strong></NavItem>
+      <NavItem eventKey={1} href="/hotelBuild"><strong>Hotels</strong></NavItem>
     </Nav>
   </Navbar>
   <div className='dashboard'>
@@ -786,7 +787,7 @@ class Dashboard extends Component {
             </Table>
         </div>
         <br/><br/>
-        <h3><strong>Search for your New Vacation!</strong></h3>
+        <h3><strong>Search the World for your New Vacation!</strong></h3>
 
         <Autocomplete style={{width:'30%'}} 
           onPlaceSelected={(place) => {
@@ -835,7 +836,7 @@ class Dashboard extends Component {
 
         <form action='/dashboard' onChange={this.listCities.bind(this)}>
         <div className='col-md-2'>
-          <h2><strong>Select Country:</strong></h2>
+          <h3><strong>or Search Europe:</strong></h3>
             <div className='dashradio'>
               <div className='dashradio-item'>
                 <input type='radio' name='radio' id='countrydashradio1' />
@@ -939,8 +940,6 @@ class Dashboard extends Component {
               </div>
             </div>
           </div>
-          <br></br>
-          <br></br>
           <br></br>
           <br></br>
           <br></br>
@@ -1048,7 +1047,7 @@ class Dashboard extends Component {
           </div>
           </form>
           <div className='col-md-2'>
-          <h2><strong>Select City:</strong></h2>
+          <h3><strong>Select City:</strong></h3>
           <form action='/dashboard' onSubmit={this.handleFormSubmit.bind(this)}>
             <div className='dashradio'>
               <div className='dashradio-item'>
