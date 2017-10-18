@@ -10,7 +10,6 @@ import * as actionCreators from '../actions';
 import Autocomplete from 'react-google-autocomplete';
 import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
 
-//const ROOT_URL = 'http://localhost:8080/api/v1';
 const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
 
 let cities = [];
@@ -227,10 +226,10 @@ componentWillMount = () => {
             <label className='col-md-2 control-label'>Check your Itinerary Items</label>  
             <div className='col-md-12 columns'>
             <div className='col-md-2 columns'>
-              <label className='checkbox-inline'>
+            <label className='checkbox-inline'>
                 <input type='checkbox' onChange={this.selectAll.bind(this)}/><strong>Check All
             </strong></label>
-             </div>
+            </div>
             <div className='row1'>
               <div className='col-md-1 columns'>
                 <label className='checkbox-inline'>
@@ -397,7 +396,15 @@ componentWillMount = () => {
             </div>
             </div>
           </div>
+
+          <div>
+          <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            
           <button className='btn btn-default' type='submit'>Click to Generate Itinerary</button>
+          </div>
           <button onClick={this.onButtonClick.bind(this)} className='btn btn-default'>Search Hotels In Area</button>
 
         </form>
