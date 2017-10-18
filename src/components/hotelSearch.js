@@ -10,7 +10,6 @@ import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
 
 import axios from 'axios';
 
-//const ROOT_URL = 'http://localhost:8080/api/v1';
 const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
 
 class hotelSearch extends React.Component {
@@ -144,19 +143,27 @@ class hotelSearch extends React.Component {
         
       console.log(this.props);
 
-      if (localStorage.getItem('hotel_flag')) {
         if (Number(localStorage.getItem('latitude')) != null && localStorage.getItem('longitude') != null){
           var location = {lat:Number(localStorage.getItem('latitude')), lng: Number(localStorage.getItem('longitude'))}
         } else {
           var location = {lat:Number(this.props.state.maps.selectedLocation.lat), lng: Number(this.props.state.maps.selectedLocation.lng)}; 
-        }} else {
+        }
+        
+/*
+      if (localStorage.getItem('hotel_flag') === true) {
+        if (Number(localStorage.getItem('latitude')) != null && localStorage.getItem('longitude') != null){
+          var location = {lat:Number(localStorage.getItem('latitude')), lng: Number(localStorage.getItem('longitude'))}
+        } else {
+          var location = {lat:Number(this.props.state.maps.selectedLocation.lat), lng: Number(this.props.state.maps.selectedLocation.lng)}; 
+      }} else {
           if (Number(localStorage.getItem('trip_lat')) != null && localStorage.getItem('trip_lng') != null){
             var location = {lat:Number(localStorage.getItem('trip_lat')), lng: Number(localStorage.getItem('trip_lng'))}
           } else {
             var location = {lat:Number(this.props.state.maps.selectedLocation.lat), lng: Number(this.props.state.maps.selectedLocation.lng)}; 
           }
         }    
-        
+*/
+
         console.log('location: ' + location);
         let map = new google.maps.Map(document.getElementById('map'), {
             center: location,
@@ -223,7 +230,7 @@ class hotelSearch extends React.Component {
             document.getElementById('iw-url').innerHTML = '<b><a href="' + place.url +
                 '">' + place.name + '</a></b>';
             document.getElementById('iw-address').textContent = place.vicinity;
-    
+    document.getElementById('iw-checkbox').innerHTML = this.createCheckbox;
             if (place.formatted_phone_number) {
               document.getElementById('iw-phone-row').style.display = '';
               document.getElementById('iw-phone').textContent =
@@ -326,6 +333,9 @@ class hotelSearch extends React.Component {
     <div style={{display: "none", float:"right"}}>
       <div id="info-content">
         <table>
+        <tr id="iw-checkbox-row" class="iw_table_row">
+            <td id="iw-checkbox"></td>
+          </tr>
           <tr id="iw-url-row" class="iw_table_row">
             <td id="iw-icon" class="iw_table_icon"></td>
             <td id="iw-url"></td>
