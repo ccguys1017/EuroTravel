@@ -397,7 +397,15 @@ componentWillMount = () => {
             </div>
             </div>
           </div>
+
+          <div>
+          <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            
           <button className='btn btn-default' type='submit'>Click to Generate Itinerary</button>
+          </div>
           <button onClick={this.onButtonClick.bind(this)} className='btn btn-default'>Search Hotels In Area</button>
 
         </form>

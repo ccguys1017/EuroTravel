@@ -158,10 +158,6 @@ componentWillMount = () => {
     }
   }
 
- onClick () {
-    this.context.router.history.push('/dashboard');
-  }
-
   render() {
 
     const cb_city = localStorage.getItem('sel_city');
@@ -388,9 +384,16 @@ componentWillMount = () => {
             </div>
           </div>
           <br/>
+          
+          <div className='col-md-1 columns'>
+          <br></br>
+            <br></br>
           <button className='btn btn-default' type='submit'>Click to Generate Itinerary</button>
+            </div>
+            
+
         </form>
-        <button onClick={this.onClick.bind(this)} className='btn btn-default'>Back</button>
+
         <Footer>
         <a href="/"> Home</a>
         <a href="/dashboard"> Dashboard</a>
