@@ -13,7 +13,6 @@ import * as actionCreators from '../actions';
 import Autocomplete from 'react-google-autocomplete';
 import PlacesSearch from './search';
 
-//const ROOT_URL = 'http://localhost:8080/api/v1';
 const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
 
 let saved_itineraries = [];
@@ -64,6 +63,9 @@ class Dashboard extends Component {
 
   findLocation() {
     this.context.router.history.push('/userLocation');
+  }
+  goToMessenger(){
+    this.context.router.history.push('/messaging');
   }
 
   handleSave = place => {
@@ -771,6 +773,10 @@ class Dashboard extends Component {
   </Navbar>
   <div className='dashboard'>
         <h3 style={{textAlign: "center"}}><strong>Dashboard</strong></h3>
+        <div class="col-md-6 float-right"><button onClick={this.goToMessenger.bind(this)} className='btn btn-primary '>Need Help?</button>
+        </div>
+
+      <br/>
         <div className='col-md-6'>
           <h4><strong>Your Previously saved Itineraries</strong></h4>
           <Table  className="table table-striped">
@@ -798,12 +804,24 @@ class Dashboard extends Component {
               alert('Please click on a autocompleted selection. Try again.');
           }});
 */
-          let selectedlatlong = place.geometry.location.toString();
+let selectedlatlong;
+let halt = false;
+if (!place.geometry){
+  alert("Place not selected please try again");
+  halt = true;
+  this.context.router.history.push('/dashboard');
+
+} else {
+  halt = false;
+  selectedlatlong = place.geometry.location.toString();
+
+}
+          
           let selLat = '';
           let selLng = '';
           let onlng = false;  
-
-          for (let i =0; i < selectedlatlong.length; i++) {
+  if (halt == false){
+    for (let i =0; i < selectedlatlong.length; i++) {
             if(onlng === false) {
               if ( i !== 0 && selectedlatlong[i] !== ',' ) {
                 selLat = selLat.concat(selectedlatlong[i]);
@@ -830,6 +848,8 @@ class Dashboard extends Component {
           }
 
           this.context.router.history.push('/manualBuild');
+  }
+          
           }}  // end onPlaceSelected
           types={['(regions)']}
         />
@@ -1086,8 +1106,11 @@ class Dashboard extends Component {
         <div><strong>or</strong></div>
         <button onClick={this.findLocation.bind(this)} className='btn btn-default'>Find Places Near You</button>
         </div>
-        </div>
         
+        </div>
+\
+
+
         <Footer>
         <div className="absolute">
           <div className="absoute">
