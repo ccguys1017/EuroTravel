@@ -8,7 +8,7 @@
 
 const path = require('path');
 const srcPath = path.join(__dirname, '/../src');
-const dfltPort = 8000;
+const dfltPort = 'https://admin-chat-eurotravel.herokuapp.com/';
 
 /**
  * Get the default modules object for webpack
