@@ -8,8 +8,8 @@ class Message extends React.Component {
     return (
       <div className={`message ${fromMe}`}>
         <div className='username' styles={{"font-weight": "bold",
-  "font-size": "0.9rem",
-  "color": "#999",
+  "font-size": "15px",
+  "color": "black",
   "margin-bottom": "5px"}}>
           { this.props.username }
         </div>

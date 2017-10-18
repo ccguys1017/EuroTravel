@@ -99,12 +99,7 @@ body,
 .error {
   color: red;
 }
-.username {
-  font-weight: bold;
-  font-size: 0.9rem;
-  color: #999;
-  margin-bottom: 5px;
-}
+
 
 
 .messages {
@@ -156,12 +151,6 @@ body,
   padding-right: 50px;
 }
 
-.username {
-  font-weight: bold;
-  font-size: 0.9rem;
-  color: #999;
-  margin-bottom: 5px;
-}
 
 /* NEXT */
 
