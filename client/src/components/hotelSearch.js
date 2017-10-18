@@ -91,6 +91,13 @@ class hotelSearch extends React.Component {
     this.context.router.history.push('/dashboard');
   }
     componentDidMount() {
+      let toggleCheckbox = label => {
+        if (this.selectedCheckboxes.has(label)) {
+          this.selectedCheckboxes.delete(label);
+        } else {
+          this.selectedCheckboxes.add(label);
+        }
+      }
         var MARKER_PATH = 'https://developers.google.com/maps/documentation/javascript/images/marker_green';
         var hostnameRegexp = new RegExp('^https?://.+?/');
         var markers = [];
@@ -120,6 +127,7 @@ class hotelSearch extends React.Component {
             var name = document.createTextNode(result.name);
             iconTd.appendChild(icon);
             nameTd.appendChild(name);
+
             tr.appendChild(iconTd);
             tr.appendChild(nameTd);
             results.appendChild(tr);
@@ -196,6 +204,8 @@ class hotelSearch extends React.Component {
                 google.maps.event.addListener(markers[i], 'click', showInfoWindow);
                 setTimeout(dropMarker(i), i * 100);
                 addResult(results[i], i);
+                // LOOK HERE *************************
+                props.addPlace(results[i]);
               }
             }
           });
@@ -223,7 +233,7 @@ class hotelSearch extends React.Component {
             document.getElementById('iw-url').innerHTML = '<b><a href="' + place.url +
                 '">' + place.name + '</a></b>';
             document.getElementById('iw-address').textContent = place.vicinity;
-    document.getElementById('iw-checkbox').innerHTML = this.createCheckbox;
+
             if (place.formatted_phone_number) {
               document.getElementById('iw-phone-row').style.display = '';
               document.getElementById('iw-phone').textContent =
@@ -317,7 +327,7 @@ class hotelSearch extends React.Component {
         <div id="map"></div>
         <div style={{"margin-left":"auto", "margin-right": "auto"}}>
         <div id="listing">
-      <table id="resultsTable" style={{"margin-left":"auto", "margin-right": "auto"}}>
+      <table id="resultsTable" style={{"margin-left":"auto", "margin-right": "0", 'float':'left'}}>
         <tbody id="results"></tbody>
       </table>
     </div>
@@ -326,9 +336,6 @@ class hotelSearch extends React.Component {
     <div style={{display: "none", float:"right"}}>
       <div id="info-content">
         <table>
-        <tr id="iw-checkbox-row" class="iw_table_row">
-            <td id="iw-checkbox"></td>
-          </tr>
           <tr id="iw-url-row" class="iw_table_row">
             <td id="iw-icon" class="iw_table_icon"></td>
             <td id="iw-url"></td>
@@ -352,6 +359,33 @@ class hotelSearch extends React.Component {
         </table>
       </div>
     </div>
+    <div className="checkboxResults" style={{
+      'float':'right', 'width':'40%'
+    }}>
+    <div className="row">
+          <div className="col-sm-12">
+            {this.props.state.maps.places.map( (place) => {
+              
+              console.log(place);
+              return(
+                <div className="hotelBox">
+                <Checkbox
+                
+        label={place.name}
+        handleCheckboxChange={this.toggleCheckbox}
+        key={place.place_id}
+        handleSave={this.handleSave}
+        label={place}
+        
+      />
+      </div>
+              )
+            })
+
+            }
+            </div>
+            </div>
+            </div>
         <div className="row">
           <div className="col-sm-12">
             <form action='/dashboard' onSubmit={this.handleFormSubmit}>  
