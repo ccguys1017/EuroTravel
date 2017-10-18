@@ -17,7 +17,9 @@ class TableRow extends Component {
       handleSubmit(event) {
         event.preventDefault();
         this.addItemService.deleteData(this.props.obj._id);
+        /*
         alert('Your Itinerary item has been deleted! Reload dashboard to update saved itinerary list.');
+        */
       }
 
       render() {
@@ -40,3 +42,4 @@ class TableRow extends Component {
     }
     
     export default TableRow;
+
