@@ -223,7 +223,7 @@ class hotelSearch extends React.Component {
             document.getElementById('iw-url').innerHTML = '<b><a href="' + place.url +
                 '">' + place.name + '</a></b>';
             document.getElementById('iw-address').textContent = place.vicinity;
-    
+    document.getElementById('iw-checkbox').innerHTML = this.createCheckbox;
             if (place.formatted_phone_number) {
               document.getElementById('iw-phone-row').style.display = '';
               document.getElementById('iw-phone').textContent =
@@ -326,6 +326,9 @@ class hotelSearch extends React.Component {
     <div style={{display: "none", float:"right"}}>
       <div id="info-content">
         <table>
+        <tr id="iw-checkbox-row" class="iw_table_row">
+            <td id="iw-checkbox"></td>
+          </tr>
           <tr id="iw-url-row" class="iw_table_row">
             <td id="iw-icon" class="iw_table_icon"></td>
             <td id="iw-url"></td>

@@ -66,13 +66,23 @@ class hotelBuild extends React.Component {
       <h4><strong>Search the World for a Hotel!</strong></h4>
       <Autocomplete style={{width:'35%'}} 
           onPlaceSelected={(place) => {
+            let selectedlatlong;
+            let halt = false;
+            if (!place.geometry){
+            alert("Place not selected please try again");
+            halt = true;
+            this.context.router.history.push('/hotelBuild');
 
-          let selectedlatlong = place.geometry.location.toString();
+          } else {
+            halt = false;
+            selectedlatlong = place.geometry.location.toString();
+
+          }
           let selLat = '';
           let selLng = '';
           let onlng = false;  
-
-          for (let i =0; i < selectedlatlong.length; i++) {
+          if (halt == false){
+            for (let i =0; i < selectedlatlong.length; i++) {
             if(onlng === false) {
               if ( i !== 0 && selectedlatlong[i] !== ',' ) {
                 selLat = selLat.concat(selectedlatlong[i]);
@@ -101,7 +111,9 @@ class hotelBuild extends React.Component {
           localStorage.setItem('trip_lng', selLng);
           localStorage.setItem('hotel_flag', false);
           this.context.router.history.push('/hotelSearch');
-          }}  // end onPlaceSelected
+          
+          }
+        }}  // end onPlaceSelected
           types={['(regions)']}
         />
         </div>

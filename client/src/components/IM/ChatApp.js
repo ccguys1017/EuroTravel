@@ -3,8 +3,6 @@
 import React from 'react';
 import io from 'socket.io-client';
 import config from './config';
-import './ChatApp.css'
-
 import Messages from './Messages';
 import ChatInput from './ChatInput';
 // import './ChatApp.css';

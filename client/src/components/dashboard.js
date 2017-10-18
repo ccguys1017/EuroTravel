@@ -805,12 +805,24 @@ class Dashboard extends Component {
               alert('Please click on a autocompleted selection. Try again.');
           }});
 */
-          let selectedlatlong = place.geometry.location.toString();
+let selectedlatlong;
+let halt = false;
+if (!place.geometry){
+  alert("Place not selected please try again");
+  halt = true;
+  this.context.router.history.push('/dashboard');
+
+} else {
+  halt = false;
+  selectedlatlong = place.geometry.location.toString();
+
+}
+          
           let selLat = '';
           let selLng = '';
           let onlng = false;  
-
-          for (let i =0; i < selectedlatlong.length; i++) {
+  if (halt == false){
+    for (let i =0; i < selectedlatlong.length; i++) {
             if(onlng === false) {
               if ( i !== 0 && selectedlatlong[i] !== ',' ) {
                 selLat = selLat.concat(selectedlatlong[i]);
@@ -837,6 +849,8 @@ class Dashboard extends Component {
           }
 
           this.context.router.history.push('/manualBuild');
+  }
+          
           }}  // end onPlaceSelected
           types={['(regions)']}
         />
