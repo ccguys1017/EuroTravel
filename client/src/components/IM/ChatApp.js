@@ -7,6 +7,8 @@ import './ChatApp.css'
 
 import Messages from './Messages';
 import ChatInput from './ChatInput';
+// import './ChatApp.css';
+
 
 class ChatApp extends React.Component {
   socket = {};
@@ -47,7 +49,9 @@ class ChatApp extends React.Component {
   render() {
     return (
       <div className="container" style={{"display": "flex",
-        "flex-direction": "column"}}>
+        "flex-direction": "column", "min-height": "100vh",
+  "max-height": "100vh",
+  "max-width": '100%'}}>
         <h3 style={{ "text-align": "center",
   "padding": "20px 0",
   "margin": "0",
