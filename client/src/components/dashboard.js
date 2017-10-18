@@ -65,6 +65,9 @@ class Dashboard extends Component {
   findLocation() {
     this.context.router.history.push('/userLocation');
   }
+  goToMessenger(){
+    this.context.router.history.push('/messaging');
+  }
 
   handleSave = place => {
     console.log(place);
@@ -771,6 +774,10 @@ class Dashboard extends Component {
   </Navbar>
   <div className='dashboard'>
         <h3 style={{textAlign: "center"}}><strong>Dashboard</strong></h3>
+        <div class="col-md-6 float-right"><button onClick={this.goToMessenger.bind(this)} className='btn btn-primary '>Need Help?</button>
+        </div>
+
+      <br/>
         <div className='col-md-6'>
           <h4><strong>Your Previously saved Itineraries</strong></h4>
           <Table  className="table table-striped">
@@ -1086,8 +1093,11 @@ class Dashboard extends Component {
         <div><strong>or</strong></div>
         <button onClick={this.findLocation.bind(this)} className='btn btn-default'>Find Places Near You</button>
         </div>
-        </div>
         
+        </div>
+\
+
+
         <Footer>
         <div className="absolute">
           <div className="absoute">

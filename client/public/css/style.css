@@ -90,3 +90,9 @@ body,
   border: 1px solid #4797b7;
   /*background-color: white;*/
 }
+.username {
+  font-weight: bold;
+  font-size: 14px;
+  color: #080808;
+  margin-bottom: 5px;
+}

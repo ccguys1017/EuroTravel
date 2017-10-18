@@ -10,6 +10,12 @@ body {
     height: 30em;
     width: 40em;
   }
+  .username {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #999;
+    margin-bottom: 5px;
+  }
 
   #testA {
     display: inline-block;

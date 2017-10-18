@@ -32,6 +32,8 @@ class UserLocation extends React.Component{
               console.log(position);
               localStorage.setItem('trip_lat', pos.lat);
               localStorage.setItem('trip_lng', pos.lng);
+              localStorage.setItem('latitude',pos.lat );
+              localStorage.setItem('longitude', pos.lng);
               var latlng = {lat: parseFloat(pos.lat), lng: parseFloat(pos.lng)};
               
               let country = "";
@@ -49,6 +51,7 @@ class UserLocation extends React.Component{
                     props.addLocation(latlng.lat, latlng.lng, results[0].place_id);
                     console.log(country);
                     console.log(city);
+                    
                     
                   } else {
                     window.alert('No results found');
