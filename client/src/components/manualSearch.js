@@ -55,6 +55,7 @@ class manualSearch extends React.Component{
   )
 
   onButtonClick () {
+    localStorage.setItem('hotel_flag', true);
     this.context.router.history.push('/hotelSearch');
   };
 

@@ -106,7 +106,7 @@ class hotelBuild extends React.Component {
             localStorage.setItem('sel_country', place.address_components[2].short_name);
           }
           localStorage.setItem('latitude',selLat );
-              localStorage.setItem('longitude', selLng);
+          localStorage.setItem('longitude', selLng);
           localStorage.setItem('trip_lat', selLat);
           localStorage.setItem('trip_lng', selLng);
           localStorage.setItem('hotel_flag', false);
