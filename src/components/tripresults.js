@@ -9,7 +9,8 @@ import Checkbox from './checkbox';
 import axios from 'axios';
 import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
 
-const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
+const ROOT_URL = 'http://localhost:8080/api/v1';
+//const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
 
 class Tripresults extends React.Component{
     constructor(props){
@@ -365,6 +366,8 @@ class Tripresults extends React.Component{
         <h4 style={{textAlign: "center"}}><strong>Marker Legend</strong></h4>
         <div className='row1'>
           <div className='col-md-12 columns'>
+          <div className='col-md-2 columns'>
+            </div>
           <div className='col-md-1 columns'>
             </div>
             <div className='col-md-1 columns'>
@@ -406,6 +409,10 @@ class Tripresults extends React.Component{
               <span className="badge" id='testX'>X - Library</span>
             </div>
             <div className='col-md-1 columns'>
+            </div>
+            </div>
+            <div className='col-md-12 columns'>
+          <div className='col-md-5 columns'>
             </div>
             <div className='col-md-1 columns'>
               <span className="badge" id='testY'>Y - Spa</span>
