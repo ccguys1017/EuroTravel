@@ -155,8 +155,7 @@ class hotelSearch extends React.Component {
           var location = {lat:Number(localStorage.getItem('latitude')), lng: Number(localStorage.getItem('longitude'))}
         } else {
           var location = {lat:Number(this.props.state.maps.selectedLocation.lat), lng: Number(this.props.state.maps.selectedLocation.lng)}; 
-        }
-        }    
+        }   
         
         console.log('location: ' + location);
         let map = new google.maps.Map(document.getElementById('map'), {
