@@ -85,8 +85,6 @@ class Signup extends Component {
     </Navbar.Header>
     <Nav>
       <NavItem eventKey={2} href="/">Home</NavItem>
-      <NavItem eventKey={1} href="/dashboard">Dashboard</NavItem>
-      <NavItem eventKey={1} href="/hotelBuild">Hotels</NavItem>
     </Nav>
   </Navbar>
       <div className="tg-login__wrapper">
