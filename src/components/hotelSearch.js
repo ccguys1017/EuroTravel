@@ -151,17 +151,11 @@ class hotelSearch extends React.Component {
         
       console.log(this.props);
 
-      if (localStorage.getItem('hotel_flag')) {
         if (Number(localStorage.getItem('latitude')) != null && localStorage.getItem('longitude') != null){
           var location = {lat:Number(localStorage.getItem('latitude')), lng: Number(localStorage.getItem('longitude'))}
         } else {
           var location = {lat:Number(this.props.state.maps.selectedLocation.lat), lng: Number(this.props.state.maps.selectedLocation.lng)}; 
-        }} else {
-          if (Number(localStorage.getItem('trip_lat')) != null && localStorage.getItem('trip_lng') != null){
-            var location = {lat:Number(localStorage.getItem('trip_lat')), lng: Number(localStorage.getItem('trip_lng'))}
-          } else {
-            var location = {lat:Number(this.props.state.maps.selectedLocation.lat), lng: Number(this.props.state.maps.selectedLocation.lng)}; 
-          }
+        }
         }    
         
         console.log('location: ' + location);
