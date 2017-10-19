@@ -79,7 +79,7 @@ class Homepage extends Component {
                   </a>
                 </li>
                 <li>
-                  <a href="/views/index.html">
+                  <a href="../views/index.html">
                     <strong>AboutUs</strong>
                   </a>
                 </li>
