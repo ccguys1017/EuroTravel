@@ -31,7 +31,7 @@ class TableRow extends Component {
               </td>
               <td>
                 <form onSubmit={this.handleSubmit}>
-                  <input type="submit" value="Delete" className="btn btn-danger"/>
+                  <input type="submit" value="Delete" className="btn btn-warning"/>
                 </form>
               </td>
             </tr>
