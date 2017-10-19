@@ -79,7 +79,7 @@ class Homepage extends Component {
                   </a>
                 </li>
                 <li>
-                  <a href="http://192.168.39.70:5000/index.html">
+                  <a href="http://192.168.39.70:5000/views/index.html">
                     <strong>AboutUs</strong>
                   </a>
                 </li>
