@@ -15,6 +15,7 @@ import PlacesSearch from './search';
 
 const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
 
+
 let saved_itineraries = [];
 let cities = [];
 let places_type = [];
