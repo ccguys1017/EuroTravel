@@ -13,5 +13,5 @@ new WebpackDevServer(webpack(config), config.devServer)
   }
   console.log('Listening at localhost:' + config.port);
   console.log('Opening your system browser...');
-  open('http://localhost:' + config.port + '/webpack-dev-server/');
+  open('https://admin-chat-eurotravel.herokuapp.com/:' + config.port + '/webpack-dev-server/');
 });
