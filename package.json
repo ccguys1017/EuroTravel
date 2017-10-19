@@ -6,6 +6,7 @@
   "author": "Dylan Jackson",
   "scripts": {
     "start": "node ./lib/app.js",
+    "build": "node ./lib/app.js",
     "compile": "babel -d lib/ src/",
     "run": "babel -d lib/ src/ && node lib/app"
   },
