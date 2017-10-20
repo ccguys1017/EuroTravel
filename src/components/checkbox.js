@@ -22,7 +22,7 @@ class Checkbox extends Component {
     const { isChecked } = this.state;
 
     return (
-      <ListGroupItem className='cardList' style={{width:'50%'}}>
+      <ListGroupItem className='cardList' style={{width:'30%'}}>
       <div className="checkbox">
         <label>
           <input
