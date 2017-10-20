@@ -515,6 +515,8 @@ div.hotelBox.span.cardList.list-group-item{
 .col-md-1 {
   font-size: medium;
   width: 92px;
+  margin-top: 0px;
+  magrin-bottom: 30px;
 }
 .checkbox-inline {
   height: 50px;
