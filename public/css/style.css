@@ -174,7 +174,7 @@ input[type="text"]:focus {
   border: 1px solid #AF9570;
   outline: none !important;
 }
-
+/*
 input[type="submit"] {
   background-color: #323232;
   color: white;
@@ -193,7 +193,7 @@ input[type="submit"] {
   box-shadow: -7px 7px 0px rgba(50,50,50,0.15);
   margin-top: 20px;
 }
-
+*/
 input[type="submit"]:hover {
   -webkit-box-shadow: -10px 10px 0px rgba(50,50,50,0.15);
   -moz-box-shadow: -10px 10px 0px rgba(50,50,50,0.15);
