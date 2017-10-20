@@ -1183,7 +1183,7 @@ class Dashboard extends Component {
             </button>
           </div>
         </div>
-        \
+
         <Footer>
           <div className="absolute">
             <div className="absoute">

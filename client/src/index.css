@@ -2,10 +2,17 @@ body {
   margin: 0;
   margin-top: 0px;
   height: 0vh;
-  position: auto;
+  position: absolute;
   padding: 0;
-  font-family: sans-serif;
-  background-color: #7fa5f7;
+  font-family: "Lato", sans-serif;
+  color: #2ef806;
+  font-style: initial;
+  background-image: url("https://images4.alphacoders.com/607/thumb-1920-607341.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: absolute;
+  background-size: cover;
+  background-color: overlay;
 }
 
 .navbar {
@@ -13,6 +20,10 @@ body {
 }
 .tg-header {
   background-color: #8fe1f0;
+}
+video {
+  width: 133% !important;
+  height: auto !important;
 }
 
 footer {
@@ -22,6 +33,12 @@ footer {
   text-align: center;
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+.col-md-1 {
+  font-size: medium;
+  width: 92px;
+  margin-top: 0px;
+  margin-bottom: 30px;
 }
 #map {
   height: 40em;
@@ -506,10 +523,6 @@ div#homeBTN {
   width: 30%;
   margin-left: auto;
   margin-right: auto;
-}
-.col-md-1 {
-  font-size: medium;
-  width: 92px;
 }
 .checkbox-inline {
   height: 50px;

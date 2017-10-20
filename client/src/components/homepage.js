@@ -84,8 +84,8 @@ class Homepage extends Component {
                   </a>
                 </li>
                 <li>
-                  <a href="#">
-                    <strong>Destinations</strong>
+                  <a href="/">
+                    <strong>Destination</strong>
                   </a>
                 </li>
               </ul>
