@@ -783,6 +783,7 @@ class Dashboard extends Component {
               <thead>
                 <tr>
                   <td><strong>Country</strong></td>
+                  <td><strong>City</strong></td>
                   <td><strong>Itinerary Type</strong></td>
                   <td><strong>Place</strong></td>
                 </tr>
