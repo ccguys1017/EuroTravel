@@ -24,6 +24,7 @@ class TableRow extends Component {
         return (
             <tr>
               <td><strong><span className="badge">{this.props.obj.country}</span></strong></td>
+              <td><strong><span className="badge">{this.props.obj.city}</span></strong></td>
               <td><span className="badge">{this.props.obj.type}</span>
               </td>
               <td>
