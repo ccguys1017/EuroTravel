@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
 
@@ -8,7 +9,8 @@ class ItemService extends Component {
     super(props);
 
     this.state = {
-      itin_deleted: false
+      itin_deleted: false,
+      place_retrieved: false
     };
   }
 
