@@ -14,6 +14,7 @@ import manualSearch from './manualSearch';
 import manualBuild from './manualBuild';
 import hotelBuild from './hotelBuild';
 import hotelSearch from './hotelSearch'
+import revisitPlace from './revisitPlace';
 import UserLocation from './FindUserLocation';
 import IMApp from './IM/IMApp';
 export default class App extends Component {
@@ -32,6 +33,7 @@ export default class App extends Component {
           <Route path='/manualSearch' component={manualSearch} />
           <Route path='/manualBuild' component={manualBuild} />
           <Route path='/tripresults' component={Tripresults} />
+          <Route path='/revisitPlace' component={revisitPlace} />
           <Route path='/feature' component={RequireAuth(Feature)} />
           <Route path='/userLocation' component={UserLocation} />
           <Route path='/messaging' component={IMApp} />
