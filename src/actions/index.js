@@ -61,6 +61,12 @@ export function signoutUser () {
   localStorage.removeItem('longitude');
   localStorage.removeItem('hotel_flag');  
   localStorage.removeItem('test_places');
+  localStorage.removeItem('revisited_lat');
+  localStorage.removeItem('revisited_lng');
+  localStorage.removeItem('revisited_placeid');
+  localStorage.removeItem('revisited_type');
+  localStorage.removeItem('revisited_city');
+  localStorage.removeItem('revisited_country');
   return { type: UNAUTH_USER };
 };
 
