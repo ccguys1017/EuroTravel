@@ -798,13 +798,7 @@ class Dashboard extends Component {
 
         <Autocomplete style={{width:'30%'}} 
           onPlaceSelected={(place) => {
-/*
-          document.getElementsByClassName('.dashboard')[0].addEventListener('click', function(event) {
-            if (event.key === 'Enter') {
-              event.preventDefault();
-              alert('Please click on a autocompleted selection. Try again.');
-          }});
-*/
+
 let selectedlatlong;
 let halt = false;
 if (!place.geometry){
