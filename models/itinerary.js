@@ -41,6 +41,12 @@ const ItinSchema = new Schema(
       type: String,
       required: true
     },
+    lat: {
+      type: Number
+    },
+    lng: {
+      type: Number
+    },
     photo: {
       type: String
     }
