@@ -11,6 +11,8 @@ exports.saveItinerary = function (req, res, next) {
     const vicinity = req.body.cb_vicinity;
     const city = req.body.cb_city;
     const country = req.body.cb_country;
+    const lat = req.body.cb_lat;
+    const lng = req.body.cb_lng;
     const photo = req.body.cb_photo;
 
     console.log('city' + city);
@@ -36,6 +38,8 @@ exports.saveItinerary = function (req, res, next) {
         vicinity: vicinity,
         photo: photo,
         city: city,
+        lat: lat,
+        lng: lng,
         country: country
       });
   
@@ -73,4 +77,15 @@ exports.deleteItinerary = function(req, res, next) {
       return res.status(422).send({ error: 'Itinerary for this place does not exist' })
     }
   })
+};
+
+
+exports.getPlace = function (req, res, next) {
+  Itin.findById({_id: req.params.id})
+    .then(function(Place) {
+      res.send({ place: Place })
+    })
+    .catch(function(err) {
+      res.send("the user saved itinerary lookup failed");
+    });
 };
