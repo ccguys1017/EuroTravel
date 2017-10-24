@@ -18,4 +18,5 @@ module.exports = function (app) {
   app.post('/api/v1/save_itin', Itinerary.saveItinerary);
   app.post('/api/v1/remove_itin/:id', Itinerary.deleteItinerary);  
   app.post('/api/v1/get_itin', Itinerary.readItinerary);
+  app.post('/api/v1/get_place/:id', Itinerary.getPlace);
 };
