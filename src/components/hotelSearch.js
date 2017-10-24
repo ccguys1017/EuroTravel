@@ -61,7 +61,9 @@ class hotelSearch extends React.Component {
       const cb_price_level = checkbox.price_level;
       const cb_rating = checkbox.rating;
       const cb_type = checkbox.types[0];
-
+      const cb_lat = Number(this.props.state.maps.selectedLocation.lat);
+      const cb_lng = Number(this.props.state.maps.selectedLocation.lng);
+        
       if(checkbox.photos){
         const cb_photo = checkbox.photos[0].html_attributions[0];
       }
@@ -74,7 +76,7 @@ class hotelSearch extends React.Component {
       const cb_city = localStorage.getItem('sel_city');
       const cb_country = localStorage.getItem('sel_country');
 
-      axios.post(`${ROOT_URL}/save_itin`, { user_email, cb_name, cb_place_id, cb_price_level, cb_rating, cb_type, cb_vicinity, cb_city, cb_country, if(cb_photo){return cb_photo} })
+      axios.post(`${ROOT_URL}/save_itin`, { user_email, cb_name, cb_place_id, cb_price_level, cb_rating, cb_type, cb_vicinity, cb_city, cb_country, cb_lat, cb_lng, if(cb_photo){return cb_photo} })
       .then(response => {
         this.setState({
           itins_saved: true
