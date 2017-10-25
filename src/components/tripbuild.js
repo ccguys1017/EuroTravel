@@ -20,18 +20,20 @@ class Tripbuild extends Component {
   constructor(props) {
     super(props);
   }    
+
   state = {
-      lng: 0,
-      lat: 0,
-      city: '',
-      country: ''
+    lng: 0,
+    lat: 0,
+    city: '',
+    country: '',
+    radius: 500
   };
 
   static contextTypes = {
     router: PropTypes.object
   };
 
-componentWillMount = () => {
+  componentWillMount = () => {
     let longitude = 0;
     let latitude = 0;
     
@@ -42,11 +44,12 @@ componentWillMount = () => {
         lng: this.props.state.maps.selectedLocation.lng,
         lat: this.props.state.maps.selectedLocation.lat
     })
-
   }
 
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
+
+    let userRadius = 0;
 
     if (document.getElementById('checkbox_place_store').checked) {
         places_type.push('store');
@@ -133,456 +136,484 @@ componentWillMount = () => {
         places_type.push('spa');
     }
 
-    localStorage.setItem('trip_lat', this.state.lat);
-    localStorage.setItem('trip_lng', this.state.lng);
+    userRadius = Number(document.getElementById("radiusInput").value);
+
+    if (userRadius == 0) {
+      userRadius = 500;
+    }
     
-    localStorage.setItem('place_type_array', places_type);
-    console.log(places_type);
-    console.log("============ LOOK HERE =========");
-    // this.props.wipePlaces(); // to reset the places per search
-    for (var i = 0; i < places_type.length; i ++){
-        this.props.addType(places_type[i]);
-        console.log("type added: " + places_type[i]);
+    if (userRadius < 500 || userRadius > 2000) {
+      alert('Search radius value must be a numeric between 500 and 2000; defaulting radius to 500m');
+      localStorage.setItem('userRadius', 500);
+    } else if (userRadius >= 500 || userRadius <= 2000) {
+      localStorage.setItem('userRadius', userRadius);   // good radius
+    } else {
+      alert('Search radius value must be a numeric value between 500 and 2000; defaulting radius to 500m');
+      localStorage.setItem('userRadius', 500);
     }
 
-    console.log("Places_type map completed");
-    console.log(this.props);
+    console.log('userRadius: ' + userRadius);
+
+    localStorage.setItem('trip_lat', this.state.lat);
+    localStorage.setItem('trip_lng', this.state.lng);
+  
+    localStorage.setItem('place_type_array', places_type);
+
+    for (var i = 0; i < places_type.length; i ++){
+      this.props.addType(places_type[i]);
+    }
+
     this.context.router.history.push('/tripresults');
   }
 
- selectAll(source) {
+  selectAll(source) {
     let checkboxes = document.querySelectorAll('input[type="checkbox"]');
     for (let i = 0; i < checkboxes.length; i++) {
-        checkboxes[i].checked = !checkboxes[i].checked;
+      checkboxes[i].checked = !checkboxes[i].checked;
     }
   }
 
   render() {
-
+    const radius = this.props;
     const cb_city = localStorage.getItem('sel_city');
     const cb_country = localStorage.getItem('sel_country');
 
     const footerStyle = {
-        backgroundColor: "#261e72",
-        fontSize: "15px",
-        color: "white",
-        borderTop: "1px solid #7fa5f7",
-        textAlign: "center",
-        padding: "0px",
-        position: "fixed",
-        left: "0",
-        bottom: "0",
-        height: "40px",
-        width: "100%"
-      };
+      backgroundColor: "#261e72",
+      fontSize: "15px",
+      color: "white",
+      borderTop: "1px solid #7fa5f7",
+      textAlign: "center",
+      padding: "0px",
+      position: "fixed",
+      left: "0",
+      bottom: "0",
+      height: "40px",
+      width: "100%"
+    };
   
-      const phantomStyle = {
-        display: "block",
-        padding: "20px",
-        height: "60px",
-        width: "100%"
-      };
+    const phantomStyle = {
+      display: "block",
+      padding: "20px",
+      height: "60px",
+      width: "100%"
+    };
       
-      function Footer({ children }) {
-        return (
-          <div>
-            <div style={phantomStyle} />
-            <div style={footerStyle}>{children}</div>
-          </div>
-        );
-      }
+    function Footer({ children }) {
+      return (
+        <div>
+          <div style={phantomStyle} />
+          <div style={footerStyle}>{children}</div>
+        </div>
+      );
+    }
+    
     return ( 
       <div className='tripbuild'>
-                    <Navbar>
-    <Navbar.Header>
-      <Navbar.Brand>
-        <a href="/"><strong>GuideTrip</strong></a>
-      </Navbar.Brand>
-    </Navbar.Header>
-    <Nav>
-      <NavItem eventKey={2} href="/"><strong>Home</strong></NavItem>
-      <NavItem eventKey={1} href="/dashboard"><strong>Dashboard</strong></NavItem>
-      <NavItem eventKey={1} href="/hotelBuild"><strong>Hotels</strong></NavItem>
-    </Nav>
-  </Navbar>
-    <h3 style={{textAlign: "center"}}><strong>Create Your Custom Itinerary for: </strong><span>{ cb_city}, {cb_country}</span></h3>
-    <label className="col-md-2 control-label">
-    Check your Itinerary Items
-  </label>
-  <form action="/tripresults" onSubmit={this.handleFormSubmit}>
-    <div className="form-group">
-      <div className="col-md-12 columns">
-        <div className="col-md-2 columns">
-          <label className="checkbox-inline">
-            <input type="checkbox" onChange={this.selectAll.bind(this)} />
-            <strong>Check All</strong>
-          </label>
+        <Navbar>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <a href="/"><strong>GuideTrip</strong></a>
+            </Navbar.Brand>
+          </Navbar.Header>
+          <Nav>
+            <NavItem eventKey={2} href="/"><strong>Home</strong></NavItem>
+            <NavItem eventKey={1} href="/dashboard"><strong>Dashboard</strong></NavItem>
+            <NavItem eventKey={1} href="/hotelBuild"><strong>Hotels</strong></NavItem>
+          </Nav>
+        </Navbar>
+        <h3 style={{textAlign: "center"}}><strong>Create Your Custom Itinerary for: </strong><span>{ cb_city}, {cb_country}</span></h3>
+        < br/>
+        <div className="col-md-12 columns">
+        <form>
+          <fieldset className='form-group'>
+            <label><strong>Search Radius (500 - 2000m):</strong></label>
+            <input id='radiusInput' {...radius} style={{width:'6%'}} className='form-control' placeholder='500' />
+          </fieldset>
+        </form>
+        < br/>
+        < br/>
         </div>
-        <div className="row1">
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_store"
-                value="item-1"
-              />
-              <strong>Store</strong>
-            </label>
-          </div>
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_lodging"
-                value="item-2"
-              />
-              <strong>Lodging</strong>
-            </label>
-          </div>
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_cafe"
-                value="item-3"
-              />
-              <strong>Cafe</strong>
-            </label>
-          </div>
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_museum"
-                value="item-1"
-              />
-              <strong>Museum</strong>
-            </label>
-          </div>
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_art_gallery"
-                value="item-3"
-              />
-              <strong>Gallery</strong>
-            </label>
-          </div>
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_subway"
-                value="item-3"
-              />
-              <strong>Subway</strong>
-            </label>
-          </div>
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_airport"
-                value="item-1"
-              />
-              <strong>Airport</strong>
-            </label>
-          </div>
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_hospital"
-                value="item-2"
-              />
-              <strong>Hospital</strong>
-            </label>
-          </div>
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_restaurant"
-                value="item-2"
-              />
-              <strong>Restaurant</strong>
-            </label>
-          </div>
-        </div>
-        <br />
-        <br />
-        <br />
-        <div className="row2">
-          <div className="col-md-2 columns" />
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_park"
-                value="item-1"
-              />
-              <strong>Park</strong>
-            </label>
-          </div>
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_atm"
-                value="item-2"
-              />
-              <strong>ATM</strong>
-            </label>
-          </div>
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_bank"
-                value="item-3"
-              />
-              <strong>Bank</strong>
-            </label>
-          </div>
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_doctor"
-                value="item-1"
-              />
-              <strong>Doctor</strong>
-            </label>
-          </div>
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_zoo"
-                value="item-2"
-              />
-              <strong>Zoo</strong>
-            </label>
-          </div>
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_police"
-                value="item-3"
-              />
-              <strong>Police</strong>
-            </label>
-          </div>
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_train"
-                value="item-1"
-              />
-              <strong>Train</strong>
-            </label>
-          </div>
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_school"
-                value="item-2"
-              />
-              <strong>School</strong>
-            </label>
-          </div>
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_university"
-                value="item-2"
-              />
-              <strong>University</strong>
-            </label>
-          </div>
-        </div>
-        <br />
-        <br />
-        <br />
-        <div className="row3">
-          <div className="col-md-2 columns" />
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_church"
-                value="item-1"
-              />
-              <strong>Church</strong>
-            </label>
-          </div>
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_bar"
-                value="item-3"
-              />
-              <strong>Bar</strong>
-            </label>
-          </div>
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_spa"
-                value="item-1"
-              />
-              <strong>Spa</strong>
-            </label>
-          </div>
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_embassy"
-                value="item-1"
-              />
-              <strong>Embassy</strong>
-            </label>
-          </div>
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_bus"
-                value="item-3"
-              />
-              <strong>Bus</strong>
-            </label>
-          </div>
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_dentist"
-                value="item-3"
-              />
-              <strong>Dentist</strong>
-            </label>
-          </div>
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_mosque"
-                value="item-1"
-              />
-              <strong>Mosque</strong>
-            </label>
-          </div>
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_library"
-                value="item-2"
-              />
-              <strong>Library</strong>
-            </label>
-          </div>
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_pharmacy"
-                value="item-2"
-              />
-              <strong>Pharmacy</strong>
-            </label>
-          </div>
-        </div>
-        <br />
-        <br />
-        <br />
-        <div className="row4">
-          <div className="col-md-2 columns" />
-          <div className="col-md-1 columns">
-            <label className="checkbox-inline">
-              <input
-                type="checkbox"
-                name="Checkboxes"
-                id="checkbox_place_synagogue"
-                value="item-3"
-              />
-              <strong>Synagogue</strong>
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <br />
 
-    <div className="col-md-1 columns">
-      <br />
-      <br />
-      <button className="btn btn-default" type="submit">
-        Click to Generate Itinerary
-      </button>
-    </div>
+        <label className="col-md-2 control-label">
+          Check your Itinerary Items
+        </label>
+        <form action="/tripresults" onSubmit={this.handleFormSubmit}>
+          <div className="form-group">
+            <div className="col-md-12 columns">
+              <div className="col-md-3 columns">
+                <label className="checkbox-inline">
+                  <input type="checkbox" onChange={this.selectAll.bind(this)} />
+                  <strong>Check All</strong>
+                </label>
+              </div>
+              <div className="row1">
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_store"
+                      value="item-1"
+                    />
+                    <strong>Store</strong>
+                  </label>
+                </div>
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_lodging"
+                      value="item-2"
+                    />
+                    <strong>Lodging</strong>
+                  </label>
+                </div>
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_cafe"
+                      value="item-3"
+                    />
+                    <strong>Cafe</strong>
+                  </label>
+                </div>
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_museum"
+                      value="item-1"
+                    />
+                    <strong>Museum</strong>
+                  </label>
+                </div>
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_art_gallery"
+                      value="item-3"
+                    />
+                    <strong>Gallery</strong>
+                  </label>
+                </div>
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_subway"
+                      value="item-3"
+                    />
+                    <strong>Subway</strong>
+                  </label>
+                </div>
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_airport"
+                      value="item-1"
+                    />
+                    <strong>Airport</strong>
+                  </label>
+                </div>
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_hospital"
+                      value="item-2"
+                    />
+                    <strong>Hospital</strong>
+                  </label>
+                </div>
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_restaurant"
+                      value="item-2"
+                    />
+                    <strong>Restaurant</strong>
+                  </label>
+                </div>
+              </div>
+              <br />
+              <br />
+              <br />
+              <div className="row2">
+                <div className="col-md-3 columns" />
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_park"
+                      value="item-1"
+                    />
+                    <strong>Park</strong>
+                  </label>
+                </div>
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_atm"
+                      value="item-2"
+                    />
+                    <strong>ATM</strong>
+                  </label>
+                </div>
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_bank"
+                      value="item-3"
+                    />
+                    <strong>Bank</strong>
+                  </label>
+                </div>
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_doctor"
+                      value="item-1"
+                    />
+                    <strong>Doctor</strong>
+                  </label>
+                </div>
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_zoo"
+                      value="item-2"
+                    />
+                    <strong>Zoo</strong>
+                  </label>
+                </div>
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_police"
+                      value="item-3"
+                    />
+                    <strong>Police</strong>
+                  </label>
+                </div>
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_train"
+                      value="item-1"
+                    />
+                    <strong>Train</strong>
+                  </label>
+                </div>
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_school"
+                      value="item-2"
+                    />
+                    <strong>School</strong>
+                  </label>
+                </div>
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_university"
+                      value="item-2"
+                    />
+                    <strong>University</strong>
+                  </label>
+                </div>
+              </div>
+              <br />
+              <br />
+              <br />
+              <div className="row3">
+                <div className="col-md-3 columns" />
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_church"
+                      value="item-1"
+                    />
+                    <strong>Church</strong>
+                  </label>
+                </div>
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_bar"
+                      value="item-3"
+                    />
+                    <strong>Bar</strong>
+                  </label>
+                </div>
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_spa"
+                      value="item-1"
+                    />
+                    <strong>Spa</strong>
+                  </label>
+                </div>
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_embassy"
+                      value="item-1"
+                    />
+                    <strong>Embassy</strong>
+                  </label>
+                </div>
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_bus"
+                      value="item-3"
+                    />
+                    <strong>Bus</strong>
+                  </label>
+                </div>
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_dentist"
+                      value="item-3"
+                    />
+                    <strong>Dentist</strong>
+                  </label>
+                </div>
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_mosque"
+                      value="item-1"
+                    />
+                    <strong>Mosque</strong>
+                  </label>
+                </div>
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_library"
+                      value="item-2"
+                    />
+                    <strong>Library</strong>
+                  </label>
+                </div>
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_pharmacy"
+                      value="item-2"
+                    />
+                    <strong>Pharmacy</strong>
+                  </label>
+                </div>
+              </div>
+              <br />
+              <br />
+              <br />
+              <div className="row4">
+                <div className="col-md-3 columns" />
+                <div className="col-md-1 columns">
+                  <label className="checkbox-inline">
+                    <input
+                      type="checkbox"
+                      name="Checkboxes"
+                      id="checkbox_place_synagogue"
+                      value="item-3"
+                    />
+                    <strong>Synagogue</strong>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br />
+
+          <div className="col-md-1 columns">
+            <br />
+            <br />
+            <button className="btn btn-default" type="submit">
+              Click to Generate Itinerary
+            </button>
+          </div>
         </form>
         <Footer>
-        <a href="/"> Home</a>
-        <a href="/dashboard"> Dashboard</a>
-        <a href="/hotelBuild"> Hotels</a>
+          <a href="/"> Home</a>
+          <a href="/dashboard"> Dashboard</a>
+          <a href="/hotelBuild"> Hotels</a>
 
-        <div className="footer-copyright">
-          <div className="container-fluid">
-            © 2017 Copyright:{" "}
-            <a href="http://www.guidetrip.me"> www.Guidetrip.me </a>
+          <div className="footer-copyright">
+            <div className="container-fluid">
+              © 2017 Copyright:{" "}
+              <a href="http://www.guidetrip.me"> www.Guidetrip.me </a>
+            </div>
           </div>
-        </div>
-      </Footer>
+        </Footer>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) =>{
-  return {state: state};
+const mapStateToProps = (state) => {
+  return {state: state,
+          radius: state.radius};
 };
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
   return bindActionCreators(actionCreators, dispatch);
 }
 
 Tripbuild = connect(mapStateToProps, mapDispatchToProps)(Tripbuild);
 
 export default Tripbuild;
+
