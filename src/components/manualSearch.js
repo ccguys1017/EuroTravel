@@ -115,7 +115,8 @@ class manualSearch extends React.Component{
         for (let x=0; x < searchTypes.length; x++){
           service.nearbySearch({
             location:location,
-            radius: 500,                
+            radius: localStorage.getItem('userRadius'), 
+            //radius: 500,                
             type: [searchTypes[x]]           
             
           }, function(results, status) {
