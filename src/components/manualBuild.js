@@ -18,19 +18,21 @@ let places_type = [];
 class manualBuild extends Component {
   constructor(props) {
     super(props);
-  }    
+  }  
+
   state = {
-      lng: 0,
-      lat: 0,
-      city: '',
-      country: ''
+    lng: 0,
+    lat: 0,
+    city: '',
+    country: '',
+    radius: 500
   };
 
   static contextTypes = {
     router: PropTypes.object
   };
 
-componentWillMount = () => {
+  componentWillMount = () => {
     let longitude = 0;
     let latitude = 0;
     
@@ -38,19 +40,19 @@ componentWillMount = () => {
     const country = localStorage.getItem('sel_country');
 
     axios.post(`${ROOT_URL}/cities_lng_lat`, { city: city, country: country })
-    .then(response => {
-      cities = response.data.payload;
-      longitude = response.data.payload[0].lng;
-      latitude = response.data.payload[0].lat;
-      this.setState({
-          lng: longitude,
-          lat: latitude,
-      });
-    })
-    .catch(err => {
-      this.setState({
-      });        
-    })
+      .then(response => {
+        cities = response.data.payload;
+        longitude = response.data.payload[0].lng;
+        latitude = response.data.payload[0].lat;
+        this.setState({
+            lng: longitude,
+            lat: latitude,
+        });
+      })
+      .catch(err => {
+        this.setState({
+        });        
+      })
   }
 
   selectAll(source) {
@@ -63,6 +65,8 @@ componentWillMount = () => {
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
 
+    let userRadius = 0;
+    
     if (document.getElementById('checkbox_place_store').checked) {
         places_type.push('store');
     }
@@ -148,25 +152,35 @@ componentWillMount = () => {
         places_type.push('spa');
     }
 
-    localStorage.setItem('trip_lat', JSON.stringify(this.state.lat));
-    localStorage.setItem('trip_lng', JSON.stringify(this.state.lng));
-    
-    console.log(places_type);
+    userRadius = Number(document.getElementById("radiusInput").value);
 
-    for (var i = 0; i < places_type.length; i ++){
-        this.props.addType(places_type[i]);
-        console.log("Type added: " + places_type[i]);
+    if (userRadius == 0) {
+      userRadius = 500;
+    }
+    
+    if (userRadius < 500 || userRadius > 2000) {
+      alert('Search radius value must be a numeric between 500 and 2000; defaulting radius to 500m');
+      localStorage.setItem('userRadius', 500);
+    } else if (userRadius >= 500 || userRadius <= 2000) {
+      localStorage.setItem('userRadius', userRadius);   // good radius
+    } else {
+      alert('Search radius value must be a numeric value between 500 and 2000; defaulting radius to 500m');
+      localStorage.setItem('userRadius', 500);
     }
 
-    console.log("Places_type map completed");
-    console.log(this.props);
-    this.context.router.history.push('/manualSearch');
+    localStorage.setItem('trip_lat', JSON.stringify(this.state.lat));
+    localStorage.setItem('trip_lng', JSON.stringify(this.state.lng));
 
+    for (var i = 0; i < places_type.length; i ++){
+      this.props.addType(places_type[i]);
+    }
+
+    this.context.router.history.push('/manualSearch');
   }
 
- onClick () {
+  onClick () {
     this.context.router.history.push('/dashboard');
-}
+  }
 
   onButtonClick () {
     this.context.router.history.push('/hotelSearch');
@@ -174,58 +188,72 @@ componentWillMount = () => {
 
   render() {
 
+    const radius = this.props;
     const cb_city = localStorage.getItem('sel_city');
     const cb_country = localStorage.getItem('sel_country');
 
     const footerStyle = {
-        backgroundColor: "#261e72",
-        fontSize: "15px",
-        color: "white",
-        borderTop: "1px solid #7fa5f7",
-        textAlign: "center",
-        padding: "0px",
-        position: "fixed",
-        left: "0",
-        bottom: "0",
-        height: "40px",
-        width: "100%"
-      };
+      backgroundColor: "#261e72",
+      fontSize: "15px",
+      color: "white",
+      borderTop: "1px solid #7fa5f7",
+      textAlign: "center",
+      padding: "0px",
+      position: "fixed",
+      left: "0",
+      bottom: "0",
+      height: "40px",
+      width: "100%"
+    };
   
-      const phantomStyle = {
-        display: "block",
-        padding: "20px",
-        height: "60px",
-        width: "100%"
-      };
+    const phantomStyle = {
+      display: "block",
+      padding: "20px",
+      height: "60px",
+      width: "100%"
+    };
       
-      function Footer({ children }) {
-        return (
-          <div>
-            <div style={phantomStyle} />
-            <div style={footerStyle}>{children}</div>
-          </div>
-        );
-      }
+    function Footer({ children }) {
+      return (
+        <div>
+          <div style={phantomStyle} />
+          <div style={footerStyle}>{children}</div>
+        </div>
+      );
+    }
+
     return ( 
       <div className='tripbuild'>
-                    <Navbar>
-    <Navbar.Header>
-      <Navbar.Brand>
-        <a href="/"><strong>GuideTrip</strong></a>
-      </Navbar.Brand>
-    </Navbar.Header>
-    <Nav>
-      <NavItem eventKey={2} href="/"><strong>Home</strong></NavItem>
-      <NavItem eventKey={1} href="/dashboard"><strong>Dashboard</strong></NavItem>
-      <NavItem eventKey={1} href="/hotelBuild"><strong>Hotels</strong></NavItem>
-    </Nav>
-  </Navbar>
-    <h3 style={{textAlign: "center"}}><strong>Create Your Custom Itinerary for: </strong><span>{ cb_city}, {cb_country}</span></h3>
-        <form action='/tripresults' onSubmit={this.handleFormSubmit}>
-          <div className='form-group'>
-          <label className="col-md-2 control-label">
+        <Navbar>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <a href="/"><strong>GuideTrip</strong></a>
+            </Navbar.Brand>
+          </Navbar.Header>
+          <Nav>
+            <NavItem eventKey={2} href="/"><strong>Home</strong></NavItem>
+            <NavItem eventKey={1} href="/dashboard"><strong>Dashboard</strong></NavItem>
+            <NavItem eventKey={1} href="/hotelBuild"><strong>Hotels</strong></NavItem>
+          </Nav>
+        </Navbar>
+        <h3 style={{textAlign: "center"}}><strong>Create Your Custom Itinerary for: </strong><span>{ cb_city}, {cb_country}</span></h3>        < br/>
+        <div className="col-md-12 columns">
+        <form>
+          <fieldset className='form-group'>
+            <label><strong>Search Radius (500 - 2000m):</strong></label>
+            <input id='radiusInput' {...radius} style={{width:'6%'}} className='form-control' placeholder='radius' />
+          </fieldset>
+        </form>
+        < br/>
+        < br/>
+        </div>
+
+        <label className="col-md-2 control-label">
           Check your Itinerary Items
         </label>
+        <form action='/tripresults' onSubmit={this.handleFormSubmit}>
+          <div className='form-group'>
+
         <div className="col-md-12 columns">
           <div className="col-md-2 columns">
             <label className="checkbox-inline">
@@ -563,12 +591,18 @@ componentWillMount = () => {
           </div>
         </div>
       </div>
-
       <div>
         <br />
         <br />
         <br />
         <br />
+
+        <br />
+        <br />
+        <br />
+        <br />
+
+
 
         <button className="btn btn-default" type="submit">
           Click to Generate Itinerary
@@ -580,33 +614,33 @@ componentWillMount = () => {
       >
         Search Hotels In Area
       </button>
-        </form>
-        
+        </form>       
         <Footer>
-        <a href="/"> Home</a>
-        <a href="/dashboard"> Dashboard</a>
-        <a href="/hotelBuild"> Hotels</a>
+          <a href="/"> Home</a>
+          <a href="/dashboard"> Dashboard</a>
+          <a href="/hotelBuild"> Hotels</a>
 
-        <div className="footer-copyright">
-          <div className="container-fluid">
-            © 2017 Copyright:{" "}
-            <a href="http://www.guidetrip.me"> www.Guidetrip.me </a>
+          <div className="footer-copyright">
+            <div className="container-fluid">
+              © 2017 Copyright:{" "}
+              <a href="http://www.guidetrip.me"> www.Guidetrip.me </a>
+            </div>
           </div>
-        </div>
-      </Footer>
+        </Footer>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) =>{
+const mapStateToProps = (state) => {
   return {state: state};
 };
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
   return bindActionCreators(actionCreators, dispatch);
 }
 
 manualBuild = connect(mapStateToProps, mapDispatchToProps)(manualBuild);
 
 export default manualBuild;
+
