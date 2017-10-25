@@ -67,6 +67,7 @@ export function signoutUser () {
   localStorage.removeItem('revisited_type');
   localStorage.removeItem('revisited_city');
   localStorage.removeItem('revisited_country');
+  localStorage.removeItem('userRadius');
   return { type: UNAUTH_USER };
 };
 
