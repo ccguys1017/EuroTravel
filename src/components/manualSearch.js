@@ -10,8 +10,8 @@ import axios from 'axios';
 import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
 
 const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
-const OPEN_WEATHER_MAP_URL = 'https://crossorigin.me/http://api.openweathermap.org/data/2.5/weather';
-const OPEN_WEATHER_MAP_ICON = 'https://crossorigin.me/http://api.openweathermap.org/img/w/';
+const OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather';
+const OPEN_WEATHER_MAP_ICON = 'http://api.openweathermap.org/img/w/';
 
 class manualSearch extends React.Component{
   constructor(props){
