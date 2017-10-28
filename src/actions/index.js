@@ -84,7 +84,7 @@ export function signoutUser () {
 
 export function fetchMessage () {
   return function (dispatch) {
-    axios.get('http://localhost:8080/api/v1', {
+    axios.get('https://eurotravel-sever.herokuapp.com/api/v1', {
       headers: { authorization: localStorage.getItem('token') }
     })
       .then(response => {
