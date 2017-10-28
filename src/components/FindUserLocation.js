@@ -34,6 +34,7 @@ class UserLocation extends React.Component{
               localStorage.setItem('trip_lng', pos.lng);
               localStorage.setItem('latitude',pos.lat );
               localStorage.setItem('longitude', pos.lng);
+              localStorage.setItem('local_flag', true);
               var latlng = {lat: parseFloat(pos.lat), lng: parseFloat(pos.lng)};
               
               let country = "";
