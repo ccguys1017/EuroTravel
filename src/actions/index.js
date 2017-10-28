@@ -68,6 +68,17 @@ export function signoutUser () {
   localStorage.removeItem('revisited_city');
   localStorage.removeItem('revisited_country');
   localStorage.removeItem('userRadius');
+  localStorage.removeItem('weather_descr');
+  localStorage.removeItem('weather_temp');
+  localStorage.removeItem('weather_pressure');
+  localStorage.removeItem('weather_humidity');
+  localStorage.removeItem('weather_clouds');
+  localStorage.removeItem('weather_time');
+  localStorage.removeItem('weather_speed');
+  localStorage.removeItem('weather_deg');
+  localStorage.removeItem('weather_sunrise');
+  localStorage.removeItem('weather_sunset');
+  localStorage.removeItem('weather_deg');
   return { type: UNAUTH_USER };
 };
 
