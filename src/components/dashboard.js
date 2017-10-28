@@ -707,6 +707,7 @@ class Dashboard extends Component {
   }
 
   componentWillMount() {
+    localStorage.setItem('local_flag', false);
     const user_email = localStorage.getItem('userEmail');
     axios.post(`${ROOT_URL}/get_itin`, { user_email })
       .then(response => {
