@@ -487,7 +487,7 @@ class Tripresults extends React.Component{
             <div className='col-md-2 columns'>
 
             {this.timeConverter(localStorage.getItem('weather_sunrise'), localStorage.getItem('weather_sunset'), localStorage.getItem('weather_time'))}
-            <span><strong>Weather: [ {localStorage.getItem('datetime')} ]</strong>
+            <span><strong>Weather: <i>{localStorage.getItem('datetime')}</i></strong>
               <ul>
                 <li><strong><span>{localStorage.getItem('weather_descr')}</span></strong></li>
                 <li><strong><span>Temp: {(1.8*localStorage.getItem('weather_temp') - 459.67).toFixed(1)} F / {((localStorage.getItem('weather_temp') - 273).toFixed(1))} C</span></strong></li>
