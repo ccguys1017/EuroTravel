@@ -18,7 +18,7 @@ class manualSearch extends React.Component{
     super(props)
     this.state = {
       itins_saved: false,
-      weather_descr: '',
+      weather_loaded: false,
       weather_temp: 0,
       weather_pressure: 0,
       weather_humidity: 0,
@@ -61,91 +61,93 @@ class manualSearch extends React.Component{
       handleSave={this.handleSave}
     />)
 
-      componentWillMount = () => {
-        this.selectedCheckboxes = new Set();
-        this.placesForAllTypes = new Set();
+  getWeather = () => {
+    let weatherDataUrl = '';
     
-        console.log(this.props);
-        let weatherDataUrl = '';
+    if (localStorage.getItem('local_flag') == true) {
+      weatherDataUrl = `${OPEN_WEATHER_MAP_URL}?q=&lon=${Number(localStorage.getItem('longitude'))}&lat=${Number(localStorage.getItem('latitude'))}&APPID=144d3c403202aaa5edea7d230772a01d`;
+    } else {
+      weatherDataUrl = `${OPEN_WEATHER_MAP_URL}?q=&lon=${Number(this.props.state.maps.selectedLocation.lng)}&lat=${Number(this.props.state.maps.selectedLocation.lat)}&APPID=144d3c403202aaa5edea7d230772a01d`;
+    }
 
-        if (localStorage.getItem('local_flag')) {
-          weatherDataUrl = `${OPEN_WEATHER_MAP_URL}?q=&lon=${Number(localStorage.getItem('longitude'))}&lat=${Number(localStorage.getItem('latitude'))}&APPID=144d3c403202aaa5edea7d230772a01d`;
-        } else {
-          weatherDataUrl = `${OPEN_WEATHER_MAP_URL}?q=&lon=${Number(this.props.state.maps.selectedLocation.lng)}&lat=${Number(this.props.state.maps.selectedLocation.lat)}&APPID=144d3c403202aaa5edea7d230772a01d`;
-        }
-        
-        axios.get(weatherDataUrl)
-          .then(response => {
-            localStorage.setItem('weather_descr', JSON.stringify(response.data.weather[0].description));
-            localStorage.setItem('weather_temp', JSON.stringify(response.data.main.temp));
-            localStorage.setItem('weather_pressure', JSON.stringify(response.data.main.pressure));
-            localStorage.setItem('weather_humidity', JSON.stringify(response.data.main.humidity));
-            localStorage.setItem('weather_clouds', JSON.stringify(response.data.clouds.all));
-            localStorage.setItem('weather_time', JSON.stringify(response.data.dt));
-            localStorage.setItem('weather_speed', JSON.stringify(response.data.wind.speed));
-            localStorage.setItem('weather_deg', JSON.stringify(response.data.wind.deg));
-            localStorage.setItem('weather_sunrise', JSON.stringify(response.data.sys.sunrise));
-            localStorage.setItem('weather_sunset', JSON.stringify(response.data.sys.sunset));
-          });
+    axios.get(weatherDataUrl)
+      .then(response => {
+        localStorage.setItem('weather_descr', JSON.stringify(response.data.weather[0].description));
+        localStorage.setItem('weather_temp', JSON.stringify(response.data.main.temp));
+        localStorage.setItem('weather_pressure', JSON.stringify(response.data.main.pressure));
+        localStorage.setItem('weather_humidity', JSON.stringify(response.data.main.humidity));
+        localStorage.setItem('weather_clouds', JSON.stringify(response.data.clouds.all));
+        localStorage.setItem('weather_time', JSON.stringify(response.data.dt));
+        localStorage.setItem('weather_speed', JSON.stringify(response.data.wind.speed));
+        localStorage.setItem('weather_deg', JSON.stringify(response.data.wind.deg));
+        localStorage.setItem('weather_sunrise', JSON.stringify(response.data.sys.sunrise));
+        localStorage.setItem('weather_sunset', JSON.stringify(response.data.sys.sunset));
+      });
 
-
-            if (localStorage.getItem('weather_deg') >= 0 && localStorage.getItem('weather_deg') < 22.5) {
-              localStorage.setItem('weather_direction', this.state.weather_direction_0);
-            } else 
-            if (localStorage.getItem('weather_deg') >= 22.5 && localStorage.getItem('weather_deg') < 45.0) {
-              localStorage.setItem('weather_direction', this.state.weather_direction_1);
-            } else 
-            if (localStorage.getItem('weather_deg') >= 45.0 && localStorage.getItem('weather_deg') < 67.5) {
-              localStorage.setItem('weather_direction', this.state.weather_direction_2);
-            } else 
-            if (localStorage.getItem('weather_deg') >= 67.5 && localStorage.getItem('weather_deg') < 90.0) {
-              localStorage.setItem('weather_direction', this.state.weather_direction_3);
-            } else 
-            if (localStorage.getItem('weather_deg') >= 90.0 && localStorage.getItem('weather_deg') < 112.5) {
-              localStorage.setItem('weather_direction', this.state.weather_direction_4);
-            } else 
-            if (localStorage.getItem('weather_deg') >= 112.5 && localStorage.getItem('weather_deg') < 135.0) {
-              localStorage.setItem('weather_direction', this.state.weather_direction_5);
-            } else 
-            if (localStorage.getItem('weather_deg') >= 135.0 && localStorage.getItem('weather_deg') < 157.5) {
-              localStorage.setItem('weather_direction', this.state.weather_direction_6);
-            } else 
-            if (localStorage.getItem('weather_deg') >=157.5 && localStorage.getItem('weather_deg') < 180.0) {
-              localStorage.setItem('weather_direction', this.state.weather_direction_7);
-            } else 
-            if (localStorage.getItem('weather_deg') >= 180.0 && localStorage.getItem('weather_deg') < 202.5) {
-              localStorage.setItem('weather_direction', this.state.weather_direction_8);
-            } else 
-            if (localStorage.getItem('weather_deg') >= 202.5 && localStorage.getItem('weather_deg') < 225.0) {
-              localStorage.setItem('weather_direction', this.state.weather_direction_9);
-            } else 
-            if (localStorage.getItem('weather_deg') >= 225.0 && localStorage.getItem('weather_deg') < 247.5) {
-              localStorage.setItem('weather_direction', this.state.weather_direction_A);
-            } else 
-            if (localStorage.getItem('weather_deg') >= 247.5 && localStorage.getItem('weather_deg') < 270.0) {
-              localStorage.setItem('weather_direction', this.state.weather_direction_B);
-            } else 
-            if (localStorage.getItem('weather_deg') >= 270.0 && localStorage.getItem('weather_deg') < 292.5) {
-              localStorage.setItem('weather_direction', this.state.weather_direction_C);
-            } else 
-            if (localStorage.getItem('weather_deg') >= 292.5 && localStorage.getItem('weather_deg') < 315.0) {
-              localStorage.setItem('weather_direction', this.state.weather_direction_D);
-            } else 
-            if (localStorage.getItem('weather_deg') >= 315.0 && localStorage.getItem('weather_deg') < 337.5) {
-              localStorage.setItem('weather_direction', this.state.weather_direction_E);
-            } else 
-            if (localStorage.getItem('weather_deg') >= 337.5 && localStorage.getItem('weather_deg') < 360.0) {
-              localStorage.setItem('weather_direction', this.state.weather_direction_F);
-            }
+      if (localStorage.getItem('weather_deg') >= 0 && localStorage.getItem('weather_deg') < 22.5) {
+        localStorage.setItem('weather_direction', this.state.weather_direction_0);
+      } else 
+      if (localStorage.getItem('weather_deg') >= 22.5 && localStorage.getItem('weather_deg') < 45.0) {
+        localStorage.setItem('weather_direction', this.state.weather_direction_1);
+      } else 
+      if (localStorage.getItem('weather_deg') >= 45.0 && localStorage.getItem('weather_deg') < 67.5) {
+        localStorage.setItem('weather_direction', this.state.weather_direction_2);
+      } else 
+      if (localStorage.getItem('weather_deg') >= 67.5 && localStorage.getItem('weather_deg') < 90.0) {
+        localStorage.setItem('weather_direction', this.state.weather_direction_3);
+      } else 
+      if (localStorage.getItem('weather_deg') >= 90.0 && localStorage.getItem('weather_deg') < 112.5) {
+        localStorage.setItem('weather_direction', this.state.weather_direction_4);
+      } else 
+      if (localStorage.getItem('weather_deg') >= 112.5 && localStorage.getItem('weather_deg') < 135.0) {
+        localStorage.setItem('weather_direction', this.state.weather_direction_5);
+      } else 
+      if (localStorage.getItem('weather_deg') >= 135.0 && localStorage.getItem('weather_deg') < 157.5) {
+        localStorage.setItem('weather_direction', this.state.weather_direction_6);
+      } else 
+      if (localStorage.getItem('weather_deg') >=157.5 && localStorage.getItem('weather_deg') < 180.0) {
+        localStorage.setItem('weather_direction', this.state.weather_direction_7);
+      } else 
+      if (localStorage.getItem('weather_deg') >= 180.0 && localStorage.getItem('weather_deg') < 202.5) {
+        localStorage.setItem('weather_direction', this.state.weather_direction_8);
+      } else 
+      if (localStorage.getItem('weather_deg') >= 202.5 && localStorage.getItem('weather_deg') < 225.0) {
+        localStorage.setItem('weather_direction', this.state.weather_direction_9);
+      } else 
+      if (localStorage.getItem('weather_deg') >= 225.0 && localStorage.getItem('weather_deg') < 247.5) {
+        localStorage.setItem('weather_direction', this.state.weather_direction_A);
+      } else 
+      if (localStorage.getItem('weather_deg') >= 247.5 && localStorage.getItem('weather_deg') < 270.0) {
+        localStorage.setItem('weather_direction', this.state.weather_direction_B);
+      } else 
+      if (localStorage.getItem('weather_deg') >= 270.0 && localStorage.getItem('weather_deg') < 292.5) {
+        localStorage.setItem('weather_direction', this.state.weather_direction_C);
+      } else 
+      if (localStorage.getItem('weather_deg') >= 292.5 && localStorage.getItem('weather_deg') < 315.0) {
+        localStorage.setItem('weather_direction', this.state.weather_direction_D);
+      } else 
+      if (localStorage.getItem('weather_deg') >= 315.0 && localStorage.getItem('weather_deg') < 337.5) {
+        localStorage.setItem('weather_direction', this.state.weather_direction_E);
+      } else 
+      if (localStorage.getItem('weather_deg') >= 337.5 && localStorage.getItem('weather_deg') < 360.0) {
+        localStorage.setItem('weather_direction', this.state.weather_direction_F);
       }
+  }
+
+  componentWillMount = () => {
+    this.selectedCheckboxes = new Set();
+    this.placesForAllTypes = new Set();
     
-      toggleCheckbox = label => {
-        if (this.selectedCheckboxes.has(label)) {
-          this.selectedCheckboxes.delete(label);
-        } else {
-          this.selectedCheckboxes.add(label);
-        }
-      }
+    console.log(this.props);
+  }
+    
+  toggleCheckbox = label => {
+    if (this.selectedCheckboxes.has(label)) {
+      this.selectedCheckboxes.delete(label);
+    } else {
+      this.selectedCheckboxes.add(label);
+    }
+  }
 
   createCheckboxes = () => (
     this.props.state.maps.places.map(this.createCheckbox)
@@ -210,13 +212,22 @@ class manualSearch extends React.Component{
     localStorage.setItem('sunset', time_b);
 
     var c = new Date(UNIX_datetime*1000);
-    var hour_c = c.getUTCHours();
-    var min_c = c.getUTCMinutes();
-    var time_c = hour_c + ':' + min_c ;
+    var months_c = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var year_c = c.getFullYear();
+    var month_c = months_c[c.getMonth()];
+    var date_c = c.getDate();
+    var hour_c = c.getHours();
+    var min_c = c.getMinutes();
+    if (hour_c == '12' || hour_c == '13' || hour_c == '14' || hour_c == '15' || hour_c == '16' || hour_c == '17' || hour_c == '18' || hour_c == '19' || hour_c == '20' || hour_c == '21' || hour_c == '22' || hour_c == '23' ) {
+      var time_c = date_c + ' ' + month_c + ' ' + year_c + ' ' + hour_c + ':' + min_c + ' pm' ;
+    } else {
+      var time_c = date_c + ' ' + month_c + ' ' + year_c + ' ' + hour_c + ':' + min_c + ' am' ;
+    }
     localStorage.setItem('datetime', time_c);
   }
 
     componentDidMount() {
+      this.getWeather();
         let location = {lat:Number(this.props.state.maps.selectedLocation.lat), lng: Number(this.props.state.maps.selectedLocation.lng)};
         console.log('location: ' + location);
         let map = new google.maps.Map(document.getElementById('map'), {
@@ -241,11 +252,8 @@ class manualSearch extends React.Component{
                 for (let i =0; i < results.length; i++) {
                   createMarker(results[i], i);
                   props.addPlace(results[i]);
-                  
-                }
-                        
+                }        
               }
-              
           });
         }        
 
@@ -482,7 +490,7 @@ class manualSearch extends React.Component{
         <div className='col-md-2 columns'>              
 
         {this.timeConverter(localStorage.getItem('weather_sunrise'), localStorage.getItem('weather_sunset'), localStorage.getItem('weather_time'))}
-        <span><strong>Weather Conditions at: {localStorage.getItem('datetime')}</strong>
+        <span><strong>Weather: [ {localStorage.getItem('datetime')} ]</strong>
           <ul>
             <li><strong><span>{localStorage.getItem('weather_descr')}</span></strong></li>
             <li><strong><span>Temp: {(1.8*localStorage.getItem('weather_temp') - 459.67).toFixed(1)} F / {((localStorage.getItem('weather_temp') - 273).toFixed(1))} C</span></strong></li>
