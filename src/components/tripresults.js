@@ -19,7 +19,7 @@ class Tripresults extends React.Component{
 
         this.state = {
           itins_saved: false,
-          weather_descr: '',
+          weather_loaded: false,
           weather_temp: 0,
           weather_pressure: 0,
           weather_humidity: 0,
@@ -62,12 +62,7 @@ class Tripresults extends React.Component{
         handleSave={this.handleSave}
       />)
 
-      componentWillMount = () => {
-        this.selectedCheckboxes = new Set();
-        this.placesForAllTypes = new Set();
-    
-        console.log(this.props);
-
+      getWeather = () => {
         let weatherDataUrl = `${OPEN_WEATHER_MAP_URL}?q=&lon=${Number(this.props.state.maps.selectedLocation.lng)}&lat=${Number(this.props.state.maps.selectedLocation.lat)}&APPID=144d3c403202aaa5edea7d230772a01d`;
         
         axios.get(weatherDataUrl)
@@ -134,6 +129,13 @@ class Tripresults extends React.Component{
         }
       }
 
+  componentWillMount = () => {
+    this.selectedCheckboxes = new Set();
+    this.placesForAllTypes = new Set();
+    
+    console.log(this.props);
+  }
+
   toggleCheckbox = label => {
     if (this.selectedCheckboxes.has(label)) {
       this.selectedCheckboxes.delete(label);
@@ -164,9 +166,17 @@ class Tripresults extends React.Component{
     localStorage.setItem('sunset', time_b);
 
     var c = new Date(UNIX_datetime*1000);
-    var hour_c = c.getUTCHours();
-    var min_c = c.getUTCMinutes();
-    var time_c = hour_c + ':' + min_c ;
+    var months_c = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var year_c = c.getFullYear();
+    var month_c = months_c[c.getMonth()];
+    var date_c = c.getDate();
+    var hour_c = c.getHours();
+    var min_c = c.getMinutes();
+    if (hour_c == '12' || hour_c == '13' || hour_c == '14' || hour_c == '15' || hour_c == '16' || hour_c == '17' || hour_c == '18' || hour_c == '19' || hour_c == '20' || hour_c == '21' || hour_c == '22' || hour_c == '23' ) {
+      var time_c = date_c + ' ' + month_c + ' ' + year_c + ' ' + hour_c + ':' + min_c + ' pm' ;
+    } else {
+      var time_c = date_c + ' ' + month_c + ' ' + year_c + ' ' + hour_c + ':' + min_c + ' am' ;
+    }
     localStorage.setItem('datetime', time_c);
   }
 
@@ -212,6 +222,7 @@ class Tripresults extends React.Component{
   }
 
     componentDidMount() {
+        this.getWeather();
         let location = {lat:Number(this.props.state.maps.selectedLocation.lat), lng: Number(this.props.state.maps.selectedLocation.lng)};
         console.log('location: ' + location);
         let map = new google.maps.Map(document.getElementById('map'), {
@@ -236,11 +247,8 @@ class Tripresults extends React.Component{
                 for (let i =0; i < results.length; i++) {
                   createMarker(results[i], x);
                   props.addPlace(results[i]);
-                  
-                }
-                        
+                }    
               }
-              
           });
         }        
         service.getDetails({
@@ -479,7 +487,7 @@ class Tripresults extends React.Component{
             <div className='col-md-2 columns'>
 
             {this.timeConverter(localStorage.getItem('weather_sunrise'), localStorage.getItem('weather_sunset'), localStorage.getItem('weather_time'))}
-            <span><strong>Weather Conditions at: {localStorage.getItem('datetime')}</strong>
+            <span><strong>Weather: [ {localStorage.getItem('datetime')} ]</strong>
               <ul>
                 <li><strong><span>{localStorage.getItem('weather_descr')}</span></strong></li>
                 <li><strong><span>Temp: {(1.8*localStorage.getItem('weather_temp') - 459.67).toFixed(1)} F / {((localStorage.getItem('weather_temp') - 273).toFixed(1))} C</span></strong></li>
