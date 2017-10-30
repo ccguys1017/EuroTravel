@@ -79,6 +79,8 @@ export function signoutUser () {
   localStorage.removeItem('weather_sunrise');
   localStorage.removeItem('weather_sunset');
   localStorage.removeItem('weather_deg');
+  localStorage.removeItem('dst');
+  localStorage.removeItem('raw');
   return { type: UNAUTH_USER };
 };
 
