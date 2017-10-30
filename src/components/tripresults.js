@@ -133,6 +133,7 @@ class Tripresults extends React.Component{
   componentWillMount = () => {
     this.selectedCheckboxes = new Set();
     this.placesForAllTypes = new Set();
+    this.setState({ weather_loaded: false });
     
     console.log(this.props);
   }
