@@ -132,6 +132,7 @@ class manualSearch extends React.Component{
       if (localStorage.getItem('weather_deg') >= 337.5 && localStorage.getItem('weather_deg') < 360.0) {
         localStorage.setItem('weather_direction', this.state.weather_direction_F);
       }
+      this.setState({ weather_loaded: true });
   }
 
   componentWillMount = () => {
