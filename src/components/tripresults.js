@@ -10,8 +10,9 @@ import axios from 'axios';
 import {Table, Nav, Navbar, NavItem} from 'react-bootstrap';
 
 const ROOT_URL = 'https://eurotravel-sever.herokuapp.com/api/v1';
-const OPEN_WEATHER_MAP_URL = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather';
-const OPEN_WEATHER_MAP_ICON = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/img/w/';
+const OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather';
+const OPEN_WEATHER_MAP_ICON = 'http://api.openweathermap.org/img/w/';
+const GOOGLE_TIMEZONE_URL = 'https://maps.googleapis.com/maps/api/timezone/json?location=';
 
 class Tripresults extends React.Component{
     constructor(props){
@@ -127,6 +128,15 @@ class Tripresults extends React.Component{
         if (localStorage.getItem('weather_deg') >= 337.5 && localStorage.getItem('weather_deg') < 360.0) {
           localStorage.setItem('weather_direction', this.state.weather_direction_F);
         }
+
+        let timezoneSunriseUrl = `${GOOGLE_TIMEZONE_URL}${Number(this.props.state.maps.selectedLocation.lat)},${Number(this.props.state.maps.selectedLocation.lng)}&timestamp=${localStorage.getItem('weather_sunrise')}&key=AIzaSyCnc5dwG-NanDvMRcZhvEyYMZkbfvaxzh4`;
+    
+        axios.get(timezoneSunriseUrl)       // Get the DST and UTC offset values
+        .then(response => {
+          localStorage.setItem('dst', JSON.stringify(response.data.dstOffset));
+          localStorage.setItem('raw', JSON.stringify(response.data.rawOffset));
+        });
+    
         this.setState({ weather_loaded: true });
       }
 
@@ -134,7 +144,7 @@ class Tripresults extends React.Component{
     this.selectedCheckboxes = new Set();
     this.placesForAllTypes = new Set();
     this.setState({ weather_loaded: false });
-    
+
     console.log(this.props);
   }
 
@@ -155,16 +165,26 @@ class Tripresults extends React.Component{
   };
 
   timeConverter(UNIX_sunrise, UNIX_sunset, UNIX_datetime){
-    var a = new Date(UNIX_sunrise*1000);
-    var hour_a = a.getUTCHours()+2;
+    var aa = Number(UNIX_sunrise)+Number(localStorage.getItem('dst'))+Number(localStorage.getItem('raw'));      // Adjust for DST and UTC offset
+    var a = new Date(aa*1000);
+    var hour_a = a.getUTCHours();
     var min_a = a.getUTCMinutes();
-    var time_a = hour_a + ':' + min_a ;
+    if (min_a >= 0 && min_a < 10) {
+      var time_a = hour_a + ':0' + min_a ;
+    } else {
+      var time_a = hour_a + ':' + min_a ;
+    }
     localStorage.setItem('sunrise', time_a);
 
-    var b = new Date(UNIX_sunset*1000);
-    var hour_b = b.getUTCHours()+2;
+    var bb = Number(UNIX_sunset)+Number(localStorage.getItem('dst'))+Number(localStorage.getItem('raw'));      // Adjust for DST and UTC offset
+    var b = new Date(bb*1000);
+    var hour_b = b.getUTCHours();
     var min_b = b.getUTCMinutes();
-    var time_b = hour_b + ':' + min_b ;
+    if (min_b >= 0 && min_b < 10) {
+      var time_b = hour_b + ':0' + min_b ;
+    } else {
+      var time_b = hour_b + ':' + min_b ;
+    }
     localStorage.setItem('sunset', time_b);
 
     var c = new Date(UNIX_datetime*1000);
@@ -174,10 +194,18 @@ class Tripresults extends React.Component{
     var date_c = c.getDate();
     var hour_c = c.getHours();
     var min_c = c.getMinutes();
-    if (hour_c == '12' || hour_c == '13' || hour_c == '14' || hour_c == '15' || hour_c == '16' || hour_c == '17' || hour_c == '18' || hour_c == '19' || hour_c == '20' || hour_c == '21' || hour_c == '22' || hour_c == '23' ) {
-      var time_c = date_c + ' ' + month_c + ' ' + year_c + ' ' + hour_c + ':' + min_c + ' pm' ;
+    if (min_c >= 0 && min_c < 10) {
+      if (hour_c == '12' || hour_c == '13' || hour_c == '14' || hour_c == '15' || hour_c == '16' || hour_c == '17' || hour_c == '18' || hour_c == '19' || hour_c == '20' || hour_c == '21' || hour_c == '22' || hour_c == '23' ) {
+        var time_c = date_c + ' ' + month_c + ' ' + year_c + ' ' + hour_c + ':0' + min_c + ' pm' ;
+      } else {
+        var time_c = date_c + ' ' + month_c + ' ' + year_c + ' ' + hour_c + ':0' + min_c + ' am' ;
+      }
     } else {
-      var time_c = date_c + ' ' + month_c + ' ' + year_c + ' ' + hour_c + ':' + min_c + ' am' ;
+      if (hour_c == '12' || hour_c == '13' || hour_c == '14' || hour_c == '15' || hour_c == '16' || hour_c == '17' || hour_c == '18' || hour_c == '19' || hour_c == '20' || hour_c == '21' || hour_c == '22' || hour_c == '23' ) {
+        var time_c = date_c + ' ' + month_c + ' ' + year_c + ' ' + hour_c + ':' + min_c + ' pm' ;
+      } else {
+        var time_c = date_c + ' ' + month_c + ' ' + year_c + ' ' + hour_c + ':' + min_c + ' am' ;
+      }
     }
     localStorage.setItem('datetime', time_c);
   }
@@ -603,4 +631,5 @@ function mapDispatchToProps(dispatch){
 Tripresults = connect(mapStateToProps, mapDispatchToProps)(Tripresults);
       
 export default Tripresults;
+
 
