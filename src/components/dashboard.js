@@ -834,12 +834,16 @@ if (!place.geometry){
           localStorage.setItem('trip_lat', selLat);
           localStorage.setItem('trip_lng', selLng);
           localStorage.setItem('sel_city', place.address_components[0].long_name);
-          localStorage.setItem('sel_country', place.address_components[2].long_name)  // length = 3
+          localStorage.setItem('sel_country', place.address_components[1].long_name)  // length = 3
 
           if(place.address_components.length > 3){
             localStorage.setItem('sel_country', place.address_components[3].long_name);
           }else if (place.address_components.length < 3){
-            localStorage.setItem('sel_country', place.address_components[2].short_name);
+            if (place.address_components.length = 2){
+              localStorage.setItem('sel_country', place.address_components[1].long_name);
+            } else {
+              localStorage.setItem('sel_country', place.address_components[2].short_name);
+            }
           }
 
           this.context.router.history.push('/manualBuild');
